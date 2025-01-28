@@ -4,9 +4,14 @@ export default function Options({ options, id, values }) {
   return (
     <>
       {options.map((option, index) => (
-        <option key={`${index}-${id}`} value={values ? option.value : option}>
+        <li
+          className="select-option"
+          key={`${index}-${id}`}
+          value={values ? option.value : option}
+          role="option"
+        >
           {values ? option.text : option}
-        </option>
+        </li>
       ))}
     </>
   )

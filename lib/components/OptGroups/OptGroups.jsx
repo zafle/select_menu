@@ -1,13 +1,16 @@
 import PropTypes from 'prop-types'
-import Options from './Options'
+import Options from '../Options/Options'
 
 export default function OptGroups({ options, id, values }) {
   return (
     <>
       {options.map((option, index) => (
-        <optgroup key={`${index}-${id}-optgroup`} label={option.label}>
-          <Options options={option.options} id={id} values={values} />
-        </optgroup>
+        <li className="select-optgroup" key={`${index}-${id}-optgroup`}>
+          <ul>
+            <li className="select-optgroup-label">{option.label}</li>
+            <Options options={option.options} id={id} values={values} />
+          </ul>
+        </li>
       ))}
     </>
   )

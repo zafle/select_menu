@@ -8,6 +8,10 @@ import {
 } from './data/mock/optionsMenus'
 
 function App() {
+  function handleChange(e) {
+    e.preventDefault()
+    console.log(e.target.value)
+  }
   return (
     <>
       <h1>Examples with different types of data</h1>
@@ -17,6 +21,7 @@ function App() {
         id="euCountries-options"
         name="euCountries-options"
         options={EU_COUNTRIES}
+        onChange={handleChange}
       />
 
       <h2>Options with values</h2>
@@ -26,6 +31,7 @@ function App() {
         name="euCountries-options_values"
         options={EU_COUNTRIES_CODES}
         values={true}
+        onChange={handleChange}
       />
 
       <h2>Optgroups without values</h2>
@@ -35,6 +41,7 @@ function App() {
         name="euCountries-optgroup"
         options={EU_COUNTRIES_GEO}
         optGroup={true}
+        onChange={handleChange}
       />
 
       <h2>Optgroups with values</h2>
@@ -45,6 +52,7 @@ function App() {
         options={EU_COUNTRIES_GEO_CODES}
         values={true}
         optGroup={true}
+        onChange={handleChange}
       />
     </>
   )
