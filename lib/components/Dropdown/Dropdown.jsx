@@ -1,34 +1,26 @@
+import { useContext } from 'react'
+import { selectContext } from '../../context/selectContext'
+import Options from '../Options/Options'
+import OptGroups from '../OptGroups/OptGroups'
 import PropTypes from 'prop-types'
-import { SelectInput } from '../SelectInput/SelectInput'
-import Dropdown from '../Dropdown/Dropdown'
-import SelectContextProvider from '../../context/SelectContextProvider/SelectContextProvider'
 
-/**
- *
- * @param {string} props.selectName attribute used for htmlFor label tag, name and id select tag
- * @returns
- */
-export function SelectMenu({
-  id,
-  name,
-  options,
-  values = false,
-  optGroup = false,
-  onChange,
-}) {
+export default function Dropdown({ id, options, values, optGroup }) {
+  const { selectedOption, isOpen, defineSelectedOption, toggleIsOpen } =
+    useContext(selectContext)
+
   return (
-    <SelectContextProvider>
-      <div className="select-container">
-        <SelectInput id={id} name={name} onChange={onChange} />
-        <Dropdown options={options} values={values} optGroup={optGroup} />
-      </div>
-    </SelectContextProvider>
+    <ul className={'select-dropdown ' + (isOpen ? 'open' : 'close')}>
+      {optGroup ? (
+        <OptGroups options={options} id={id} values={values} />
+      ) : (
+        <Options options={options} id={id} values={values} />
+      )}
+    </ul>
   )
 }
 
-SelectMenu.propTypes = {
+Dropdown.propTypes = {
   id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.oneOfType([
       // options without values
@@ -57,6 +49,4 @@ SelectMenu.propTypes = {
   ).isRequired,
   values: PropTypes.bool,
   optGroup: PropTypes.bool,
-  onChange: PropTypes.func.isRequired,
-  defaultSelectValue: PropTypes.string,
 }
