@@ -1,33 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { SelectMenu } from '../lib/main'
+import {
+  EU_COUNTRIES,
+  EU_COUNTRIES_CODES,
+  EU_COUNTRIES_GEO,
+  EU_COUNTRIES_GEO_CODES,
+} from './data/mock/optionsMenus'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Examples with different types of data</h1>
+      <h2>Options without values</h2>
+      <label htmlFor="euCountries-options">Select a country :</label>
+      <SelectMenu
+        id="euCountries-options"
+        name="euCountries-options"
+        options={EU_COUNTRIES}
+      />
+
+      <h2>Options with values</h2>
+      <label htmlFor="euCountries-options_values">Select a country :</label>
+      <SelectMenu
+        id="euCountries-options_values"
+        name="euCountries-options_values"
+        options={EU_COUNTRIES_CODES}
+        values={true}
+      />
+
+      <h2>Optgroups without values</h2>
+      <label htmlFor="euCountries-optgroup">Select a country :</label>
+      <SelectMenu
+        id="euCountries-optgroup"
+        name="euCountries-optgroup"
+        options={EU_COUNTRIES_GEO}
+        optGroup={true}
+      />
+
+      <h2>Optgroups with values</h2>
+      <label htmlFor="euCountries-optgroup_values">Select a country :</label>
+      <SelectMenu
+        id="euCountries-optgroup_values"
+        name="euCountries-optgroup_values"
+        options={EU_COUNTRIES_GEO_CODES}
+        values={true}
+        optGroup={true}
+      />
     </>
   )
 }
