@@ -1,15 +1,32 @@
 import PropTypes from 'prop-types'
 import { useContext } from 'react'
 import { selectContext } from '../../context/selectContext'
-export default function Options({ options, id, values }) {
+import useConfig from '../../context/hook/useConfig'
+export default function Options({ options }) {
   const { defineSelectedOption, defineSelectedValue } =
     useContext(selectContext)
 
+  const { id, values } = useConfig()
+
   function handleClick(e) {
-    console.log('e.target.innerText :', e.target.innerText)
-    console.log('e.target.dataset.value :', e.target.dataset.value)
     defineSelectedOption(e.target.innerText)
     defineSelectedValue(e.target.dataset.value)
+
+    function triggerOnChangeSelectedValueInput(enteredValue) {
+      const selectedValueInput = document.getElementById(id)
+      selectedValueInput.value = enteredValue
+
+      const selectedValueInputEvent = new Event('change', { bubbles: true })
+
+      const tracker = selectedValueInput._valueTracker
+      if (tracker) {
+        tracker.setValue('fake value')
+      }
+
+      selectedValueInput.dispatchEvent(selectedValueInputEvent)
+    }
+
+    triggerOnChangeSelectedValueInput(e.target.dataset.value)
   }
 
   return (
@@ -41,6 +58,4 @@ Options.propTypes = {
       }),
     ])
   ).isRequired,
-  id: PropTypes.string.isRequired,
-  values: PropTypes.bool.isRequired,
 }

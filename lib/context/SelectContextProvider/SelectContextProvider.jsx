@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 export default function SelectContextProvider({ children }) {
   const [selectedOption, setSelectedOption] = useState(undefined)
-  const [selectedValue, setSelectedValue] = useState(undefined)
+  const [selectedValue, setSelectedValue] = useState('')
   const [isOpen, setIsOpen] = useState(false)
 
   const defineSelectedOption = (value) => {

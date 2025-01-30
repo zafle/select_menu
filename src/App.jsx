@@ -1,5 +1,5 @@
 import './App.css'
-import { SelectMenu } from '../lib/main'
+import { SelectDropdown } from '../lib/main'
 import {
   EU_COUNTRIES,
   EU_COUNTRIES_CODES,
@@ -8,16 +8,15 @@ import {
 } from './data/mock/optionsMenus'
 
 function App() {
-  function handleChange(e) {
-    e.preventDefault()
-    console.log(e.target.value)
+  function handleChange(selectedValue) {
+    console.log('selectedValue retrieved :', selectedValue)
   }
   return (
     <>
       <h1>Examples with different types of data</h1>
       <h2>Options without values</h2>
       <label htmlFor="euCountries-options">Select a country :</label>
-      <SelectMenu
+      <SelectDropdown
         id="euCountries-options"
         name="euCountries-options"
         options={EU_COUNTRIES}
@@ -26,7 +25,7 @@ function App() {
 
       <h2>Options with values</h2>
       <label htmlFor="euCountries-options_values">Select a country :</label>
-      <SelectMenu
+      <SelectDropdown
         id="euCountries-options_values"
         name="euCountries-options_values"
         options={EU_COUNTRIES_CODES}
@@ -36,7 +35,7 @@ function App() {
 
       <h2>Optgroups without values</h2>
       <label htmlFor="euCountries-optgroup">Select a country :</label>
-      <SelectMenu
+      <SelectDropdown
         id="euCountries-optgroup"
         name="euCountries-optgroup"
         options={EU_COUNTRIES_GEO}
@@ -46,7 +45,7 @@ function App() {
 
       <h2>Optgroups with values</h2>
       <label htmlFor="euCountries-optgroup_values">Select a country :</label>
-      <SelectMenu
+      <SelectDropdown
         id="euCountries-optgroup_values"
         name="euCountries-optgroup_values"
         options={EU_COUNTRIES_GEO_CODES}

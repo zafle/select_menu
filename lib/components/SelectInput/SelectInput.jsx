@@ -1,37 +1,35 @@
 import { useContext } from 'react'
 import { selectContext } from '../../context/selectContext'
-import PropTypes from 'prop-types'
+import useConfig from '../../context/hook/useConfig'
 
-export function SelectInput({ id, name, onChange }) {
-  const {
-    selectedOption,
-    selectedValue,
-    isOpen,
-    defineSelectedOption,
-    toggleIsOpen,
-  } = useContext(selectContext)
+export default function SelectInput() {
+  const { selectedOption, selectedValue, isOpen, toggleIsOpen } =
+    useContext(selectContext)
 
-  return (
-    <div>
-      <div>{selectedOption}</div>
-      <input
-        className="select-input"
-        type="text"
-        id={id}
-        onChange={onChange}
-        name={name}
-        value={selectedValue}
-        tabIndex="0"
-        role="combobox"
-        aria-expanded={isOpen}
-        onClick={toggleIsOpen}
-      />
-    </div>
-  )
-}
+  const { isSet, id, name, onChange } = useConfig()
 
-SelectInput.propTypes = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  const handleChange = (e) => {
+    onChange(e.target.value)
+  }
+
+  if (isSet) {
+    return (
+      <div onClick={toggleIsOpen}>
+        <div className="select-selected-text">{selectedOption}</div>
+        <input
+          className="select-selected-value"
+          type="text"
+          id={id}
+          onChange={(e) => {
+            handleChange(e)
+          }}
+          name={name}
+          value={selectedValue}
+          tabIndex="0"
+          role="combobox"
+          aria-expanded={isOpen}
+        />
+      </div>
+    )
+  }
 }
