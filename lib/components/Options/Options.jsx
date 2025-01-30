@@ -1,32 +1,28 @@
 import PropTypes from 'prop-types'
-import { useContext } from 'react'
-import { selectContext } from '../../context/selectContext'
 import useConfig from '../../context/hook/useConfig'
+import useSelect from '../../context/hook/useSelect'
 export default function Options({ options }) {
-  const { defineSelectedOption, defineSelectedValue } =
-    useContext(selectContext)
-
+  const { defineSelectedOption, defineSelectedValue } = useSelect()
   const { id, values } = useConfig()
 
-  function handleClick(e) {
-    defineSelectedOption(e.target.innerText)
-    defineSelectedValue(e.target.dataset.value)
+  function triggerOnChangeSelectedValueInput(enteredValue) {
+    const selectedValueInput = document.getElementById(id)
+    selectedValueInput.value = enteredValue
 
-    function triggerOnChangeSelectedValueInput(enteredValue) {
-      const selectedValueInput = document.getElementById(id)
-      selectedValueInput.value = enteredValue
+    const selectedValueInputEvent = new Event('change', { bubbles: true })
 
-      const selectedValueInputEvent = new Event('change', { bubbles: true })
-
-      const tracker = selectedValueInput._valueTracker
-      if (tracker) {
-        tracker.setValue('fake value')
-      }
-
-      selectedValueInput.dispatchEvent(selectedValueInputEvent)
+    const tracker = selectedValueInput._valueTracker
+    if (tracker) {
+      tracker.setValue('fake value')
     }
 
+    selectedValueInput.dispatchEvent(selectedValueInputEvent)
+  }
+
+  function handleClick(e) {
     triggerOnChangeSelectedValueInput(e.target.dataset.value)
+    defineSelectedOption(e.target.innerText)
+    defineSelectedValue(e.target.dataset.value)
   }
 
   return (

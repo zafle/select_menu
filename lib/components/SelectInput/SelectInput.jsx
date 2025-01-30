@@ -1,11 +1,8 @@
-import { useContext } from 'react'
-import { selectContext } from '../../context/selectContext'
 import useConfig from '../../context/hook/useConfig'
+import useSelect from '../../context/hook/useSelect'
 
 export default function SelectInput() {
-  const { selectedOption, selectedValue, isOpen, toggleIsOpen } =
-    useContext(selectContext)
-
+  const { selectedOption, selectedValue, isOpen, toggleIsOpen } = useSelect()
   const { isSet, id, name, onChange } = useConfig()
 
   const handleChange = (e) => {

@@ -1,12 +1,9 @@
 import { useState } from 'react'
 import { configContext } from '../configContext'
 import { nanoid } from 'nanoid'
-
 import PropTypes from 'prop-types'
 
 export default function ConfigContextProvider({ children }) {
-  // const [isSet, setIsSet] = useState(false)
-
   const [config, setConfig] = useState({
     isSet: false,
     options: [],
@@ -29,10 +26,6 @@ export default function ConfigContextProvider({ children }) {
       optGroup: props.optGroup ?? prevConfig.optGroup,
     }))
   }
-
-  // const defineIsSet = (value) => {
-  //   setIsSet(value)
-  // }
 
   return (
     <configContext.Provider value={{ config, defineConfig }}>
