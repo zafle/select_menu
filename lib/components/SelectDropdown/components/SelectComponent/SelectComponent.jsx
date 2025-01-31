@@ -14,12 +14,14 @@ export default function SelectComponent({ props }) {
     }
   }, [props, isSet, defineConfig])
 
-  return (
-    <div className={styles.selectContainer} style={{ maxWidth: maxWidth }}>
-      <SelectInput />
-      <Dropdown />
-    </div>
-  )
+  if (isSet) {
+    return (
+      <div className={styles.selectContainer} style={{ maxWidth: maxWidth }}>
+        <SelectInput />
+        <Dropdown />
+      </div>
+    )
+  }
 }
 SelectComponent.propTypes = {
   props: PropTypes.shape({

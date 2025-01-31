@@ -4,7 +4,12 @@ import useSelect from '../../context/hook/useSelect'
 import styles from './Options.module.css'
 
 export default function Options({ options }) {
-  const { defineSelectedOption, defineSelectedValue } = useSelect()
+  const {
+    selectedOptionId,
+    defineSelectedOptionId,
+    defineSelectedOption,
+    defineSelectedValue,
+  } = useSelect()
   const { id, values } = useConfig()
 
   function triggerOnChangeSelectedValueInput(enteredValue) {
@@ -23,6 +28,7 @@ export default function Options({ options }) {
 
   function handleClick(e) {
     triggerOnChangeSelectedValueInput(e.target.dataset.value)
+    defineSelectedOptionId(e.target.id)
     defineSelectedOption(e.target.innerText)
     defineSelectedValue(e.target.dataset.value)
   }
@@ -31,13 +37,15 @@ export default function Options({ options }) {
     <>
       {options.map((option, index) => (
         <li
+          id={`option_${index}_${id}`}
           className={styles.selectOption}
           key={`${index}-${id}`}
           data-value={values ? option.value : option}
-          role="option"
           onClick={(e) => {
             handleClick(e)
           }}
+          role="option"
+          aria-selected={selectedOptionId === `option_${index}_${id}`}
         >
           {values ? option.text : option}
         </li>

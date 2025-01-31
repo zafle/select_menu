@@ -6,13 +6,19 @@ import PropTypes from 'prop-types'
 export default function ConfigContextProvider({ children }) {
   const [config, setConfig] = useState({
     isSet: false,
-    options: [],
+    // input config
     id: nanoid(),
+    labelId: '', // for aria-labelledby
     name: '',
     onChange: null,
+    // options config
+    options: [],
     values: false,
     optGroup: false,
+    // css config
     maxWidth: '250px',
+    borderWidth: '1px',
+    borderColor: '#2b2b2b',
   })
 
   const defineConfig = (props) => {
@@ -21,11 +27,14 @@ export default function ConfigContextProvider({ children }) {
       isSet: true,
       options: props.options,
       id: props.id ?? prevConfig.id,
+      labelId: props.labelId ?? prevConfig.labelId,
       name: props.name ?? prevConfig.name,
       onChange: props.onChange ?? prevConfig.onChange,
       values: props.values ?? prevConfig.values,
       optGroup: props.optGroup ?? prevConfig.optGroup,
       maxWidth: props.maxWidth ?? prevConfig.maxWidth,
+      borderWidth: props.borderWidth ?? prevConfig.borderWidth,
+      borderColor: props.borderColor ?? prevConfig.borderColor,
     }))
   }
 
@@ -39,9 +48,12 @@ ConfigContextProvider.propTypes = {
   children: PropTypes.node,
   options: PropTypes.array,
   id: PropTypes.string,
+  labelId: PropTypes.string,
   name: PropTypes.string,
   onChange: PropTypes.func,
   values: PropTypes.bool,
   optGroup: PropTypes.bool,
   maxWidth: PropTypes.string,
+  borderWidth: PropTypes.string,
+  borderColor: PropTypes.string,
 }

@@ -3,10 +3,14 @@ import { selectContext } from '../selectContext'
 import PropTypes from 'prop-types'
 
 export default function SelectContextProvider({ children }) {
+  const [selectedOptionId, setSelectedOptionId] = useState('')
   const [selectedOption, setSelectedOption] = useState(undefined)
   const [selectedValue, setSelectedValue] = useState('')
   const [isOpen, setIsOpen] = useState(false)
 
+  const defineSelectedOptionId = (value) => {
+    setSelectedOptionId(value)
+  }
   const defineSelectedOption = (value) => {
     setSelectedOption(value)
   }
@@ -20,9 +24,11 @@ export default function SelectContextProvider({ children }) {
   return (
     <selectContext.Provider
       value={{
+        selectedOptionId,
         selectedOption,
         selectedValue,
         isOpen,
+        defineSelectedOptionId,
         defineSelectedOption,
         defineSelectedValue,
         toggleIsOpen,
