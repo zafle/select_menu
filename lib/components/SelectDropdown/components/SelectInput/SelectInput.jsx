@@ -1,9 +1,11 @@
 import useConfig from '../../context/hook/useConfig'
 import useSelect from '../../context/hook/useSelect'
+import arrow from '../../assets/arrow.png'
+import styles from './SelectInput.module.css'
 
 export default function SelectInput() {
   const { selectedOption, selectedValue, isOpen, toggleIsOpen } = useSelect()
-  const { isSet, id, name, onChange } = useConfig()
+  const { isSet, id, name, onChange, borderWidth, borderColor } = useConfig()
 
   const handleChange = (e) => {
     onChange(e.target.value)
@@ -11,10 +13,13 @@ export default function SelectInput() {
 
   if (isSet) {
     return (
-      <div onClick={toggleIsOpen}>
-        <div className="select-selected-text">{selectedOption}</div>
+      <div
+        className={styles.selectInput}
+        onClick={toggleIsOpen}
+        style={{ border: `${borderWidth} solid ${borderColor}` }}
+      >
         <input
-          className="select-selected-value"
+          className={styles.selectedValue}
           type="text"
           id={id}
           onChange={(e) => {
@@ -25,6 +30,12 @@ export default function SelectInput() {
           tabIndex="0"
           role="combobox"
           aria-expanded={isOpen}
+        />
+        <div className={styles.selectedText}>{selectedOption}</div>
+        <img
+          className={styles.selectArrow}
+          src={arrow}
+          alt="select menu control"
         />
       </div>
     )

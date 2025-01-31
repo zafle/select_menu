@@ -3,9 +3,10 @@ import SelectInput from '../SelectInput/SelectInput'
 import PropTypes from 'prop-types'
 import useConfig from '../../context/hook/useConfig'
 import { useEffect } from 'react'
+import styles from './SelectComponent.module.css'
 
 export default function SelectComponent({ props }) {
-  const { isSet, defineConfig } = useConfig()
+  const { isSet, maxWidth, defineConfig } = useConfig()
 
   useEffect(() => {
     if (!isSet) {
@@ -14,7 +15,7 @@ export default function SelectComponent({ props }) {
   }, [props, isSet, defineConfig])
 
   return (
-    <div className="select-container">
+    <div className={styles.selectContainer} style={{ maxWidth: maxWidth }}>
       <SelectInput />
       <Dropdown />
     </div>

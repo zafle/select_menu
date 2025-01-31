@@ -1,6 +1,6 @@
-import SelectContextProvider from '../../context/SelectContextProvider/SelectContextProvider'
-import ConfigContextProvider from '../../context/ConfigContextProvider/ConfigContextprovider'
-import SelectComponent from '../SelectComponent/SelectComponent'
+import SelectContextProvider from './context/SelectContextProvider/SelectContextProvider'
+import ConfigContextProvider from './context/ConfigContextProvider/ConfigContextprovider'
+import SelectComponent from './components/SelectComponent/SelectComponent'
 
 export function SelectDropdown(props) {
   return (

@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types'
 import useConfig from '../../context/hook/useConfig'
 import useSelect from '../../context/hook/useSelect'
+import styles from './Options.module.css'
+
 export default function Options({ options }) {
   const { defineSelectedOption, defineSelectedValue } = useSelect()
   const { id, values } = useConfig()
@@ -29,7 +31,7 @@ export default function Options({ options }) {
     <>
       {options.map((option, index) => (
         <li
-          className="select-option"
+          className={styles.selectOption}
           key={`${index}-${id}`}
           data-value={values ? option.value : option}
           role="option"

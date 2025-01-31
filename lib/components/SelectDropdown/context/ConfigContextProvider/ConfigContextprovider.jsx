@@ -12,6 +12,7 @@ export default function ConfigContextProvider({ children }) {
     onChange: null,
     values: false,
     optGroup: false,
+    maxWidth: '250px',
   })
 
   const defineConfig = (props) => {
@@ -24,6 +25,7 @@ export default function ConfigContextProvider({ children }) {
       onChange: props.onChange ?? prevConfig.onChange,
       values: props.values ?? prevConfig.values,
       optGroup: props.optGroup ?? prevConfig.optGroup,
+      maxWidth: props.maxWidth ?? prevConfig.maxWidth,
     }))
   }
 
@@ -41,4 +43,5 @@ ConfigContextProvider.propTypes = {
   onChange: PropTypes.func,
   values: PropTypes.bool,
   optGroup: PropTypes.bool,
+  maxWidth: PropTypes.string,
 }
