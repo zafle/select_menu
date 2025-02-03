@@ -6,6 +6,8 @@ export default function SelectContextProvider({ children }) {
   const [selectedOptionId, setSelectedOptionId] = useState('')
   const [selectedOption, setSelectedOption] = useState(undefined)
   const [selectedValue, setSelectedValue] = useState('')
+  const [activeOptionIndex, setActiveOptionIndex] = useState('')
+  // const [activeOption, setActiveOption] = useState('')
   const [isOpen, setIsOpen] = useState(false)
 
   const defineSelectedOptionId = (value) => {
@@ -17,6 +19,14 @@ export default function SelectContextProvider({ children }) {
   const defineSelectedValue = (value) => {
     setSelectedValue(value)
   }
+  const defineActiveOptionIndex = (value) => {
+    setActiveOptionIndex(value)
+  }
+  // const defineActiveOption = (index, id) => {
+  //   setActiveOptionIndex(index)
+  //   setActiveOption(`option_${index}_${id}`)
+  //   // document.getElementById(activeOption).focus()
+  // }
   const toggleIsOpen = () => {
     setIsOpen(isOpen ? false : true)
   }
@@ -27,10 +37,14 @@ export default function SelectContextProvider({ children }) {
         selectedOptionId,
         selectedOption,
         selectedValue,
+        activeOptionIndex,
+        // activeOption,
         isOpen,
         defineSelectedOptionId,
         defineSelectedOption,
         defineSelectedValue,
+        defineActiveOptionIndex,
+        // defineActiveOption,
         toggleIsOpen,
       }}
     >

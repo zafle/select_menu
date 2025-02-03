@@ -1,18 +1,19 @@
-import Options from '../Options/Options'
 import useConfig from '../../context/hook/useConfig'
+import OptGroup from '../OptGroup/OptGroup'
 
 export default function OptGroups() {
   const { id, options } = useConfig()
-  return (
-    <>
-      {options.map((option, index) => (
-        <li className="select-optgroup" key={`${index}-${id}-optgroup`}>
-          <ul>
-            <li className="select-optgroup-label">{option.label}</li>
-            <Options options={option.options} />
-          </ul>
-        </li>
-      ))}
-    </>
-  )
+
+  const optGroupStartIndex = options.reduce((acc, option, i) => {
+    acc.push(i === 0 ? 0 : acc[i - 1] + options[i - 1].options.length)
+    return acc
+  }, [])
+
+  return options.map((option, index) => (
+    <OptGroup
+      key={`${index}-${id}-optgroup`}
+      options={option}
+      startIndex={optGroupStartIndex[index]}
+    />
+  ))
 }

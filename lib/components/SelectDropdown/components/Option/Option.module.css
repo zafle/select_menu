@@ -6,3 +6,9 @@
   background-color: #555555;
   color: white;
 }
+.selectOption:focus {
+  background: red;
+}
+.selectOption.active {
+  color: yellow;
+}

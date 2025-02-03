@@ -17,3 +17,6 @@
 .selectedText {
   flex: 1 1 100%;
 }
+.selectArrow.open {
+  transform: rotate(-180deg);
+}

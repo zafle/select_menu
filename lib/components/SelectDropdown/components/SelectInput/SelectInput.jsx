@@ -10,6 +10,7 @@ export default function SelectInput() {
     selectedValue,
     isOpen,
     toggleIsOpen,
+    defineActiveOptionIndex,
   } = useSelect()
   const { id, labelId, name, onChange, borderWidth, borderColor } = useConfig()
 
@@ -17,10 +18,17 @@ export default function SelectInput() {
     onChange(e.target.value)
   }
 
+  const handleClick = () => {
+    toggleIsOpen()
+    defineActiveOptionIndex(0)
+  }
+
   return (
     <div
-      className={styles.selectInput}
-      onClick={toggleIsOpen}
+      className={
+        `${styles.selectInput} ` + (isOpen ? styles.open : styles.close)
+      }
+      onClick={handleClick}
       style={{ border: `${borderWidth} solid ${borderColor}` }}
       tabIndex="0"
       role="combobox"
@@ -44,7 +52,9 @@ export default function SelectInput() {
       />
       <div className={styles.selectedText}>{selectedOption}</div>
       <img
-        className={styles.selectArrow}
+        className={
+          `${styles.selectArrow} ` + (isOpen ? styles.open : styles.close)
+        }
         src={arrow}
         alt="select menu control"
       />
