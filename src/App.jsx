@@ -24,6 +24,7 @@ function App() {
         options={EU_COUNTRIES}
         onChange={handleChange}
         labelId="euCountries-options-label"
+        defaultSelectedOption="first"
       />
 
       <h2>Options with values</h2>
@@ -40,6 +41,7 @@ function App() {
         values={true}
         onChange={handleChange}
         labelId="euCountries-options_values-label"
+        defaultSelectedOption="Croatia"
       />
 
       <h2>Optgroups without values</h2>

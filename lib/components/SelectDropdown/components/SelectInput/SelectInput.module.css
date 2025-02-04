@@ -17,6 +17,18 @@
 .selectedText {
   flex: 1 1 100%;
 }
+.selectArrow {
+  width: 10px;
+  height: 10px;
+}
 .selectArrow.open {
   transform: rotate(-180deg);
+}
+.clearSelect {
+  width: 10px;
+  height: 10px;
+  display: none;
+}
+.clearSelect.isSelected {
+  display: inline-block;
 }

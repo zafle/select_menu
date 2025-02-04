@@ -1,6 +1,7 @@
 import useConfig from '../../context/hook/useConfig'
 import useSelect from '../../context/hook/useSelect'
-import arrow from '../../assets/arrow.png'
+import arrow from '../../assets/caret-down-icon.png'
+import closeIcon from '../../assets/close-line-icon.png'
 import styles from './SelectInput.module.css'
 
 export default function SelectInput() {
@@ -8,9 +9,11 @@ export default function SelectInput() {
     selectedOptionId,
     selectedOption,
     selectedValue,
+    selectedIndex,
     isOpen,
     toggleIsOpen,
     defineActiveOptionIndex,
+    clearSelected,
   } = useSelect()
   const { id, labelId, name, onChange, borderWidth, borderColor } = useConfig()
 
@@ -18,9 +21,14 @@ export default function SelectInput() {
     onChange(e.target.value)
   }
 
-  const handleClick = () => {
+  const handleInputClick = () => {
     toggleIsOpen()
-    defineActiveOptionIndex(0)
+    defineActiveOptionIndex(selectedIndex !== '' ? selectedIndex : 0)
+  }
+
+  const handleClearClick = (e) => {
+    e.stopPropagation()
+    clearSelected()
   }
 
   return (
@@ -28,7 +36,7 @@ export default function SelectInput() {
       className={
         `${styles.selectInput} ` + (isOpen ? styles.open : styles.close)
       }
-      onClick={handleClick}
+      onClick={handleInputClick}
       style={{ border: `${borderWidth} solid ${borderColor}` }}
       tabIndex="0"
       role="combobox"
@@ -51,6 +59,17 @@ export default function SelectInput() {
         readOnly
       />
       <div className={styles.selectedText}>{selectedOption}</div>
+      <img
+        className={
+          `${styles.clearSelect} ` +
+          (selectedOption !== undefined && styles.isSelected)
+        }
+        src={closeIcon}
+        alt="clear selection"
+        onClick={(e) => {
+          handleClearClick(e)
+        }}
+      />
       <img
         className={
           `${styles.selectArrow} ` + (isOpen ? styles.open : styles.close)

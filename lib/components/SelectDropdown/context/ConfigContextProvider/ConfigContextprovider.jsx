@@ -15,6 +15,7 @@ export default function ConfigContextProvider({ children }) {
     options: [],
     values: false,
     optGroup: false,
+    defaultSelectedOption: undefined, // 'first' for first, 'option_text' to define one, undefined for none
     // css config
     maxWidth: '250px',
     borderWidth: '1px',
@@ -31,6 +32,8 @@ export default function ConfigContextProvider({ children }) {
       name: props.name ?? prevConfig.name,
       onChange: props.onChange ?? prevConfig.onChange,
       values: props.values ?? prevConfig.values,
+      defaultSelectedOption:
+        props.defaultSelectedOption ?? prevConfig.defaultSelectedOption,
       optGroup: props.optGroup ?? prevConfig.optGroup,
       maxWidth: props.maxWidth ?? prevConfig.maxWidth,
       borderWidth: props.borderWidth ?? prevConfig.borderWidth,
@@ -52,6 +55,7 @@ ConfigContextProvider.propTypes = {
   name: PropTypes.string,
   onChange: PropTypes.func,
   values: PropTypes.bool,
+  defaultSelectedOption: PropTypes.string,
   optGroup: PropTypes.bool,
   maxWidth: PropTypes.string,
   borderWidth: PropTypes.string,
