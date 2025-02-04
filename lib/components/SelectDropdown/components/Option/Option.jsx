@@ -25,10 +25,11 @@ export default function Option({ option, index }) {
       defaultSelectedOption === optionText ||
       (defaultSelectedOption === 'first' && index === 0)
     ) {
-      // triggerOnChangeSelectedValueInput(optionValue, id)
-
       defineSelected(`option_${index}_${id}`, optionText, optionValue, index)
     }
+    // NOTE: Run effect once on component mount, please
+    // recheck dependencies if effect is updated.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -55,11 +56,7 @@ export default function Option({ option, index }) {
   return (
     <li
       id={`option_${index}_${id}`}
-      className={
-        `${styles.selectOption} `
-        // +
-        // (activeOptionIndex === index ? styles.active : '')
-      }
+      className={styles.selectOption}
       ref={optionRef}
       data-value={values ? option.value : option}
       onClick={(e) => {
