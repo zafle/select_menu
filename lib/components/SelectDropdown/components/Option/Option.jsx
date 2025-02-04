@@ -8,7 +8,7 @@ import { triggerOnChangeSelectedValueInput } from '../../utils/utils'
 export default function Option({ option, index }) {
   const {
     isOpen,
-    selectedOptionId,
+    selectedId,
     activeOptionIndex,
     defineSelected,
     defineActiveOptionIndex,
@@ -64,7 +64,7 @@ export default function Option({ option, index }) {
       }}
       onMouseEnter={handleHover}
       role="option"
-      aria-selected={selectedOptionId === `option_${index}_${id}`}
+      aria-selected={selectedId === `option_${index}_${id}`}
       tabIndex="-1"
     >
       {values ? option.text : option}

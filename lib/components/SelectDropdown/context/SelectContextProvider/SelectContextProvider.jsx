@@ -3,44 +3,30 @@ import { selectContext } from '../selectContext'
 import PropTypes from 'prop-types'
 
 export default function SelectContextProvider({ children }) {
-  const [selectedOptionId, setSelectedOptionId] = useState('')
-  const [selectedOption, setSelectedOption] = useState(undefined)
-  const [selectedValue, setSelectedValue] = useState('')
-  const [selectedIndex, setSelectedIndex] = useState('')
+  const initialSelectedState = {
+    id: '',
+    text: '',
+    value: '',
+    index: '',
+  }
+  const [selected, setSelected] = useState(initialSelectedState)
   const [activeOptionIndex, setActiveOptionIndex] = useState('')
-  // const [activeOption, setActiveOption] = useState('')
   const [isOpen, setIsOpen] = useState(false)
 
-  // const defineSelectedOptionId = (value) => {
-  //   setSelectedOptionId(value)
-  // }
-  // const defineSelectedOption = (value) => {
-  //   setSelectedOption(value)
-  // }
-  // const defineSelectedValue = (value) => {
-  //   setSelectedValue(value)
-  // }
   const defineSelected = (id, text, value, index) => {
-    setSelectedOptionId(id)
-    setSelectedOption(text)
-    setSelectedValue(value)
-    setSelectedIndex(index)
+    setSelected({
+      id,
+      text,
+      value,
+      index,
+    })
   }
   const clearSelected = () => {
-    setSelectedOptionId('')
-    setSelectedOption(undefined)
-    setSelectedValue('')
-    setSelectedIndex('')
+    setSelected(initialSelectedState)
   }
   const defineActiveOptionIndex = (value) => {
     setActiveOptionIndex(value)
   }
-
-  // const defineActiveOption = (index, id) => {
-  //   setActiveOptionIndex(index)
-  //   setActiveOption(`option_${index}_${id}`)
-  //   // document.getElementById(activeOption).focus()
-  // }
   const toggleIsOpen = () => {
     setIsOpen(isOpen ? false : true)
   }
@@ -48,20 +34,12 @@ export default function SelectContextProvider({ children }) {
   return (
     <selectContext.Provider
       value={{
-        selectedOptionId,
-        selectedOption,
-        selectedValue,
-        selectedIndex,
+        selected,
         activeOptionIndex,
-        // activeOption,
         isOpen,
-        // defineSelectedOptionId,
-        // defineSelectedOption,
-        // defineSelectedValue,
         defineSelected,
         clearSelected,
         defineActiveOptionIndex,
-        // defineActiveOption,
         toggleIsOpen,
       }}
     >

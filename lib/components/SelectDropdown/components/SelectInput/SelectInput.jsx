@@ -7,8 +7,8 @@ import { triggerOnChangeSelectedValueInput } from '../../utils/utils'
 
 export default function SelectInput() {
   const {
-    selectedOptionId,
-    selectedOption,
+    selectedId,
+    selectedText,
     selectedValue,
     selectedIndex,
     isOpen,
@@ -47,7 +47,7 @@ export default function SelectInput() {
       aria-expanded={isOpen}
       aria-haspopup="listbox"
       aria-controls={`dropdown_${id}`}
-      aria-activedescendant={selectedOptionId}
+      aria-activedescendant={selectedId}
       aria-labelledby={labelId}
     >
       <input
@@ -62,11 +62,11 @@ export default function SelectInput() {
         aria-hidden="true"
         readOnly
       />
-      <div className={styles.selectedText}>{selectedOption}</div>
+      <div className={styles.selectedText}>{selectedText}</div>
       <img
         className={
           `${styles.clearSelect} ` +
-          (selectedOption !== undefined && styles.isSelected)
+          (selectedText !== '' && styles.hasSelection)
         }
         src={closeIcon}
         alt="clear selection"
@@ -75,9 +75,7 @@ export default function SelectInput() {
         }}
       />
       <img
-        className={
-          `${styles.selectArrow} ` + (isOpen ? styles.open : styles.close)
-        }
+        className={`${styles.selectArrow} ` + (isOpen && styles.open)}
         src={arrow}
         alt="select menu control"
       />

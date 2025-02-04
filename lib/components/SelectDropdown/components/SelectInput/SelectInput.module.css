@@ -29,6 +29,6 @@
   height: 10px;
   display: none;
 }
-.clearSelect.isSelected {
+.clearSelect.hasSelection {
   display: inline-block;
 }
