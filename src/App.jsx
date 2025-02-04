@@ -22,7 +22,7 @@ function App() {
         id="euCountries-options"
         name="euCountries-options"
         options={EU_COUNTRIES}
-        onChange={handleChange}
+        onChangeValue={handleChange}
         labelId="euCountries-options-label"
         defaultSelectedOption="first"
       />
@@ -39,7 +39,7 @@ function App() {
         name="euCountries-options_values"
         options={EU_COUNTRIES_CODES}
         values={true}
-        onChange={handleChange}
+        onChangeValue={handleChange}
         labelId="euCountries-options_values-label"
         defaultSelectedOption="Croatia"
       />
@@ -53,7 +53,7 @@ function App() {
         name="euCountries-optgroup"
         options={EU_COUNTRIES_GEO}
         optGroup={true}
-        onChange={handleChange}
+        onChangeValue={handleChange}
         labelId="euCountries-optgroup-label"
       />
 
@@ -70,7 +70,7 @@ function App() {
         options={EU_COUNTRIES_GEO_CODES}
         values={true}
         optGroup={true}
-        onChange={handleChange}
+        onChangeValue={handleChange}
         labelId="euCountries-optgroup_values-label"
       />
     </>

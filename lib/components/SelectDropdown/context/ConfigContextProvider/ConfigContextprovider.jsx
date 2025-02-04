@@ -10,7 +10,7 @@ export default function ConfigContextProvider({ children }) {
     id: nanoid(),
     labelId: '', // for aria-labelledby
     name: '',
-    onChange: null,
+    onChangeValue: null,
     // options config
     options: [],
     values: false,
@@ -30,7 +30,7 @@ export default function ConfigContextProvider({ children }) {
       id: props.id ?? prevConfig.id,
       labelId: props.labelId ?? prevConfig.labelId,
       name: props.name ?? prevConfig.name,
-      onChange: props.onChange ?? prevConfig.onChange,
+      onChangeValue: props.onChangeValue ?? prevConfig.onChangeValue,
       values: props.values ?? prevConfig.values,
       defaultSelectedOption:
         props.defaultSelectedOption ?? prevConfig.defaultSelectedOption,
@@ -53,7 +53,7 @@ ConfigContextProvider.propTypes = {
   id: PropTypes.string,
   labelId: PropTypes.string,
   name: PropTypes.string,
-  onChange: PropTypes.func,
+  onChangeValue: PropTypes.func,
   values: PropTypes.bool,
   defaultSelectedOption: PropTypes.string,
   optGroup: PropTypes.bool,

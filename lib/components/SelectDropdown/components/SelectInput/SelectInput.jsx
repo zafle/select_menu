@@ -3,6 +3,7 @@ import useSelect from '../../context/hook/useSelect'
 import arrow from '../../assets/caret-down-icon.png'
 import closeIcon from '../../assets/close-line-icon.png'
 import styles from './SelectInput.module.css'
+import { triggerOnChangeSelectedValueInput } from '../../utils/utils'
 
 export default function SelectInput() {
   const {
@@ -15,10 +16,12 @@ export default function SelectInput() {
     defineActiveOptionIndex,
     clearSelected,
   } = useSelect()
-  const { id, labelId, name, onChange, borderWidth, borderColor } = useConfig()
+  const { id, labelId, name, onChangeValue, borderWidth, borderColor } =
+    useConfig()
 
   const handleChange = (e) => {
-    onChange(e.target.value)
+    onChangeValue(e.target.value)
+    console.log('selected has changed')
   }
 
   const handleInputClick = () => {
@@ -28,6 +31,7 @@ export default function SelectInput() {
 
   const handleClearClick = (e) => {
     e.stopPropagation()
+    triggerOnChangeSelectedValueInput('', id)
     clearSelected()
   }
 

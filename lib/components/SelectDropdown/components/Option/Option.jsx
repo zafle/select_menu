@@ -25,7 +25,7 @@ export default function Option({ option, index }) {
       defaultSelectedOption === optionText ||
       (defaultSelectedOption === 'first' && index === 0)
     ) {
-      triggerOnChangeSelectedValueInput(optionValue, id)
+      // triggerOnChangeSelectedValueInput(optionValue, id)
 
       defineSelected(`option_${index}_${id}`, optionText, optionValue, index)
     }
