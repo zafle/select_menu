@@ -38,7 +38,8 @@ function App() {
         id="euCountries-options_values"
         name="euCountries-options_values"
         options={EU_COUNTRIES_CODES}
-        values={true}
+        textField="name"
+        valueField="abreviation"
         onChangeValue={handleChange}
         labelId="euCountries-options_values-label"
         defaultSelectedOption="Croatia"
@@ -52,7 +53,8 @@ function App() {
         id="euCountries-optgroup"
         name="euCountries-optgroup"
         options={EU_COUNTRIES_GEO}
-        optGroup={true}
+        optGroupLabelField="label"
+        optGroupOptionsField="options"
         onChangeValue={handleChange}
         labelId="euCountries-optgroup-label"
       />
@@ -68,8 +70,10 @@ function App() {
         id="euCountries-optgroup_values"
         name="euCountries-optgroup_values"
         options={EU_COUNTRIES_GEO_CODES}
-        values={true}
-        optGroup={true}
+        textField="text"
+        valueField="value"
+        optGroupLabelField="label"
+        optGroupOptionsField="options"
         onChangeValue={handleChange}
         labelId="euCountries-optgroup_values-label"
       />

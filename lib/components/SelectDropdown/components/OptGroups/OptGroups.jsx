@@ -2,7 +2,7 @@ import useConfig from '../../context/hook/useConfig'
 import OptGroup from '../OptGroup/OptGroup'
 
 export default function OptGroups() {
-  const { id, options } = useConfig()
+  const { id, options, optGroupOptionsField } = useConfig()
 
   /**
    * Computes the starting index for each optgroup's options.
@@ -12,7 +12,9 @@ export default function OptGroups() {
    * @returns {number[]} Array of starting indexes for each optgroup.
    */
   const optGroupStartIndex = options.reduce((acc, option, i) => {
-    acc.push(i === 0 ? 0 : acc[i - 1] + options[i - 1].options.length)
+    acc.push(
+      i === 0 ? 0 : acc[i - 1] + options[i - 1][optGroupOptionsField].length
+    )
     return acc
   }, [])
 

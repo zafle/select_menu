@@ -15,13 +15,14 @@ export default function Option({ option, index }) {
     toggleIsOpen,
   } = useSelect()
 
-  const { id, values, defaultSelectedOption } = useConfig()
+  const { id, values, defaultSelectedOption, textField, valueField } =
+    useConfig()
 
   const optionRef = useRef(null)
 
   useEffect(() => {
-    const optionText = values ? option.text : option
-    const optionValue = values ? option.value : option
+    const optionText = values ? option[textField] : option
+    const optionValue = values ? option[valueField] : option
     if (
       defaultSelectedOption === optionText ||
       (defaultSelectedOption === 'first' && index === 0)
@@ -68,7 +69,7 @@ export default function Option({ option, index }) {
       id={`option_${index}_${id}`}
       className={styles.selectOption}
       ref={optionRef}
-      data-value={values ? option.value : option}
+      data-value={values ? option[valueField] : option}
       onClick={(e) => {
         handleClick(e)
       }}
@@ -78,17 +79,21 @@ export default function Option({ option, index }) {
       aria-selected={selectedId === `option_${index}_${id}`}
       tabIndex="-1"
     >
-      {values ? option.text : option}
+      {values ? option[textField] : option}
     </li>
   )
 }
 
 Option.propTypes = {
   option: PropTypes.oneOfType([
+    // without values
     PropTypes.string,
+    // with values
     PropTypes.shape({
-      text: PropTypes.string,
-      value: PropTypes.string,
+      // textField
+      [PropTypes.string]: PropTypes.string,
+      // valueField
+      [PropTypes.string]: PropTypes.string,
     }),
   ]).isRequired,
   index: PropTypes.number.isRequired,

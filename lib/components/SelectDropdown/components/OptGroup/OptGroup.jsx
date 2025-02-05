@@ -1,12 +1,17 @@
+import useConfig from '../../context/hook/useConfig'
 import Options from '../Options/Options'
 import PropTypes from 'prop-types'
 
 export default function OptGroup({ options, startIndex }) {
+  const { optGroupLabelField, optGroupOptionsField } = useConfig()
   return (
     <li className="select-optgroup">
       <ul>
-        <li className="select-optgroup-label">{options.label}</li>
-        <Options options={options.options} startIndex={startIndex} />
+        <li className="select-optgroup-label">{options[optGroupLabelField]}</li>
+        <Options
+          options={options[optGroupOptionsField]}
+          startIndex={startIndex}
+        />
       </ul>
     </li>
   )
@@ -14,13 +19,17 @@ export default function OptGroup({ options, startIndex }) {
 
 OptGroup.propTypes = {
   options: PropTypes.shape({
-    label: PropTypes.string,
-    options: PropTypes.arrayOf(
+    //optGroupLabelField
+    [PropTypes.string]: PropTypes.string,
+    //optGroupOptionsField
+    [PropTypes.string]: PropTypes.arrayOf(
       PropTypes.oneOfType([
+        // without values
         PropTypes.string,
+        // with values
         PropTypes.shape({
-          text: PropTypes.string,
-          value: PropTypes.string,
+          [PropTypes.string]: PropTypes.string,
+          [PropTypes.string]: PropTypes.string,
         }),
       ])
     ),

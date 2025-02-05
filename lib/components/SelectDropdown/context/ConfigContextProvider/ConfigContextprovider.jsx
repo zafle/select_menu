@@ -16,6 +16,10 @@ export default function ConfigContextProvider({ children }) {
     values: false,
     optGroup: false,
     defaultSelectedOption: undefined, // 'first' for first, 'option_text' to define one, undefined for none
+    textField: '',
+    valueField: '',
+    optGroupLabelField: '',
+    optGroupOptionsField: '',
     // css config
     maxWidth: '250px',
     borderWidth: '1px',
@@ -34,10 +38,28 @@ export default function ConfigContextProvider({ children }) {
       values: props.values ?? prevConfig.values,
       defaultSelectedOption:
         props.defaultSelectedOption ?? prevConfig.defaultSelectedOption,
+      textField: props.textField ?? prevConfig.textField,
+      valueField: props.valueField ?? prevConfig.valueField,
+      optGroupLabelField:
+        props.optGroupLabelField ?? prevConfig.optGroupLabelField,
+      optGroupOptionsField:
+        props.optGroupOptionsField ?? prevConfig.optGroupOptionsField,
       optGroup: props.optGroup ?? prevConfig.optGroup,
       maxWidth: props.maxWidth ?? prevConfig.maxWidth,
       borderWidth: props.borderWidth ?? prevConfig.borderWidth,
       borderColor: props.borderColor ?? prevConfig.borderColor,
+    }))
+    setConfig((prevConfig) => ({
+      ...prevConfig,
+      values:
+        prevConfig.textField !== '' && prevConfig.valueField !== ''
+          ? true
+          : false,
+      optGroup:
+        prevConfig.optGroupLabelField !== '' &&
+        prevConfig.optGroupOptionsField !== ''
+          ? true
+          : false,
     }))
   }
 
@@ -56,6 +78,10 @@ ConfigContextProvider.propTypes = {
   onChangeValue: PropTypes.func,
   values: PropTypes.bool,
   defaultSelectedOption: PropTypes.string,
+  textField: PropTypes.string,
+  valueField: PropTypes.string,
+  optGroupLabelField: PropTypes.string,
+  optGroupOptionsField: PropTypes.string,
   optGroup: PropTypes.bool,
   maxWidth: PropTypes.string,
   borderWidth: PropTypes.string,
