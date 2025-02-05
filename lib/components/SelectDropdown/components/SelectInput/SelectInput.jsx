@@ -16,23 +16,53 @@ export default function SelectInput() {
     defineActiveOptionIndex,
     clearSelected,
   } = useSelect()
+
   const { id, labelId, name, onChangeValue, borderWidth, borderColor } =
     useConfig()
 
-  const handleChange = (e) => {
-    onChangeValue(e.target.value)
-    console.log('selected has changed')
+  const toggleDropdown = (e) => {
+    // if event is not from clear selection element
+    if (e.target.dataset.name !== 'clear') {
+      // if dropdown is closed when event occurs, define active option before opening
+      !isOpen &&
+        defineActiveOptionIndex(selectedIndex !== '' ? selectedIndex : 0)
+      toggleIsOpen()
+    }
   }
 
-  const handleInputClick = () => {
-    toggleIsOpen()
-    defineActiveOptionIndex(selectedIndex !== '' ? selectedIndex : 0)
-  }
-
-  const handleClearClick = (e) => {
-    e.stopPropagation()
+  const clearSelection = () => {
     triggerOnChangeSelectedValueInput('', id)
     clearSelected()
+    isOpen && defineActiveOptionIndex(0)
+  }
+
+  const handleChange = (e) => {
+    onChangeValue(e.target.value)
+  }
+
+  // Handle input controls
+
+  const handleInputClick = (e) => {
+    toggleDropdown(e)
+  }
+
+  const handleInputKeyDown = (e) => {
+    if (e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter') {
+      e.preventDefault()
+      toggleDropdown(e)
+    }
+  }
+
+  // Handle clear input controls
+
+  const handleClearClick = () => {
+    clearSelection()
+  }
+  const handleClearKeyDown = (e) => {
+    if (e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter') {
+      e.preventDefault()
+      clearSelection()
+    }
   }
 
   return (
@@ -40,7 +70,6 @@ export default function SelectInput() {
       className={
         `${styles.selectInput} ` + (isOpen ? styles.open : styles.close)
       }
-      onClick={handleInputClick}
       style={{ border: `${borderWidth} solid ${borderColor}` }}
       tabIndex="0"
       role="combobox"
@@ -49,6 +78,12 @@ export default function SelectInput() {
       aria-controls={`dropdown_${id}`}
       aria-activedescendant={selectedId}
       aria-labelledby={labelId}
+      onClick={(e) => {
+        handleInputClick(e)
+      }}
+      onKeyDown={(e) => {
+        handleInputKeyDown(e)
+      }}
     >
       <input
         className={styles.selectedValue}
@@ -60,6 +95,7 @@ export default function SelectInput() {
         name={name}
         value={selectedValue}
         aria-hidden="true"
+        tabIndex="-1"
         readOnly
       />
       <div className={styles.selectedText}>{selectedText}</div>
@@ -70,8 +106,14 @@ export default function SelectInput() {
         }
         src={closeIcon}
         alt="clear selection"
-        onClick={(e) => {
-          handleClearClick(e)
+        data-name="clear"
+        tabIndex="0"
+        aria-label="clear selection"
+        onClick={() => {
+          handleClearClick()
+        }}
+        onKeyDown={(e) => {
+          handleClearKeyDown(e)
         }}
       />
       <img

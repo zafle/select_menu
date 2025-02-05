@@ -8,47 +8,30 @@ import useOnClickOutside from '../../hooks/useOnClickOutside'
 import useSelect from '../../context/hook/useSelect'
 
 export default function SelectComponent({ props }) {
-  const {
-    isOpen,
-    activeOptionIndex,
-    defineActiveOptionIndex,
-    toggleIsOpen,
-  } = useSelect()
+  const { isOpen, toggleIsOpen } = useSelect()
+
   const { isSet, maxWidth, defineConfig } = useConfig()
 
   const selectComponentRef = useRef(null)
-  function closeDropdown() {
-    isOpen && toggleIsOpen()
-  }
-  useOnClickOutside(selectComponentRef, closeDropdown)
-
-  function handleKeyDown(e) {
-    console.log('keydown')
-    if (e.key === 'Escape') {
-      toggleIsOpen()
-    }
-    if (e.key === 'ArrowDown') {
-      // Fonction pour naviguer vers l’option suivante
-      e.preventDefault()
-      defineActiveOptionIndex(activeOptionIndex + 1)
-    }
-    if (e.key === 'ArrowUp') {
-      // Fonction pour naviguer vers l’option précédente
-      e.preventDefault()
-      defineActiveOptionIndex(activeOptionIndex - 1)
-    }
-  }
 
   useEffect(() => {
     if (!isSet) {
       defineConfig(props)
     }
+  }, [props, isSet, defineConfig])
 
-  }, [
-    props,
-    isSet,
-    defineConfig,
-  ])
+  function closeDropdown() {
+    isOpen && toggleIsOpen()
+  }
+
+  useOnClickOutside(selectComponentRef, closeDropdown)
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Escape') {
+      e.preventDefault()
+      closeDropdown()
+    }
+  }
 
   if (isSet) {
     return (

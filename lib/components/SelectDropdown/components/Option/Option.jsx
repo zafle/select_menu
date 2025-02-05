@@ -12,6 +12,7 @@ export default function Option({ option, index }) {
     activeOptionIndex,
     defineSelected,
     defineActiveOptionIndex,
+    toggleIsOpen,
   } = useSelect()
 
   const { id, values, defaultSelectedOption } = useConfig()
@@ -46,11 +47,20 @@ export default function Option({ option, index }) {
       e.target.dataset.value,
       index
     )
+    toggleIsOpen()
   }
 
   function handleHover() {
     defineActiveOptionIndex(index)
     optionRef.current.focus()
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter') {
+      e.stopPropagation()
+      e.preventDefault()
+      handleClick(e)
+    }
   }
 
   return (
@@ -63,6 +73,7 @@ export default function Option({ option, index }) {
         handleClick(e)
       }}
       onMouseEnter={handleHover}
+      onKeyDown={handleKeyDown}
       role="option"
       aria-selected={selectedId === `option_${index}_${id}`}
       tabIndex="-1"
