@@ -1,13 +1,31 @@
 import useConfig from '../../context/hook/useConfig'
 import Options from '../Options/Options'
 import PropTypes from 'prop-types'
+import styles from './OptGroup.module.css'
 
 export default function OptGroup({ options, startIndex }) {
-  const { optGroupLabelField, optGroupOptionsField } = useConfig()
+  const {
+    optGroupLabelField,
+    optGroupOptionsField,
+    optGroupLabelTextColor,
+    optGroupLabelFontSize,
+    optGroupVerticalPadding,
+    optGroupHorizontalPadding,
+    optGroupMarginTop,
+  } = useConfig()
+
+  const optGroupStyle = {
+    color: optGroupLabelTextColor,
+    fontSize: optGroupLabelFontSize,
+    padding: `${optGroupVerticalPadding} ${optGroupHorizontalPadding}`,
+    marginTop: optGroupMarginTop,
+  }
   return (
     <li className="select-optgroup">
       <ul>
-        <li className="select-optgroup-label">{options[optGroupLabelField]}</li>
+        <li className={styles.optgroupLabel} style={optGroupStyle}>
+          {options[optGroupLabelField]}
+        </li>
         <Options
           options={options[optGroupOptionsField]}
           startIndex={startIndex}

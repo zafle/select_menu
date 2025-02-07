@@ -1,8 +1,8 @@
 .selectInput {
   cursor: pointer;
   display: flex;
-  padding: 8px 16px;
-  border: 1px solid #2b2b2b;
+  align-items: center;
+  position: relative;
 }
 .selectedValue {
   position: absolute;
@@ -17,16 +17,15 @@
 .selectedText {
   flex: 1 1 100%;
 }
-.selectArrow {
+.selectControl {
   width: 10px;
   height: 10px;
+  padding: 5px;
 }
 .selectArrow.open {
   transform: rotate(-180deg);
 }
 .clearSelect {
-  width: 10px;
-  height: 10px;
   display: none;
 }
 .clearSelect.hasSelection {

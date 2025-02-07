@@ -1,14 +1,11 @@
 .selectDropdown {
   position: absolute;
-  background: white;
-  border: 1px solid #2b2b2b;
   border-top: 0;
-  padding: 16px 0;
-  max-width: 250px;
+  padding-left: 0;
+  padding-right: 0;
   width: 100%;
   box-sizing: border-box;
-  max-height: 200px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .selectDropdown.close {

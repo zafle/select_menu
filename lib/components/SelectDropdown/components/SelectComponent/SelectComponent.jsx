@@ -33,12 +33,16 @@ export default function SelectComponent({ props }) {
     }
   }
 
+  const containerStyle = {
+    maxWidth: maxWidth,
+  }
+
   if (isSet) {
     return (
       <div
         ref={selectComponentRef}
         className={styles.selectContainer}
-        style={{ maxWidth: maxWidth }}
+        style={containerStyle}
         onKeyDown={(e) => {
           handleKeyDown(e)
         }}

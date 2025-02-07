@@ -9,7 +9,26 @@ export default function Dropdown() {
   const { isOpen, selectedId, activeOptionIndex, defineActiveOptionIndex } =
     useSelect()
 
-  const { id, labelId, options, optGroup } = useConfig()
+  const {
+    id,
+    labelId,
+    options,
+    optGroup,
+    maxWidth,
+    border,
+    dropdownBorderTop,
+    dropdownBorderBottom,
+    // borderColor,
+    // borderWidth,
+    dropdownBackground,
+    dropdownBorderRadius,
+    dropdownMaxHeight,
+    dropdownVerticalPadding,
+    // dropdownPosition,
+    dropdownBottom,
+    boxShadow,
+    boxShadowOnOpen,
+  } = useConfig()
 
   const lastFocusableOptionIndex = useMemo(() => {
     let index = 0
@@ -44,12 +63,29 @@ export default function Dropdown() {
     }
   }
 
+  const dropdownStyle = {
+    maxHeight: dropdownMaxHeight,
+    maxWidth: maxWidth,
+    background: dropdownBackground,
+    border: border,
+    borderTop: dropdownBorderTop,
+    borderBottom: dropdownBorderBottom,
+    borderRadius: dropdownBorderRadius,
+    // paddingTop: dropdownVerticalPadding,
+    // paddingBottom: dropdownVerticalPadding,
+    padding: `${dropdownVerticalPadding} 0`,
+    boxShadow: boxShadowOnOpen ? (isOpen ? boxShadow : 'unset') : boxShadow,
+    bottom: dropdownBottom,
+    zIndex: isOpen ? '1' : 'auto',
+  }
+
   return (
     <ul
       id={`dropdown_${id}`}
       className={
         `${styles.selectDropdown} ` + (isOpen ? styles.open : styles.close)
       }
+      style={dropdownStyle}
       role="listbox"
       aria-hidden={!isOpen}
       aria-activedescendant={selectedId}

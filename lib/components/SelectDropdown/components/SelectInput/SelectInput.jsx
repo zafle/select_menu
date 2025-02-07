@@ -3,7 +3,11 @@ import useSelect from '../../context/hook/useSelect'
 import arrow from '../../assets/caret-down-icon.png'
 import closeIcon from '../../assets/close-line-icon.png'
 import styles from './SelectInput.module.css'
-import { triggerOnChangeSelectedValueInput } from '../../utils/utils'
+import {
+  outlineColorOnBlur,
+  outlineColorOnFocus,
+  triggerOnChangeSelectedValueInput,
+} from '../../utils/utils'
 
 export default function SelectInput() {
   const {
@@ -17,8 +21,26 @@ export default function SelectInput() {
     clearSelected,
   } = useSelect()
 
-  const { id, labelId, name, onChangeValue, borderWidth, borderColor } =
-    useConfig()
+  const {
+    id,
+    labelId,
+    name,
+    onChangeValue,
+    colorOnFocus,
+    border,
+    inputHeight,
+    inputBackground,
+    inputTextColor,
+    inputBorderRadiusOpened,
+    inputBorderRadiusClosed,
+    inputVerticalPadding,
+    inputHorizontalPadding,
+    containerMargin,
+    inputFontSize,
+    boxShadow,
+    boxShadowOnOpen,
+    dropdownPosition,
+  } = useConfig()
 
   const toggleDropdown = (e) => {
     // if event is not from clear selection element
@@ -65,12 +87,26 @@ export default function SelectInput() {
     }
   }
 
+  // Inline css
+  const selectInputStyle = {
+    border: border,
+    height: inputHeight,
+    background: inputBackground,
+    color: inputTextColor,
+    borderRadius: isOpen ? inputBorderRadiusOpened : inputBorderRadiusClosed,
+    padding: `${inputVerticalPadding} ${inputHorizontalPadding}`,
+    margin: containerMargin,
+    fontSize: inputFontSize,
+    boxShadow: boxShadowOnOpen ? (isOpen ? boxShadow : 'unset') : boxShadow,
+    zIndex: dropdownPosition === 'top' && isOpen ? '2' : 'auto',
+  }
+
   return (
     <div
       className={
         `${styles.selectInput} ` + (isOpen ? styles.open : styles.close)
       }
-      style={{ border: `${borderWidth} solid ${borderColor}` }}
+      style={selectInputStyle}
       tabIndex="0"
       role="combobox"
       aria-expanded={isOpen}
@@ -83,6 +119,12 @@ export default function SelectInput() {
       }}
       onKeyDown={(e) => {
         handleInputKeyDown(e)
+      }}
+      onFocus={(e) => {
+        outlineColorOnFocus(e.target, colorOnFocus)
+      }}
+      onBlur={(e) => {
+        outlineColorOnBlur(e.target)
       }}
     >
       <input
@@ -101,7 +143,7 @@ export default function SelectInput() {
       <div className={styles.selectedText}>{selectedText}</div>
       <img
         className={
-          `${styles.clearSelect} ` +
+          `${styles.clearSelect} ${styles.selectControl} ` +
           (selectedText !== '' && styles.hasSelection)
         }
         src={closeIcon}
@@ -109,15 +151,25 @@ export default function SelectInput() {
         data-name="clear"
         tabIndex="0"
         aria-label="clear selection"
+        role="button"
         onClick={() => {
           handleClearClick()
         }}
         onKeyDown={(e) => {
           handleClearKeyDown(e)
         }}
+        onFocus={(e) => {
+          outlineColorOnFocus(e.target, colorOnFocus)
+        }}
+        onBlur={(e) => {
+          outlineColorOnBlur(e.target)
+        }}
       />
       <img
-        className={`${styles.selectArrow} ` + (isOpen && styles.open)}
+        className={
+          `${styles.selectArrow} ${styles.selectControl} ` +
+          (isOpen && styles.open)
+        }
         src={arrow}
         alt="select menu control"
       />

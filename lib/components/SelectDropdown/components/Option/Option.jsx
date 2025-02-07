@@ -15,8 +15,19 @@ export default function Option({ option, index }) {
     toggleIsOpen,
   } = useSelect()
 
-  const { id, values, defaultSelectedOption, textField, valueField } =
-    useConfig()
+  const {
+    id,
+    values,
+    defaultSelectedOption,
+    textField,
+    valueField,
+    optionTextColor,
+    hoveredOptionBackground,
+    hoveredOptionTextColor,
+    optionVerticalPadding,
+    optionHorizontalPadding,
+    optionFontSize,
+  } = useConfig()
 
   const optionRef = useRef(null)
 
@@ -40,7 +51,7 @@ export default function Option({ option, index }) {
     }
   }, [isOpen, activeOptionIndex, index])
 
-  function handleClick(e) {
+  const handleClick = (e) => {
     triggerOnChangeSelectedValueInput(e.target.dataset.value, id)
     defineSelected(
       e.target.id,
@@ -51,7 +62,7 @@ export default function Option({ option, index }) {
     toggleIsOpen()
   }
 
-  function handleHover() {
+  const handleMouseEnter = () => {
     defineActiveOptionIndex(index)
     optionRef.current.focus()
   }
@@ -64,16 +75,25 @@ export default function Option({ option, index }) {
     }
   }
 
+  const optionStyle = {
+    color:
+      activeOptionIndex === index ? hoveredOptionTextColor : optionTextColor,
+    fontSize: optionFontSize,
+    padding: `${optionVerticalPadding} ${optionHorizontalPadding}`,
+    background: activeOptionIndex === index ? hoveredOptionBackground : 'unset',
+  }
+
   return (
     <li
       id={`option_${index}_${id}`}
       className={styles.selectOption}
       ref={optionRef}
       data-value={values ? option[valueField] : option}
+      style={optionStyle}
       onClick={(e) => {
         handleClick(e)
       }}
-      onMouseEnter={handleHover}
+      onMouseEnter={handleMouseEnter}
       onKeyDown={handleKeyDown}
       role="option"
       aria-selected={selectedId === `option_${index}_${id}`}
