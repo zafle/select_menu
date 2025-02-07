@@ -103,7 +103,7 @@ export default function SelectInput() {
   return (
     <div
       className={
-        `${styles.selectInput} ` +
+        `select-input ${styles.selectInput} ` +
         (colorOnFocus !== 'default' ? `${styles[classOnFocus]} ` : '')
       }
       style={selectInputStyle}

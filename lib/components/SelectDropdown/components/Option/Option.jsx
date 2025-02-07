@@ -89,7 +89,7 @@ export default function Option({ option, index }) {
     <li
       id={`option_${index}_${id}`}
       className={
-        `${styles.selectOption} ` +
+        `select-option ${styles.selectOption} ` +
         (colorOnFocus !== 'default' ? `${styles[classOnFocus]} ` : '')
       }
       ref={optionRef}

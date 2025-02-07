@@ -41,7 +41,7 @@ export default function Dropdown() {
     }
   }, [options, optGroup])
 
-  function handleKeyDown(e) {
+  const handleKeyDown = (e) => {
     if (e.key === 'ArrowDown') {
       // focus on next option
       e.preventDefault()
@@ -80,7 +80,7 @@ export default function Dropdown() {
     <ul
       id={`dropdown_${id}`}
       className={
-        `${styles.selectDropdown} ` +
+        `select-dropdown ${styles.selectDropdown} ` +
         (colorOnFocus !== 'default' ? `${styles[classOnFocus]} ` : '') +
         (isOpen ? '' : styles.close)
       }

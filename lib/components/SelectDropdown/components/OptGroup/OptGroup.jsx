@@ -23,7 +23,10 @@ export default function OptGroup({ options, startIndex }) {
   return (
     <li className="select-optgroup">
       <ul>
-        <li className={styles.optgroupLabel} style={optGroupStyle}>
+        <li
+          className={`select-optgroup-label ${styles.optgroupLabel}`}
+          style={optGroupStyle}
+        >
           {options[optGroupLabelField]}
         </li>
         <Options

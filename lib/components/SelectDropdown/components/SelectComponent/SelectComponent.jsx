@@ -21,7 +21,7 @@ export default function SelectComponent({ props }) {
     }
   }, [props, isSet, defineConfig])
 
-  function closeDropdown() {
+  const closeDropdown = () => {
     isOpen && toggleIsOpen()
   }
 
@@ -44,7 +44,7 @@ export default function SelectComponent({ props }) {
     return (
       <div
         ref={selectComponentRef}
-        className={styles.selectContainer}
+        className={`select-container ${styles.selectContainer}`}
         style={containerStyle}
         onKeyDown={(e) => {
           handleKeyDown(e)
