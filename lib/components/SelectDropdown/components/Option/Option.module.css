@@ -1,3 +1,9 @@
 .selectOption {
   cursor: pointer;
 }
+.hasNoFocusVisibleColor:focus-visible {
+  outline: none;
+}
+.hasCustomFocusVisibleColor:focus-visible {
+  outline: solid var(--outline-focus-visible-color);
+}

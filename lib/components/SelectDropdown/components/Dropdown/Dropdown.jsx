@@ -18,16 +18,15 @@ export default function Dropdown() {
     border,
     dropdownBorderTop,
     dropdownBorderBottom,
-    // borderColor,
-    // borderWidth,
     dropdownBackground,
     dropdownBorderRadius,
     dropdownMaxHeight,
     dropdownVerticalPadding,
-    // dropdownPosition,
     dropdownBottom,
     boxShadow,
     boxShadowOnOpen,
+    colorOnFocus,
+    classOnFocus,
   } = useConfig()
 
   const lastFocusableOptionIndex = useMemo(() => {
@@ -71,8 +70,6 @@ export default function Dropdown() {
     borderTop: dropdownBorderTop,
     borderBottom: dropdownBorderBottom,
     borderRadius: dropdownBorderRadius,
-    // paddingTop: dropdownVerticalPadding,
-    // paddingBottom: dropdownVerticalPadding,
     padding: `${dropdownVerticalPadding} 0`,
     boxShadow: boxShadowOnOpen ? (isOpen ? boxShadow : 'unset') : boxShadow,
     bottom: dropdownBottom,
@@ -83,7 +80,9 @@ export default function Dropdown() {
     <ul
       id={`dropdown_${id}`}
       className={
-        `${styles.selectDropdown} ` + (isOpen ? styles.open : styles.close)
+        `${styles.selectDropdown} ` +
+        (colorOnFocus !== 'default' ? `${styles[classOnFocus]} ` : '') +
+        (isOpen ? '' : styles.close)
       }
       style={dropdownStyle}
       role="listbox"

@@ -11,3 +11,9 @@
 .selectDropdown.close {
   display: none;
 }
+.hasNoFocusVisibleColor:focus-visible {
+  outline: none;
+}
+.hasCustomFocusVisibleColor:focus-visible {
+  outline: solid var(--outline-focus-visible-color);
+}

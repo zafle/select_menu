@@ -11,6 +11,7 @@ import {
   setInputBorderRadiusOpened,
   setInputBorderRadiusClosed,
   setDropdownBorderRadius,
+  setClassOnFocus,
 } from '../default/configSettings'
 import PropTypes from 'prop-types'
 
@@ -37,8 +38,8 @@ export default function ConfigContextProvider({ children }) {
       // set border
       config.border = setBorder(config.border)
 
-      // set color on focus
-      // config.colorOnFocus = set
+      // set class on focus
+      config.classOnFocus = setClassOnFocus(config.colorOnFocus)
 
       // set input border radius when closed
       config.inputBorderRadiusClosed = setInputBorderRadiusClosed(

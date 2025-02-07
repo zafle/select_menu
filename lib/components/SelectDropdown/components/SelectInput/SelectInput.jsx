@@ -3,11 +3,7 @@ import useSelect from '../../context/hook/useSelect'
 import arrow from '../../assets/caret-down-icon.png'
 import closeIcon from '../../assets/close-line-icon.png'
 import styles from './SelectInput.module.css'
-import {
-  outlineColorOnBlur,
-  outlineColorOnFocus,
-  triggerOnChangeSelectedValueInput,
-} from '../../utils/utils'
+import { triggerOnChangeSelectedValueInput } from '../../utils/utils'
 
 export default function SelectInput() {
   const {
@@ -27,6 +23,7 @@ export default function SelectInput() {
     name,
     onChangeValue,
     colorOnFocus,
+    classOnFocus,
     border,
     inputHeight,
     inputBackground,
@@ -41,6 +38,8 @@ export default function SelectInput() {
     boxShadowOnOpen,
     dropdownPosition,
   } = useConfig()
+
+  console.log('class o focus', classOnFocus)
 
   const toggleDropdown = (e) => {
     // if event is not from clear selection element
@@ -104,7 +103,8 @@ export default function SelectInput() {
   return (
     <div
       className={
-        `${styles.selectInput} ` + (isOpen ? styles.open : styles.close)
+        `${styles.selectInput} ` +
+        (colorOnFocus !== 'default' ? `${styles[classOnFocus]} ` : '')
       }
       style={selectInputStyle}
       tabIndex="0"
@@ -119,12 +119,6 @@ export default function SelectInput() {
       }}
       onKeyDown={(e) => {
         handleInputKeyDown(e)
-      }}
-      onFocus={(e) => {
-        outlineColorOnFocus(e.target, colorOnFocus)
-      }}
-      onBlur={(e) => {
-        outlineColorOnBlur(e.target)
       }}
     >
       <input
@@ -144,7 +138,8 @@ export default function SelectInput() {
       <img
         className={
           `${styles.clearSelect} ${styles.selectControl} ` +
-          (selectedText !== '' && styles.hasSelection)
+          (selectedText !== '' ? `${styles.hasSelection} ` : '') +
+          (colorOnFocus !== 'default' ? `${styles[classOnFocus]} ` : '')
         }
         src={closeIcon}
         alt="clear selection"
@@ -157,12 +152,6 @@ export default function SelectInput() {
         }}
         onKeyDown={(e) => {
           handleClearKeyDown(e)
-        }}
-        onFocus={(e) => {
-          outlineColorOnFocus(e.target, colorOnFocus)
-        }}
-        onBlur={(e) => {
-          outlineColorOnBlur(e.target)
         }}
       />
       <img

@@ -27,6 +27,8 @@ export default function Option({ option, index }) {
     optionVerticalPadding,
     optionHorizontalPadding,
     optionFontSize,
+    colorOnFocus,
+    classOnFocus,
   } = useConfig()
 
   const optionRef = useRef(null)
@@ -86,7 +88,10 @@ export default function Option({ option, index }) {
   return (
     <li
       id={`option_${index}_${id}`}
-      className={styles.selectOption}
+      className={
+        `${styles.selectOption} ` +
+        (colorOnFocus !== 'default' ? `${styles[classOnFocus]} ` : '')
+      }
       ref={optionRef}
       data-value={values ? option[valueField] : option}
       style={optionStyle}

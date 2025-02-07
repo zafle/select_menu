@@ -10,7 +10,8 @@ import useSelect from '../../context/hook/useSelect'
 export default function SelectComponent({ props }) {
   const { isOpen, toggleIsOpen } = useSelect()
 
-  const { isSet, maxWidth, defineConfig } = useConfig()
+  const { isSet, maxWidth, colorOnFocus, classOnFocus, defineConfig } =
+    useConfig()
 
   const selectComponentRef = useRef(null)
 
@@ -35,6 +36,8 @@ export default function SelectComponent({ props }) {
 
   const containerStyle = {
     maxWidth: maxWidth,
+    '--outline-focus-visible-color':
+      classOnFocus === 'hasCustomFocusVisibleColor' ? colorOnFocus : undefined,
   }
 
   if (isSet) {

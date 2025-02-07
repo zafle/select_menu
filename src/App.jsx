@@ -29,6 +29,7 @@ function App() {
         border="none"
         boxShadow="default"
         boxShadowOnOpen={true}
+        colorOnFocus="purple"
       />
 
       <h2>Options with values</h2>
@@ -66,7 +67,6 @@ function App() {
         boxShadow="4px 4px 10px rgba(209, 30, 30, 0.4)"
         dropdownPosition="top"
         dropdownMaxHeight="150px"
-        colorOnFocus="none"
       />
 
       <h2>Optgroups with values</h2>
@@ -86,6 +86,7 @@ function App() {
         optGroupOptionsField="options"
         onChangeValue={handleChange}
         labelId="euCountries-optgroup_values-label"
+        colorOnFocus="none"
       />
     </>
   )
