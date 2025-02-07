@@ -39,7 +39,7 @@ export default function SelectInput() {
     dropdownPosition,
   } = useConfig()
 
-  console.log('class o focus', classOnFocus)
+  console.log('select input is rendered')
 
   const toggleDropdown = (e) => {
     // if event is not from clear selection element

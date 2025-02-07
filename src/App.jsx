@@ -1,5 +1,5 @@
 import './App.css'
-import { SelectDropdown } from '../lib/main'
+import { SelectMenu } from '../lib/main'
 import {
   EU_COUNTRIES,
   EU_COUNTRIES_CODES,
@@ -18,7 +18,7 @@ function App() {
       <label id="euCountries-options-label" htmlFor="euCountries-options">
         Select a country :
       </label>
-      <SelectDropdown
+      <SelectMenu
         id="euCountries-options"
         name="euCountries-options"
         options={EU_COUNTRIES}
@@ -39,7 +39,7 @@ function App() {
       >
         Select a country :
       </label>
-      <SelectDropdown
+      <SelectMenu
         id="euCountries-options_values"
         name="euCountries-options_values"
         options={EU_COUNTRIES_CODES}
@@ -56,7 +56,7 @@ function App() {
       <label id="euCountries-optgroup-label" htmlFor="euCountries-optgroup">
         Select a country :
       </label>
-      <SelectDropdown
+      <SelectMenu
         id="euCountries-optgroup"
         name="euCountries-optgroup"
         options={EU_COUNTRIES_GEO}
@@ -76,7 +76,7 @@ function App() {
       >
         Select a country :
       </label>
-      <SelectDropdown
+      <SelectMenu
         id="euCountries-optgroup_values"
         name="euCountries-optgroup_values"
         options={EU_COUNTRIES_GEO_CODES}

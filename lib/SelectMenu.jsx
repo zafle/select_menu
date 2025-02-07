@@ -2,7 +2,7 @@ import SelectContextProvider from './context/SelectContextProvider/SelectContext
 import ConfigContextProvider from './context/ConfigContextProvider/ConfigContextprovider'
 import SelectComponent from './components/SelectComponent/SelectComponent'
 
-export function SelectDropdown(props) {
+export function SelectMenu(props) {
   return (
     <SelectContextProvider>
       <ConfigContextProvider>
