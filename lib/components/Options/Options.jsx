@@ -25,10 +25,12 @@ export default function Options({ options, startIndex }) {
 Options.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.oneOfType([
+      // options without values
       PropTypes.string,
+      // options with values
       PropTypes.shape({
-        text: PropTypes.string,
-        value: PropTypes.string,
+        [PropTypes.string]: PropTypes.string,
+        [PropTypes.string]: PropTypes.string,
       }),
     ])
   ).isRequired,

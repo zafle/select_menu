@@ -7,7 +7,6 @@ import { triggerOnChangeSelectedValueInput } from '../../utils/utils'
 import useActiveOption from '../../context/hook/useActiveOption'
 
 export default function Option({ option, index }) {
-  console.log('option render :', index)
   const { isOpen, selectedId, defineSelected, toggleIsOpen } = useSelect()
 
   const {
