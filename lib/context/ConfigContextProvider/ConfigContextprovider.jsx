@@ -12,6 +12,8 @@ import {
   setInputBorderRadiusClosed,
   setDropdownBorderRadius,
   setClassOnFocus,
+  setLastFocusableOptionIndex,
+  setDropdownBottom,
 } from '../default/configSettings'
 import PropTypes from 'prop-types'
 
@@ -66,10 +68,14 @@ export default function ConfigContextProvider({ children }) {
         config.dropdownPosition,
         config.borderRadius
       )
-
       //  set dropdown bottom
-      config.dropdownBottom = setDropdownBorderBottom(config.dropdownPosition)
+      config.dropdownBottom = setDropdownBottom(config.dropdownPosition)
 
+      //  set last focusable option index
+      config.lastFocusableOptionIndex = setLastFocusableOptionIndex(
+        config.options,
+        config.optGroup
+      )
       return config
     })
   }

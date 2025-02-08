@@ -4,21 +4,17 @@ import styles from './Option.module.css'
 import { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { triggerOnChangeSelectedValueInput } from '../../utils/utils'
+import useActiveOption from '../../context/hook/useActiveOption'
 
 export default function Option({ option, index }) {
-  const {
-    isOpen,
-    selectedId,
-    activeOptionIndex,
-    defineSelected,
-    defineActiveOptionIndex,
-    toggleIsOpen,
-  } = useSelect()
+  console.log('option render :', index)
+  const { isOpen, selectedId, defineSelected, toggleIsOpen } = useSelect()
 
   const {
     id,
     values,
     defaultSelectedOption,
+    lastFocusableOptionIndex,
     textField,
     valueField,
     optionTextColor,
@@ -31,6 +27,8 @@ export default function Option({ option, index }) {
     classOnFocus,
   } = useConfig()
 
+  const { activeOptionIndex, defineActiveOptionIndex } = useActiveOption()
+
   const optionRef = useRef(null)
 
   useEffect(() => {
@@ -41,6 +39,7 @@ export default function Option({ option, index }) {
       (defaultSelectedOption === 'first' && index === 0)
     ) {
       defineSelected(`option_${index}_${id}`, optionText, optionValue, index)
+      defineActiveOptionIndex(index)
     }
     // NOTE: Run effect once on component mount, please
     // recheck dependencies if effect is updated.
@@ -74,6 +73,24 @@ export default function Option({ option, index }) {
       e.stopPropagation()
       e.preventDefault()
       handleClick(e)
+    }
+    if (e.key === 'ArrowDown') {
+      // focus on next option
+      e.preventDefault()
+      defineActiveOptionIndex(
+        activeOptionIndex === lastFocusableOptionIndex
+          ? 0
+          : activeOptionIndex + 1
+      )
+    }
+    if (e.key === 'ArrowUp') {
+      // focus on previous option
+      e.preventDefault()
+      defineActiveOptionIndex(
+        activeOptionIndex === 0
+          ? lastFocusableOptionIndex
+          : activeOptionIndex - 1
+      )
     }
   }
 

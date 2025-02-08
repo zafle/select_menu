@@ -10,10 +10,8 @@ export default function SelectInput() {
     selectedId,
     selectedText,
     selectedValue,
-    selectedIndex,
     isOpen,
     toggleIsOpen,
-    defineActiveOptionIndex,
     clearSelected,
   } = useSelect()
 
@@ -44,9 +42,6 @@ export default function SelectInput() {
   const toggleDropdown = (e) => {
     // if event is not from clear selection element
     if (e.target.dataset.name !== 'clear') {
-      // if dropdown is closed when event occurs, define active option before opening
-      !isOpen &&
-        defineActiveOptionIndex(selectedIndex !== '' ? selectedIndex : 0)
       toggleIsOpen()
     }
   }
@@ -54,7 +49,6 @@ export default function SelectInput() {
   const clearSelection = () => {
     triggerOnChangeSelectedValueInput('', id)
     clearSelected()
-    isOpen && defineActiveOptionIndex(0)
   }
 
   const handleChange = (e) => {
