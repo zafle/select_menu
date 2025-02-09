@@ -6,6 +6,14 @@ import PropTypes from 'prop-types'
 import { triggerOnChangeSelectedValueInput } from '../../utils/utils'
 import useActiveOption from '../../context/hook/useActiveOption'
 
+/**
+ * Displays Option
+ *
+ * @param {string|Object} option
+ * @param {number} index option's index
+ *
+ * @returns {React.ReactElement} Option
+ */
 export default function Option({ option, index }) {
   const { isOpen, selectedId, defineSelected, toggleIsOpen } = useSelect()
 
@@ -30,6 +38,12 @@ export default function Option({ option, index }) {
 
   const optionRef = useRef(null)
 
+  /**
+   * If the option is the defualt selected option
+   * then define selected option in select context
+   * then define active option in select context
+   * NOTE: this useEffect only runs once on component mount
+   */
   useEffect(() => {
     const optionText = values ? option[textField] : option
     const optionValue = values ? option[valueField] : option
@@ -52,6 +66,12 @@ export default function Option({ option, index }) {
   }, [isOpen, activeOptionIndex, index])
 
   const handleClick = (e) => {
+    /**
+     *  Trigger on change event on option's value hidden input
+     *
+     * @param {string} e.target.dataset.value option's value
+     * @param {string} id  option's value hidden input ID
+     */
     triggerOnChangeSelectedValueInput(e.target.dataset.value, id)
     defineSelected(
       e.target.id,

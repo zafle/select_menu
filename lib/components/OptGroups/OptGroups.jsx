@@ -1,6 +1,11 @@
 import useConfig from '../../context/hook/useConfig'
 import OptGroup from '../OptGroup/OptGroup'
 
+/**
+ * Displays optGroups
+ *
+ * @returns {React.ReactElement} OptGroups
+ */
 export default function OptGroups() {
   const { id, options, optGroupOptionsField } = useConfig()
 

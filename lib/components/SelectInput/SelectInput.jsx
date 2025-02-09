@@ -2,10 +2,16 @@ import useConfig from '../../context/hook/useConfig'
 import useSelect from '../../context/hook/useSelect'
 import arrow from '../../assets/caret-down-icon.png'
 import closeIcon from '../../assets/close-line-icon.png'
-import styles from './SelectInput.module.css'
 import { triggerOnChangeSelectedValueInput } from '../../utils/utils'
+import styles from './SelectInput.module.css'
 
+/**
+ * Displays Select input
+ *
+ * @returns {React.ReactElement} SelectInput
+ */
 export default function SelectInput() {
+  //  get context
   const {
     selectedId,
     selectedText,
@@ -27,17 +33,14 @@ export default function SelectInput() {
     inputBackground,
     inputTextColor,
     inputBorderRadiusOpened,
-    inputBorderRadiusClosed,
+    borderRadius,
     inputVerticalPadding,
     inputHorizontalPadding,
-    containerMargin,
     inputFontSize,
     boxShadow,
     boxShadowOnOpen,
     dropdownPosition,
   } = useConfig()
-
-  console.log('select input is rendered')
 
   const toggleDropdown = (e) => {
     // if event is not from clear selection element
@@ -45,22 +48,27 @@ export default function SelectInput() {
       toggleIsOpen()
     }
   }
-
   const clearSelection = () => {
+    /**
+     *  Trigger on change event on option's value hidden input
+     *
+     * @param {string} param1 option's value (empty)
+     * @param {string} id  option's value hidden input ID
+     */
     triggerOnChangeSelectedValueInput('', id)
     clearSelected()
   }
 
+  // Handle hidden input on change event
   const handleChange = (e) => {
+    // custom onChangeValue function from config
     onChangeValue(e.target.value)
   }
 
-  // Handle input controls
-
+  // Handle visible input controls
   const handleInputClick = (e) => {
     toggleDropdown(e)
   }
-
   const handleInputKeyDown = (e) => {
     if (e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter') {
       e.preventDefault()
@@ -69,7 +77,6 @@ export default function SelectInput() {
   }
 
   // Handle clear input controls
-
   const handleClearClick = () => {
     clearSelection()
   }
@@ -80,15 +87,13 @@ export default function SelectInput() {
     }
   }
 
-  // Inline css
   const selectInputStyle = {
     border: border,
     height: inputHeight,
     background: inputBackground,
     color: inputTextColor,
-    borderRadius: isOpen ? inputBorderRadiusOpened : inputBorderRadiusClosed,
+    borderRadius: isOpen ? inputBorderRadiusOpened : borderRadius,
     padding: `${inputVerticalPadding} ${inputHorizontalPadding}`,
-    margin: containerMargin,
     fontSize: inputFontSize,
     boxShadow: boxShadowOnOpen ? (isOpen ? boxShadow : 'unset') : boxShadow,
     zIndex: dropdownPosition === 'top' && isOpen ? '2' : 'auto',
@@ -115,10 +120,11 @@ export default function SelectInput() {
         handleInputKeyDown(e)
       }}
     >
+      {/* Hidden in css input */}
       <input
+        id={id}
         className={styles.selectedValue}
         type="text"
-        id={id}
         onChange={(e) => {
           handleChange(e)
         }}

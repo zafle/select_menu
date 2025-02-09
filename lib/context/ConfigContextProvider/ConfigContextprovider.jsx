@@ -4,12 +4,9 @@ import defaultConfig from '../default/defaultConfig'
 import {
   setValues,
   setOptGroup,
-  setShadowStyle,
-  setBorder,
   setDropdownBorderTop,
   setDropdownBorderBottom,
   setInputBorderRadiusOpened,
-  setInputBorderRadiusClosed,
   setDropdownBorderRadius,
   setClassOnFocus,
   setLastFocusableOptionIndex,
@@ -34,19 +31,10 @@ export default function ConfigContextProvider({ children }) {
         config.optGroupLabelField,
         config.optGroupOptionsField
       )
-      // set box-shadow
-      config.boxShadow = setShadowStyle(config.boxShadow)
-
-      // set border
-      config.border = setBorder(config.border)
 
       // set class on focus
       config.classOnFocus = setClassOnFocus(config.colorOnFocus)
 
-      // set input border radius when closed
-      config.inputBorderRadiusClosed = setInputBorderRadiusClosed(
-        config.borderRadius
-      )
       // set input border radius when opened
       config.inputBorderRadiusOpened = setInputBorderRadiusOpened(
         config.borderRadius,

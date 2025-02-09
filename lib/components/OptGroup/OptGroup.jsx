@@ -3,6 +3,16 @@ import Options from '../Options/Options'
 import PropTypes from 'prop-types'
 import styles from './OptGroup.module.css'
 
+/**
+ * Displays optGroup
+ *
+ * @param {Object} options
+ * @param {string} options[optGroupLabelField] optgroup label
+ * @param {Array<string|Object} options[optGroupOptionsField] Array of optgroup options
+ * @param {number} startIndex Index from which options should start in optgroup
+ *
+ * @returns {React.ReactElement} OptGroup
+ */
 export default function OptGroup({ options, startIndex }) {
   const {
     optGroupLabelField,

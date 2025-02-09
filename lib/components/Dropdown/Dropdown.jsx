@@ -3,10 +3,15 @@ import OptGroups from '../OptGroups/OptGroups'
 import useConfig from '../../context/hook/useConfig'
 import useSelect from '../../context/hook/useSelect'
 import styles from './Dropdown.module.css'
+import ActiveOptionContextProvider from '../../context/ActiveOptionContextProvider/ActiveOptionContextProvider'
 
+/**
+ * Displays dropdown
+ * All components inside Dropdown component use active option context
+ *
+ * @returns {React.ReactElement} Dropdown
+ */
 export default function Dropdown() {
-  console.log('dropdown renders')
-
   const { isOpen, selectedId } = useSelect()
 
   const {
@@ -58,7 +63,9 @@ export default function Dropdown() {
       aria-labelledby={labelId}
       tabIndex="-1"
     >
-      {optGroup ? <OptGroups /> : <Options options={options} />}
+      <ActiveOptionContextProvider>
+        {optGroup ? <OptGroups /> : <Options options={options} />}
+      </ActiveOptionContextProvider>
     </ul>
   )
 }

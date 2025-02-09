@@ -26,10 +26,11 @@ function App() {
         labelId="euCountries-options-label"
         defaultSelectedOption="first"
         dropdownMaxHeight="250px"
-        border="none"
-        boxShadow="default"
+        border="unset"
         boxShadowOnOpen={true}
         colorOnFocus="purple"
+        containerMargin="2em 1em"
+        inputHeight="30px"
       />
 
       <h2>Options with values</h2>
@@ -48,8 +49,9 @@ function App() {
         onChangeValue={handleChange}
         labelId="euCountries-options_values-label"
         defaultSelectedOption="Croatia"
-        boxShadow="default"
         colorOnFocus="green"
+        border="4px solid red"
+        hoveredOptionBackground="red"
       />
 
       <h2>Optgroups without values</h2>
@@ -67,6 +69,7 @@ function App() {
         boxShadow="4px 4px 10px rgba(209, 30, 30, 0.4)"
         dropdownPosition="top"
         dropdownMaxHeight="150px"
+        borderRadius="unset"
       />
 
       <h2>Optgroups with values</h2>
@@ -87,6 +90,8 @@ function App() {
         onChangeValue={handleChange}
         labelId="euCountries-optgroup_values-label"
         colorOnFocus="none"
+        borderRadius="10%"
+        boxShadow="unset"
       />
     </>
   )
