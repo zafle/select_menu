@@ -6,15 +6,29 @@ import {
   EU_COUNTRIES_GEO,
   EU_COUNTRIES_GEO_CODES,
 } from './data/mock/optionsMenus'
+import { useState } from 'react'
 
 function App() {
+  const [selectedValue, setSelectedValue] = useState('')
+  const [formData, setFormData] = useState('')
+
+  function handleControlledFormChange(selectedValue) {
+    setSelectedValue(selectedValue)
+  }
+
+  // function onSubmitUncontrolledForm(e) {
+  //   e.preventDefault()
+  //   console.log('submit', e.target.country.value)
+  // }
+
   function handleChange(selectedValue) {
-    console.log('selectedValue retrieved :', selectedValue)
+    console.log('selectedValue :', selectedValue)
   }
   return (
     <>
-      <h1>Examples with different types of data</h1>
-      <h2>Options without values</h2>
+      <h1>Examples</h1>
+      <h2>Examples with different types of data</h2>
+      <h3>Options without values</h3>
       <label id="euCountries-options-label" htmlFor="euCountries-options">
         Select a country :
       </label>
@@ -33,7 +47,7 @@ function App() {
         inputHeight="30px"
       />
 
-      <h2>Options with values</h2>
+      <h3>Options with values</h3>
       <label
         id="euCountries-options_values-label"
         htmlFor="euCountries-options_values"
@@ -54,7 +68,7 @@ function App() {
         hoveredOptionBackground="red"
       />
 
-      <h2>Optgroups without values</h2>
+      <h3>Optgroups without values</h3>
       <label id="euCountries-optgroup-label" htmlFor="euCountries-optgroup">
         Select a country :
       </label>
@@ -72,7 +86,7 @@ function App() {
         borderRadius="unset"
       />
 
-      <h2>Optgroups with values</h2>
+      <h3>Optgroups with values</h3>
       <label
         id="euCountries-optgroup_values-label"
         htmlFor="euCountries-optgroup_values"
@@ -93,6 +107,42 @@ function App() {
         borderRadius="10%"
         boxShadow="unset"
       />
+
+      <h2>Controlled and uncontrolled forms</h2>
+
+      <h3>Controlled form</h3>
+
+      <p>The selected option is {selectedValue} </p>
+
+      <form>
+        <SelectMenu
+          options={EU_COUNTRIES}
+          onChangeValue={handleControlledFormChange}
+        />
+      </form>
+
+      <h3>Uncontrolled form</h3>
+      <p>The submited option value is : {formData}</p>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault()
+          setFormData(e.target.country.value)
+        }}
+      >
+        <label htmlFor="uncontrolled-form">Select a country</label>
+        <SelectMenu
+          options={EU_COUNTRIES_GEO_CODES}
+          id="uncontrolled-form"
+          // labelId="uncontrolled-form-label"
+          name="country"
+          textField="text"
+          valueField="value"
+          optGroupLabelField="label"
+          optGroupOptionsField="options"
+          defaultSelectedOption="first"
+        />
+        <button type="submit">Validate</button>
+      </form>
     </>
   )
 }

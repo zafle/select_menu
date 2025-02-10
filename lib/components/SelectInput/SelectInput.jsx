@@ -62,7 +62,7 @@ export default function SelectInput() {
   // Handle hidden input on change event
   const handleChange = (e) => {
     // custom onChangeValue function from config
-    onChangeValue(e.target.value)
+    onChangeValue !== null ? onChangeValue(e.target.value) : e.preventDefault()
   }
 
   // Handle visible input controls
