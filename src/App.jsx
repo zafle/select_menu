@@ -1,5 +1,6 @@
 import './App.css'
-import { SelectMenu } from '../lib/main'
+// import { SelectMenu } from '../lib/main'
+import { SelectMenu } from '../'
 import {
   EU_COUNTRIES,
   EU_COUNTRIES_CODES,
