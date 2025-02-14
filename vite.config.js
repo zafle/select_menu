@@ -28,6 +28,7 @@ export default defineConfig({
         '**/lib/main.js',
         ...coverageConfigDefaults.exclude,
       ],
+      reporter: ['text', 'json', 'html', 'lcov'],
     },
   },
 })
