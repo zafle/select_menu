@@ -10,7 +10,6 @@ export default function SelectContextProvider({ children }) {
     index: '',
   }
   const [selected, setSelected] = useState(initialSelectedState)
-  // const [activeOptionIndex, setActiveOptionIndex] = useState('')
   const [isOpen, setIsOpen] = useState(false)
 
   const defineSelected = (id, text, value, index) => {
@@ -24,9 +23,6 @@ export default function SelectContextProvider({ children }) {
   const clearSelected = () => {
     setSelected(initialSelectedState)
   }
-  // const defineActiveOptionIndex = (value) => {
-  //   setActiveOptionIndex(value)
-  // }
   const toggleIsOpen = () => {
     setIsOpen(isOpen ? false : true)
   }
@@ -35,11 +31,9 @@ export default function SelectContextProvider({ children }) {
     <selectContext.Provider
       value={{
         selected,
-        // activeOptionIndex,
         isOpen,
         defineSelected,
         clearSelected,
-        // defineActiveOptionIndex,
         toggleIsOpen,
       }}
     >
