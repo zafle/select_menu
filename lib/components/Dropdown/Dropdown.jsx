@@ -62,6 +62,7 @@ export default function Dropdown() {
       aria-activedescendant={selectedId}
       aria-labelledby={labelId}
       tabIndex="-1"
+      data-testid="dropdown"
     >
       <ActiveOptionContextProvider>
         {optGroup ? <OptGroups /> : <Options options={options} />}

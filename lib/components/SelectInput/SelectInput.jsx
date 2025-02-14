@@ -119,6 +119,7 @@ export default function SelectInput() {
       onKeyDown={(e) => {
         handleInputKeyDown(e)
       }}
+      data-testid="select-input"
     >
       {/* Hidden in css input */}
       <input
@@ -133,8 +134,11 @@ export default function SelectInput() {
         aria-hidden="true"
         tabIndex="-1"
         readOnly
+        data-testid="selectedValue-input"
       />
-      <div className={styles.selectedText}>{selectedText}</div>
+      <div className={styles.selectedText} data-testid="selectedText-input">
+        {selectedText}
+      </div>
       <img
         className={
           `${styles.clearSelect} ${styles.selectControl} ` +
@@ -153,6 +157,7 @@ export default function SelectInput() {
         onKeyDown={(e) => {
           handleClearKeyDown(e)
         }}
+        data-testid="clearSelected-button"
       />
       <img
         className={
