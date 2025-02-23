@@ -179,7 +179,7 @@ return (
 
 ### Label and SelectMenu component link
 
-To link your <label> tag to the SelectMenu component, use **id** prop, and set _htmlFor_ attribute in your <label> tag accordingly.
+To link your `<label>` tag to the SelectMenu component, use `id` prop, and set `htmlFor` attribute in your `<label>` tag accordingly.
 This will allow a click event on the label to trigger the opening of the SelectMenu dropdown.
 
 ```jsx

@@ -1,108 +1,45 @@
 // Datas for Select Menu options
 
-// Options without values
-export const EU_COUNTRIES = [
-  'Austria',
-  'Belgium',
-  'Bulgaria',
-  'Croatia',
-  'Cyprus',
-  'Czech Republic',
-  'Denmark',
-  'Estonia',
-  'Finland',
-  'France',
-  'Germany',
-  'Greece',
-  'Hungary',
-  'Ireland',
-  'Italy',
-  'Latvia',
-  'Lithuania',
-  'Luxembourg',
-  'Malta',
-  'Netherlands',
-  'Poland',
-  'Portugal',
-  'Romania',
-  'Slovakia',
-  'Slovenia',
-  'Spain',
-  'Sweden',
+// Options without values (Colors)
+export const COLORS = ['Red', 'Blue', 'Green', 'Yellow', 'Purple']
+
+// Options with values (Colors)
+export const COLORS_CODES = [
+  { name: 'Red', code: '#FF0000' },
+  { name: 'Blue', code: '#0000FF' },
+  { name: 'Green', code: '#008000' },
+  { name: 'Yellow', code: '#FFFF00' },
+  { name: 'Purple', code: '#800080' },
 ]
 
-// Options with values
-export const EU_COUNTRIES_CODES = [
-  { name: 'Austria', abreviation: 'AUT' },
-  { name: 'Belgium', abreviation: 'BEL' },
-  { name: 'Bulgaria', abreviation: 'BGR' },
-  { name: 'Croatia', abreviation: 'HRV' },
-  { name: 'Cyprus', abreviation: 'CYP' },
-  { name: 'Czech Republic', abreviation: 'CZE' },
-  { name: 'Denmark', abreviation: 'DNK' },
-  { name: 'Estonia', abreviation: 'EST' },
-  { name: 'Finland', abreviation: 'FIN' },
-  { name: 'France', abreviation: 'FRA' },
-  { name: 'Germany', abreviation: 'DEU' },
-  { name: 'Greece', abreviation: 'GRC' },
-  { name: 'Hungary', abreviation: 'HUN' },
-  { name: 'Ireland', abreviation: 'IRL' },
-  { name: 'Italy', abreviation: 'ITA' },
-  { name: 'Latvia', abreviation: 'LVA' },
-  { name: 'Lithuania', abreviation: 'LTU' },
-  { name: 'Luxembourg', abreviation: 'LUX' },
-  { name: 'Malta', abreviation: 'MLT' },
-  { name: 'Netherlands', abreviation: 'NLD' },
-  { name: 'Poland', abreviation: 'POL' },
-  { name: 'Portugal', abreviation: 'PRT' },
-  { name: 'Romania', abreviation: 'ROU' },
-  { name: 'Slovakia', abreviation: 'SVK' },
-  { name: 'Slovenia', abreviation: 'SVN' },
-  { name: 'Spain', abreviation: 'ESP' },
-  { name: 'Sweden', abreviation: 'SWE' },
-]
-
-// OptGroups without values
-export const EU_COUNTRIES_GEO = [
+// OptGroups without values (Fruits & Vegetables)
+export const FOOD_CATEGORIES = [
   {
-    label: 'Nordic Europe',
-    options: ['Sweden', 'Denmark', 'Finland', 'Norway'],
+    label: 'Fruits',
+    options: ['Apple', 'Banana', 'Cherry'],
   },
   {
-    label: 'Central Europe',
-    options: ['Germany', 'Austria', 'Switzerland'],
-  },
-  {
-    label: 'Southern Europe',
-    options: ['Italy', 'Spain', 'Portugal'],
+    label: 'Vegetables',
+    options: ['Carrot', 'Broccoli', 'Spinach'],
   },
 ]
 
-// OptGroups with values
-export const EU_COUNTRIES_GEO_CODES = [
+// OptGroups with values (Fruits & Vegetables)
+export const FOOD_CATEGORIES_CODES = [
   {
-    label: 'Nordic Europe',
+    label: 'Fruits',
     options: [
-      { text: 'Sweden', value: 'SWE' },
-      { text: 'Denmark', value: 'DNK' },
-      { text: 'Finland', value: 'FIN' },
-      { text: 'Norway', value: 'NOR' },
+      { text: 'Apple', value: 'APL' },
+      { text: 'Banana', value: 'BAN' },
+      { text: 'Cherry', value: 'CHR' },
     ],
   },
   {
-    label: 'Central Europe',
+    label: 'Vegetables',
     options: [
-      { text: 'Germany', value: 'DEU' },
-      { text: 'Austria', value: 'AUT' },
-      { text: 'Switzerland', value: 'CHE' },
-    ],
-  },
-  {
-    label: 'Southern Europe',
-    options: [
-      { text: 'Italy', value: 'ITA' },
-      { text: 'Spain', value: 'ESP' },
-      { text: 'Portugal', value: 'PRT' },
+      { text: 'Carrot', value: 'CRT' },
+      { text: 'Broccoli', value: 'BRC' },
+      { text: 'Spinach', value: 'SPN' },
     ],
   },
 ]
