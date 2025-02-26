@@ -43,7 +43,7 @@ A very easy to use and customisable React select dropdown
 
 ## Installation
 
-> `npm install --save react-select-menu`
+> `npm i @zafle/select_menu`
 
 ## Basic usage
 
