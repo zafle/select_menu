@@ -49,7 +49,7 @@ A very easy to use and customisable React select dropdown
 
 ### Import SelectMenu component
 
-`import { SelectMenu } from "react-select-menu"`
+`import { SelectMenu } from "@zafle/select_menu"`
 
 ### Use
 
