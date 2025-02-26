@@ -1,7 +1,20 @@
 {
   "name": "select_menu",
   "private": false,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zafle/select_menu"
+  },
+  "author": "Zafle",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "select",
+    "dropdown",
+    "input"
+  ],
+  "description": "A customisable React Select Input Dropdown component",
   "type": "module",
   "main": "dist/select_menu.js",
   "files": [
