@@ -1,3 +1,4 @@
+import { defaultConfigOptions } from '../contexts/defaultConfigOptions'
 import {
   optionsOptGroupSnippet,
   optionsOptGroupValuesSnippet,
@@ -12,70 +13,70 @@ import {
 } from '../data/mock/optionsMenus'
 
 export function configReducer(config, action) {
+  // Config to use when update options type
+  const optionsConfigMap = {
+    options_without_values: {
+      optionsArray: optionsSnippet,
+      configProps: {
+        options: COLORS,
+        textField: '',
+        valueField: '',
+        optGroupLabelField: '',
+        optGroupOptionsField: '',
+      },
+      defaultSelectedOption: 'Green',
+    },
+    options_with_values: {
+      optionsArray: optionsValuesSnippet,
+      configProps: {
+        options: COLORS_CODES,
+        textField: 'name',
+        valueField: 'code',
+        optGroupLabelField: '',
+        optGroupOptionsField: '',
+      },
+      defaultSelectedOption: 'Green',
+    },
+    options_with_optgroups: {
+      optionsArray: optionsOptGroupSnippet,
+      configProps: {
+        options: FOOD_CATEGORIES,
+        textField: '',
+        valueField: '',
+        optGroupLabelField: 'label',
+        optGroupOptionsField: 'options',
+      },
+      defaultSelectedOption: 'Broccoli',
+    },
+    options_with_optgroups_with_values: {
+      optionsArray: optionsOptGroupValuesSnippet,
+      configProps: {
+        options: FOOD_CATEGORIES_CODES,
+        textField: 'text',
+        valueField: 'value',
+        optGroupLabelField: 'label',
+        optGroupOptionsField: 'options',
+      },
+      defaultSelectedOption: 'Broccoli',
+    },
+  }
+
   switch (action.type) {
     case 'set_optionsType': {
-      let optionsArray
-      let options
-      let textField
-      let valueField
-      let optGroupLabelField
-      let optGroupOptionsField
-      let defaultSelectedOption
-
-      if (action.optionsType === 'options_without_values') {
-        optionsArray = optionsSnippet
-        options = COLORS
-        textField = ''
-        valueField = ''
-        optGroupLabelField = ''
-        optGroupOptionsField = ''
-      } else if (action.optionsType === 'options_with_values') {
-        optionsArray = optionsValuesSnippet
-        options = COLORS_CODES
-        textField = 'name'
-        valueField = 'code'
-        optGroupLabelField = ''
-        optGroupOptionsField = ''
-      } else if (action.optionsType === 'options_with_optgroups') {
-        optionsArray = optionsOptGroupSnippet
-        options = FOOD_CATEGORIES
-        textField = ''
-        valueField = ''
-        optGroupLabelField = 'label'
-        optGroupOptionsField = 'options'
-      } else if (action.optionsType === 'options_with_optgroups_with_values') {
-        optionsArray = optionsOptGroupValuesSnippet
-        options = FOOD_CATEGORIES_CODES
-        textField = 'text'
-        valueField = 'value'
-        optGroupLabelField = 'label'
-        optGroupOptionsField = 'options'
-      }
-
-      if (
-        config.configProps.defaultSelectedOption === 'first' ||
-        config.configProps.defaultSelectedOption === undefined
-      ) {
-        defaultSelectedOption = config.configProps.defaultSelectedOption
-      } else {
-        defaultSelectedOption =
-          action.optionsType === 'options_without_values' ||
-          action.optionsType === 'options_with_values'
-            ? 'Green'
-            : 'Broccoli'
-      }
+      const optionsConfig = optionsConfigMap[action.optionsType]
+      const defaultSelectedOption =
+        config.configProps.defaultSelectedOption !== 'first' &&
+        config.configProps.defaultSelectedOption !== undefined
+          ? optionsConfig.defaultSelectedOption
+          : config.configProps.defaultSelectedOption
 
       return {
         ...config,
         optionsType: action.optionsType,
-        optionsArray,
+        optionsArray: optionsConfig.optionsArray,
         configProps: {
           ...config.configProps,
-          options,
-          textField,
-          valueField,
-          optGroupLabelField,
-          optGroupOptionsField,
+          ...optionsConfig.configProps,
           defaultSelectedOption,
         },
       }
@@ -111,7 +112,12 @@ export function configReducer(config, action) {
     case 'set_id': {
       if (action.id === '') {
         delete config.configProps.id
-        return { ...config }
+        return {
+          ...config,
+          configProps: {
+            ...config.configProps,
+          },
+        }
       } else {
         return {
           ...config,
@@ -132,8 +138,6 @@ export function configReducer(config, action) {
       }
     }
     case 'set_defaultSelectedOption': {
-      console.log('config.optionsType : ', config.optionsType)
-
       let defaultSelectedOption
 
       if (action.defaultSelectedOption === 'custom') {
@@ -153,6 +157,38 @@ export function configReducer(config, action) {
         configProps: {
           ...config.configProps,
           defaultSelectedOption,
+        },
+      }
+    }
+
+    case 'set_dropdownPosition': {
+      return {
+        ...config,
+        configProps: {
+          ...config.configProps,
+          dropdownPosition: action.dropdownPosition,
+        },
+      }
+    }
+
+    case 'set_boxShadowOnOpen': {
+      return {
+        ...config,
+        configProps: {
+          ...config.configProps,
+          boxShadowOnOpen: action.boxShadowOnOpen,
+        },
+      }
+    }
+
+    case 'set_css': {
+      const propName = action.propName
+      return {
+        ...config,
+        configProps: {
+          ...config.configProps,
+          [propName]:
+            action.value !== '' ? action.value : defaultConfigOptions[propName],
         },
       }
     }

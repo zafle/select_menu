@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useConfigDispatch } from '../../contexts/ConfigContext'
+import InputForCSSProp from '../InputForCSSProp/InputForCSSProp'
 
 export default function ConfigSelectForm() {
   const dispatch = useConfigDispatch()
@@ -9,8 +10,10 @@ export default function ConfigSelectForm() {
   const [isLinkLabelChecked, setIsLinkLabelChecked] = useState(false)
   const [isEnableAriaChecked, setIsEnableAriaChecked] = useState(false)
   const [defaultSelected, setdefaultSelected] = useState(undefined)
+  const [hasBoxShadowOnOpen, setHasBoxShadowOnOpen] = useState(false)
+  const [dropdownPosition, setDropdownPosition] = useState('')
 
-  // function for onChangeValu configProps
+  // Function for onChangeValue dispatch
   const onChangeValueFunction = (option) => {
     dispatch({
       type: 'set_selected_option',
@@ -56,11 +59,32 @@ export default function ConfigSelectForm() {
       return newCheckedState
     })
   }
+
   function handleChangeDefaultSelected(e) {
+    console.log('rom handle defeult :', e.target.value)
     setdefaultSelected(e.target.value)
     dispatch({
       type: 'set_defaultSelectedOption',
       defaultSelectedOption: e.target.value,
+    })
+  }
+
+  function handleChangeDropdownPosition(e) {
+    setDropdownPosition(e.target.value)
+    dispatch({
+      type: 'set_dropdownPosition',
+      dropdownPosition: e.target.value,
+    })
+  }
+
+  function handleChangeBoxShadowOnOpen() {
+    setHasBoxShadowOnOpen((prev) => {
+      const newCheckedState = !prev
+      dispatch({
+        type: 'set_boxShadowOnOpen',
+        boxShadowOnOpen: newCheckedState,
+      })
+      return newCheckedState
     })
   }
 
@@ -207,6 +231,8 @@ export default function ConfigSelectForm() {
             <input
               type="radio"
               value="none"
+              // value={undefined}
+              // checked={defaultSelected === undefined}
               checked={defaultSelected === 'none'}
               onChange={handleChangeDefaultSelected}
             />
@@ -219,6 +245,202 @@ export default function ConfigSelectForm() {
             </p>
           )}
         </li>
+
+        <li>
+          <span>Dropdown position</span>
+          <label>
+            <input
+              type="radio"
+              value="bottom"
+              checked={dropdownPosition === 'bottom'}
+              onChange={handleChangeDropdownPosition}
+            />
+            Bottom
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="top"
+              checked={dropdownPosition === 'top'}
+              onChange={handleChangeDropdownPosition}
+            />
+            Top
+          </label>
+        </li>
+
+        <li>
+          <label>
+            Show shadow only when dropdown is open
+            <input
+              type="checkbox"
+              checked={hasBoxShadowOnOpen}
+              onChange={handleChangeBoxShadowOnOpen}
+            />
+          </label>
+          {hasBoxShadowOnOpen && (
+            <p>
+              For shadow to display only when dropdown is opened, the{' '}
+              <code>boxShadowOnOpen</code> prop is required and must be set to
+              true.
+            </p>
+          )}
+        </li>
+
+        <InputForCSSProp
+          prop="maxWidth"
+          label="Component max-width"
+          cssProperty="max-width"
+        />
+
+        <InputForCSSProp
+          prop="border"
+          label="Component borders (unset for none)"
+          cssProperty="border"
+        />
+
+        <InputForCSSProp
+          prop="borderRadius"
+          label="Component border-radius (only single value accepted, unset for none)"
+          cssProperty="width"
+        />
+
+        <InputForCSSProp
+          prop="containerMargin"
+          label="Component margin"
+          cssProperty="margin"
+        />
+
+        <InputForCSSProp
+          prop="boxShadow"
+          label="Component box-shadow (unset for none)"
+          cssProperty="box-shadow"
+        />
+
+        <InputForCSSProp
+          prop="colorOnFocus"
+          label="Component color on focus (none, default, or custom color)"
+          cssProperty="color"
+        />
+
+        <InputForCSSProp
+          prop="inputHeight"
+          label="Select-input height"
+          cssProperty="height"
+        />
+
+        <InputForCSSProp
+          prop="inputBackground"
+          label="Select-input background color"
+          cssProperty="background-color"
+        />
+
+        <InputForCSSProp
+          prop="inputTextColor"
+          label="Select-input text color"
+          cssProperty="color"
+        />
+
+        <InputForCSSProp
+          prop="inputVerticalPadding"
+          label="Select-input vertical padding"
+          cssProperty="padding-top"
+        />
+
+        <InputForCSSProp
+          prop="inputHorizontalPadding"
+          label="Select-input horizontal padding"
+          cssProperty="padding-top"
+        />
+
+        <InputForCSSProp
+          prop="inputFontSize"
+          label="Select-input font-size"
+          cssProperty="font-size"
+        />
+
+        <InputForCSSProp
+          prop="dropdownBackground"
+          label="Dropdown background-color"
+          cssProperty="background-color"
+        />
+
+        <InputForCSSProp
+          prop="dropdownMaxHeight"
+          label="Dropdown max-height"
+          cssProperty="max-height"
+        />
+
+        <InputForCSSProp
+          prop="dropdownVerticalPadding"
+          label="Dropdown vertical padding"
+          cssProperty="padding-top"
+        />
+
+        <InputForCSSProp
+          prop="optionTextColor"
+          label="Option text color"
+          cssProperty="color"
+        />
+
+        <InputForCSSProp
+          prop="hoveredOptionBackground"
+          label="Hovered option background-color"
+          cssProperty="background-color"
+        />
+
+        <InputForCSSProp
+          prop="hoveredOptionTextColor"
+          label="Hovered option text color"
+          cssProperty="color"
+        />
+
+        <InputForCSSProp
+          prop="optionVerticalPadding"
+          label="Option vertical padding"
+          cssProperty="padding-top"
+        />
+
+        <InputForCSSProp
+          prop="optionHorizontalPadding"
+          label="Option horizontal padding"
+          cssProperty="padding-top"
+        />
+
+        <InputForCSSProp
+          prop="optionFontSize"
+          label="Option font-size"
+          cssProperty="font-size"
+        />
+
+        <InputForCSSProp
+          prop="optGroupLabelTextColor"
+          label="OptGroup label text color"
+          cssProperty="color"
+        />
+
+        <InputForCSSProp
+          prop="optGroupLabelFontSize"
+          label="OptGroup label font-size"
+          cssProperty="font-size"
+        />
+
+        <InputForCSSProp
+          prop="optGroupVerticalPadding"
+          label="OptGroup vertical padding"
+          cssProperty="padding-top"
+        />
+
+        <InputForCSSProp
+          prop="optGroupHorizontalPadding"
+          label="OptGroup horizontal padding"
+          cssProperty="padding-top"
+        />
+
+        <InputForCSSProp
+          prop="optGroupMarginTop"
+          label="OptGroup margin-top"
+          cssProperty="margin-top"
+        />
       </ul>
     </form>
   )

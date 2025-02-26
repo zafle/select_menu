@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { SelectMenu } from '../../../'
 import { useConfig, useConfigDispatch } from '../../contexts/ConfigContext'
+import './CustomSelectMenu.css'
 
 export default function CustomSelectMenu() {
   const { selectedOption, configProps } = useConfig()
@@ -9,7 +10,6 @@ export default function CustomSelectMenu() {
   const [renderKey, setRenderKey] = useState(0)
 
   useEffect(() => {
-    console.log(configProps)
     setRenderKey((prevKey) => prevKey + 1)
   }, [configProps])
 
