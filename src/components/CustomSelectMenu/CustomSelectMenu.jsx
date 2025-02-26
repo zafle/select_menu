@@ -22,9 +22,10 @@ export default function CustomSelectMenu() {
   }
 
   return (
-    <div>
+    <div className="component-demo">
       <form onSubmit={configProps.name === 'optionName' ? handleSubmit : null}>
         <label
+          className="demo-label"
           htmlFor={configProps.id === 'selectMenuId' ? configProps.id : ''}
           id={
             configProps.labelId === 'selectMenuLabel' ? configProps.labelId : ''
@@ -37,7 +38,16 @@ export default function CustomSelectMenu() {
           <button type="submit">Valider</button>
         )}
       </form>
-      <p>Your selection: {selectedOption}</p>
+      <p>
+        This option has been selected:{' '}
+        {configProps.onChangeValue !== null || configProps.name !== '' ? (
+          selectedOption
+        ) : (
+          <span className="info-component">
+            Set controlled or uncontrolled form to enable
+          </span>
+        )}
+      </p>
     </div>
   )
 }

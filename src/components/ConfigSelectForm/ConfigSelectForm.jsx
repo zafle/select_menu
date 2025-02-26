@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useConfigDispatch } from '../../contexts/ConfigContext'
 import InputForCSSProp from '../InputForCSSProp/InputForCSSProp'
+import './ConfigSelectForm.css'
 
 export default function ConfigSelectForm() {
   const dispatch = useConfigDispatch()
@@ -90,200 +91,273 @@ export default function ConfigSelectForm() {
 
   return (
     <form>
-      <ul>
+      <ul className="form-list">
         <li>
-          <span>Options</span>
-          <label>
-            <input
-              type="radio"
-              value="options_without_values"
-              checked={optionsType === 'options_without_values'}
-              onChange={handleChangeOptionsType}
-            />
-            Options without values
-          </label>
+          <div className="form-prop">
+            <code className="prop-code">options</code>
+          </div>
+          <div className="form-content">
+            <div className="form-text">
+              <div className="form-title">
+                Select the type of the options array
+              </div>
+            </div>
+            <div className="form-radio-buttons">
+              <label>
+                <input
+                  type="radio"
+                  value="options_without_values"
+                  checked={optionsType === 'options_without_values'}
+                  onChange={handleChangeOptionsType}
+                />
+                Options without values
+              </label>
 
-          <label>
-            <input
-              type="radio"
-              value="options_with_values"
-              checked={optionsType === 'options_with_values'}
-              onChange={handleChangeOptionsType}
-            />
-            Options with values
-          </label>
+              <label>
+                <input
+                  type="radio"
+                  value="options_with_values"
+                  checked={optionsType === 'options_with_values'}
+                  onChange={handleChangeOptionsType}
+                />
+                Options with values
+              </label>
 
-          <label>
-            <input
-              type="radio"
-              value="options_with_optgroups"
-              checked={optionsType === 'options_with_optgroups'}
-              onChange={handleChangeOptionsType}
-            />
-            Options with optgroups
-          </label>
+              <label>
+                <input
+                  type="radio"
+                  value="options_with_optgroups"
+                  checked={optionsType === 'options_with_optgroups'}
+                  onChange={handleChangeOptionsType}
+                />
+                Options with optgroups
+              </label>
 
-          <label>
-            <input
-              type="radio"
-              value="options_with_optgroups_with_values"
-              checked={optionsType === 'options_with_optgroups_with_values'}
-              onChange={handleChangeOptionsType}
-            />
-            Options with optgroups and values
-          </label>
-        </li>
-
-        <li>
-          <span>Controlled or uncontrolled form</span>
-          <label>
-            <input
-              type="radio"
-              value="controlled"
-              checked={formType === 'controlled'}
-              onChange={handleChangeFormType}
-            />
-            Controlled
-          </label>
-          <label>
-            <input
-              type="radio"
-              value="uncontrolled"
-              checked={formType === 'uncontrolled'}
-              onChange={handleChangeFormType}
-            />
-            Uncontrolled
-          </label>
-          <div>
-            {formType === 'controlled' && (
-              <p>
-                For a controlled form, the <code>onChangeValue</code> prop is
-                required.
-              </p>
-            )}
-            {formType === 'uncontrolled' && (
-              <p>
-                For an uncontrolled form, the <code>name</code> prop is
-                required. It will set the select input <code>name</code>{' '}
-                attribute.
-              </p>
-            )}
+              <label>
+                <input
+                  type="radio"
+                  value="options_with_optgroups_with_values"
+                  checked={optionsType === 'options_with_optgroups_with_values'}
+                  onChange={handleChangeOptionsType}
+                />
+                Options with optgroups and values
+              </label>
+            </div>
           </div>
         </li>
 
         <li>
-          <label>
-            Link your label with SelectMenu component
+          <div className="form-prop">
+            <code className="prop-code">onChangeValue</code>
+            <code className="prop-code">name</code>
+          </div>
+          <div className="form-content">
+            <div className="form-text">
+              <div className="form-title">Controlled or uncontrolled form</div>
+              <div className="form-desc">
+                {formType === 'controlled' && (
+                  <p>
+                    For a controlled form, the{' '}
+                    <code className="prop-code">onChangeValue</code> prop is
+                    required.
+                  </p>
+                )}
+                {formType === 'uncontrolled' && (
+                  <p>
+                    For an uncontrolled form, the{' '}
+                    <code className="prop-code">name</code> prop is required. It
+                    will set the select input{' '}
+                    <code className="prop-code">name</code> attribute.
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className="form-radio-buttons">
+              <label>
+                <input
+                  type="radio"
+                  value="controlled"
+                  checked={formType === 'controlled'}
+                  onChange={handleChangeFormType}
+                />
+                Controlled
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value="uncontrolled"
+                  checked={formType === 'uncontrolled'}
+                  onChange={handleChangeFormType}
+                />
+                Uncontrolled
+              </label>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div className="form-prop">
+            <code className="prop-code">id</code>
+          </div>
+          <div className="form-content">
+            <div className="form-text">
+              <label className="form-title" htmlFor="linkLabelInput">
+                Link your label with SelectMenu component
+              </label>
+              <div className="form-desc">
+                {isLinkLabelChecked && (
+                  <p>
+                    To link your label with SelectMenu, the{' '}
+                    <code className="prop-code">id</code> prop is required. This
+                    value must be as well given to the{' '}
+                    <code className="prop-code">htmlFor</code> attribute label.
+                  </p>
+                )}
+              </div>
+            </div>
             <input
+              id="linkLabelInput"
               type="checkbox"
               checked={isLinkLabelChecked}
               onChange={handleChangeLinkLabel}
             />
-          </label>
-          {isLinkLabelChecked && (
-            <p>
-              To link your label with SelectMenu, the <code>id</code> prop is
-              required. This value must be as well given to the{' '}
-              <code>htmlFor</code> attribute label.
-            </p>
-          )}
+          </div>
         </li>
 
         <li>
-          <label>
-            Enable aria-labelledBy attribute for full accessibility
+          <div className="form-prop">
+            <code className="prop-code">labelId</code>
+          </div>
+          <div className="form-content">
+            <div className="form-text">
+              <label className="form-title">
+                Enable aria-labelledBy attribute for full accessibility
+              </label>
+              <div className="form-desc">
+                {isEnableAriaChecked && (
+                  <p>
+                    To enable aria-labelledBy attribute, the{' '}
+                    <code className="prop-code">labelId</code> prop is required
+                    and its value must be the label&apos;s{' '}
+                    <code className="prop-code">id</code> attribute value.
+                  </p>
+                )}
+              </div>
+            </div>
             <input
               type="checkbox"
               checked={isEnableAriaChecked}
               onChange={handleChangeEnableAria}
             />
-          </label>
-          {isEnableAriaChecked && (
-            <p>
-              To enable aria-labelledBy attribute, the <code>labelId</code> prop
-              is required and its value must be the label&apos;s <code>id</code>{' '}
-              attribute value.
-            </p>
-          )}
+          </div>
         </li>
 
         <li>
-          <span>Default selected option</span>
-          <label>
-            <input
-              type="radio"
-              value="first"
-              checked={defaultSelected === 'first'}
-              onChange={handleChangeDefaultSelected}
-            />
-            First option
-          </label>
-          <label>
-            <input
-              type="radio"
-              value="custom"
-              checked={defaultSelected === 'custom'}
-              onChange={handleChangeDefaultSelected}
-            />
-            Custom option
-          </label>
-          <label>
-            <input
-              type="radio"
-              value="none"
-              // value={undefined}
-              // checked={defaultSelected === undefined}
-              checked={defaultSelected === 'none'}
-              onChange={handleChangeDefaultSelected}
-            />
-            No default selected option
-          </label>
-          {defaultSelected === 'custom' && (
-            <p>
-              To display a custom default selected option, indicate the default
-              option&apos;s text in the <code>defaultSelectedOption</code> prop.
-            </p>
-          )}
+          <div className="form-prop">
+            <code className="prop-code">defaultSelectedOption</code>
+          </div>
+          <div className="form-content">
+            <div className="form-text">
+              <div className="form-title">Default selected option</div>
+              <div className="form-desc">
+                {defaultSelected === 'custom' && (
+                  <p>
+                    To display a custom default selected option, indicate the
+                    default option&apos;s text in the{' '}
+                    <code className="prop-code">defaultSelectedOption</code>{' '}
+                    prop.
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className="form-radio-buttons">
+              <label>
+                <input
+                  type="radio"
+                  value="first"
+                  checked={defaultSelected === 'first'}
+                  onChange={handleChangeDefaultSelected}
+                />
+                First option
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value="custom"
+                  checked={defaultSelected === 'custom'}
+                  onChange={handleChangeDefaultSelected}
+                />
+                Custom option
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value="none"
+                  checked={defaultSelected === 'none'}
+                  onChange={handleChangeDefaultSelected}
+                />
+                No default selected option
+              </label>
+            </div>
+          </div>
         </li>
 
         <li>
-          <span>Dropdown position</span>
-          <label>
-            <input
-              type="radio"
-              value="bottom"
-              checked={dropdownPosition === 'bottom'}
-              onChange={handleChangeDropdownPosition}
-            />
-            Bottom
-          </label>
-          <label>
-            <input
-              type="radio"
-              value="top"
-              checked={dropdownPosition === 'top'}
-              onChange={handleChangeDropdownPosition}
-            />
-            Top
-          </label>
+          <div className="form-prop">
+            <code className="prop-code">dropdownPosition</code>
+          </div>
+          <div className="form-content">
+            <div className="form-text">
+              <div className="form-title">Dropdown position</div>
+            </div>
+            <div className="form-radio-buttons">
+              <label>
+                <input
+                  type="radio"
+                  value="bottom"
+                  checked={dropdownPosition === 'bottom'}
+                  onChange={handleChangeDropdownPosition}
+                />
+                Bottom
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value="top"
+                  checked={dropdownPosition === 'top'}
+                  onChange={handleChangeDropdownPosition}
+                />
+                Top
+              </label>
+            </div>
+          </div>
         </li>
 
         <li>
-          <label>
-            Show shadow only when dropdown is open
+          <div className="form-prop">
+            <code className="prop-code">boxShadowOnOpen</code>
+          </div>
+          <div className="form-content">
+            <div className="form-text">
+              <label className="form-title">
+                Show shadow only when dropdown is open
+              </label>
+              <div className="form-desc">
+                {hasBoxShadowOnOpen && (
+                  <p>
+                    For shadow to display only when dropdown is opened, the{' '}
+                    <code className="prop-code">boxShadowOnOpen</code> prop is
+                    required and must be set to true.
+                  </p>
+                )}
+              </div>
+            </div>
             <input
               type="checkbox"
               checked={hasBoxShadowOnOpen}
               onChange={handleChangeBoxShadowOnOpen}
             />
-          </label>
-          {hasBoxShadowOnOpen && (
-            <p>
-              For shadow to display only when dropdown is opened, the{' '}
-              <code>boxShadowOnOpen</code> prop is required and must be set to
-              true.
-            </p>
-          )}
+          </div>
         </li>
 
         <InputForCSSProp
@@ -294,13 +368,15 @@ export default function ConfigSelectForm() {
 
         <InputForCSSProp
           prop="border"
-          label="Component borders (unset for none)"
+          label="Component border"
+          desc="unset for none"
           cssProperty="border"
         />
 
         <InputForCSSProp
           prop="borderRadius"
-          label="Component border-radius (only single value accepted, unset for none)"
+          label="Component border-radius"
+          desc="only single value accepted, unset for none"
           cssProperty="width"
         />
 
@@ -312,13 +388,15 @@ export default function ConfigSelectForm() {
 
         <InputForCSSProp
           prop="boxShadow"
-          label="Component box-shadow (unset for none)"
+          label="Component box-shadow"
+          desc="unset for none"
           cssProperty="box-shadow"
         />
 
         <InputForCSSProp
           prop="colorOnFocus"
-          label="Component color on focus (none, default, or custom color)"
+          label="Component color on focus"
+          desc="none, default, or custom color"
           cssProperty="color"
         />
 

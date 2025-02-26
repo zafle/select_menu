@@ -7,3 +7,18 @@
   content: 'Invalid CSS property';
   color: red;
 }
+.component-demo {
+  margin: 0 auto;
+  width: max-content;
+  min-width: 250px;
+  padding: 30px;
+}
+.info-component {
+  font-size: 14px;
+  font-style: italic;
+}
+.demo-label {
+  margin-bottom: 10px;
+  display: block;
+  font-weight: 600;
+}
