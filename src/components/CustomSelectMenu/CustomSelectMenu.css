@@ -1,7 +1,6 @@
 .unvalid > input {
   border: 1px solid red;
 }
-
 .unvalid::after {
   display: inline-block;
   content: 'Invalid CSS property';
