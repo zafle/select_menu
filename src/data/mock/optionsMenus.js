@@ -1,4 +1,4 @@
-// Datas for Select Menu options
+// Mocks for Select Menu options
 
 // Options without values (Colors)
 export const COLORS = ['Red', 'Blue', 'Green', 'Yellow', 'Purple']

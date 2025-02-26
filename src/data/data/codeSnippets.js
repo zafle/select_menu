@@ -1,3 +1,5 @@
+// Snippets of code for GeneratedCode component
+
 export const optionsSnippet = `const OPTIONS = ['Red', 'Blue', 'Green', 'Yellow', 'Purple']
 `
 

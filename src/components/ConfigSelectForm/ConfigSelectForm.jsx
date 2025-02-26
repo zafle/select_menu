@@ -3,6 +3,11 @@ import { useConfigDispatch } from '../../contexts/ConfigContext'
 import InputForCSSProp from '../InputForCSSProp/InputForCSSProp'
 import './ConfigSelectForm.css'
 
+/**
+ * Displays the form to configure SelectMenu component
+ *
+ * @returns {React.ReactElement}
+ */
 export default function ConfigSelectForm() {
   const dispatch = useConfigDispatch()
 

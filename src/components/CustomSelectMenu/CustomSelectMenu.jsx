@@ -3,12 +3,20 @@ import { SelectMenu } from '../../../'
 import { useConfig, useConfigDispatch } from '../../contexts/ConfigContext'
 import './CustomSelectMenu.css'
 
+/**
+ * Displays the SelectMenu component demo
+ *
+ * @returns {React.ReactElement}
+ */
 export default function CustomSelectMenu() {
   const { selectedOption, configProps } = useConfig()
   const dispatch = useConfigDispatch()
 
   const [renderKey, setRenderKey] = useState(0)
 
+  /**
+   * Updates SelectMenu component key to force re-render when configProps updates
+   */
   useEffect(() => {
     setRenderKey((prevKey) => prevKey + 1)
   }, [configProps])

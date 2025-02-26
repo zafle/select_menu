@@ -4,6 +4,17 @@ import { defaultConfigOptions } from '../../contexts/defaultConfigOptions'
 import { checkIsSecure, checkIsValidCSS } from '../../utils/security'
 import PropTypes from 'prop-types'
 
+/**
+ * Create a custom React text Input component for CSS propperties
+ *
+ * @param {Object} props
+ * @param {string} props.prop prop name
+ * @param {string} props.label input label text
+ * @param {string} props.desc input text description
+ * @param {string} props.cssProperty css property name
+ *
+ * @returns {React.ReactElement}
+ */
 export default function InputForCSSProp({ prop, label, desc, cssProperty }) {
   const dispatch = useConfigDispatch()
   const [inputValue, setInputValue] = useState('')
@@ -11,7 +22,7 @@ export default function InputForCSSProp({ prop, label, desc, cssProperty }) {
   /**
    *
    * @param {Event} e Change input value event
-   * @param {string} cssProperty css property awaited to check its validation
+   * @param {string} cssProperty css property awaited to check input's css
    * @param {string} prop prop name
    */
   function handleChangeCSSValue(e, cssProperty, prop) {

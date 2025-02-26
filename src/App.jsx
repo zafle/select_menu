@@ -1,9 +1,13 @@
-import './App.css'
 import CustomSelectMenu from './components/CustomSelectMenu/CustomSelectMenu'
 import ConfigSelectForm from './components/ConfigSelectForm/ConfigSelectForm'
 import GeneratedCode from './components/GeneratedCode/GeneratedCode'
 import ConfigProvider from './contexts/ConfigProvider/ConfigProvider'
+import './App.css'
 
+/**
+ *
+ * @returns Example page for SelectMenu component usage with interactive comonent design
+ */
 function App() {
   return (
     <div className="main-container">

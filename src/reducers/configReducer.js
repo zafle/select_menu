@@ -12,6 +12,12 @@ import {
   FOOD_CATEGORIES_CODES,
 } from '../data/mock/optionsMenus'
 
+/**
+ *
+ * @param {Object} config current context value
+ * @param {Object} action dispatched action to update state
+ * @returns updated context value
+ */
 export function configReducer(config, action) {
   // Config to use when update options type
   const optionsConfigMap = {

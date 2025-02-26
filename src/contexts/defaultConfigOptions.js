@@ -1,5 +1,7 @@
 import { COLORS } from '../data/mock/optionsMenus'
 
+// Default config options for configContext
+
 export const defaultConfigOptions = {
   labelId: '', // for SelectInput aria-labelledby
   name: '', // name for hidden input that will receive the selected option value

@@ -72,7 +72,7 @@ export default function GeneratedCode() {
     return code
   }
 
-  // Define HTML
+  // Define HTML code
   const controlledFormCode =
     configProps.onChangeValue !== null
       ? `

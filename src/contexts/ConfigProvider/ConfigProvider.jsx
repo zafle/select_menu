@@ -5,6 +5,12 @@ import { ConfigContext, ConfigDispatchContext } from '../ConfigContext'
 import { configReducer } from '../../reducers/configReducer'
 import PropTypes from 'prop-types'
 
+/**
+ * Creates a context Provider and Reducer
+ *
+ * @param {React.ReactElement} children
+ * @returns ConfigContext and ConfigDispatchContext
+ */
 export default function ConfigProvider({ children }) {
   const initialConfig = {
     optionsType: 'options_without_values',
