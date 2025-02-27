@@ -18,7 +18,8 @@
   "type": "module",
   "main": "dist/select_menu.js",
   "files": [
-    "dist"
+    "dist",
+    "index.d.ts"
   ],
   "scripts": {
     "dev": "vite",
