@@ -6,7 +6,7 @@ A very easy to use and customisable React select dropdown
 
 ## Features
 
-- [Different types of options data](###-different-types-of-options-datas) :
+- [Different types of options data](#different-types-of-options-datas) :
 
   - array of options with or without values
   - array of optgroup with labels
