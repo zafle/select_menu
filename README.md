@@ -1,6 +1,6 @@
 [![Coverage Status](https://coveralls.io/repos/github/zafle/select_menu/badge.svg)](https://coveralls.io/github/zafle/select_menu)
 
-# React-select-menu
+# Select_Menu React component
 
 A very easy to use and customisable React select dropdown
 

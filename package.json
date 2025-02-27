@@ -60,5 +60,6 @@
   },
   "sideEffects": [
     "**/*.css"
-  ]
+  ],
+  "types": "index.d.ts"
 }
