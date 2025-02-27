@@ -1,7 +1,7 @@
 {
   "name": "@zafle/select_menu",
   "private": false,
-  "version": "1.0.5",
+  "version": "1.0.6",
   "repository": {
     "type": "git",
     "url": "https://github.com/zafle/select_menu"
