@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import prism from 'vite-plugin-prismjs'
 
 export default defineConfig({
-  base: '/select-menu/', // Pour GitHub Pages
+  base: '/select_menu/', // Pour GitHub Pages
   plugins: [
     react(),
     prism({
