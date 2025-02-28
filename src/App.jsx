@@ -6,16 +6,24 @@ import './App.css'
 
 /**
  *
- * @returns Example page for SelectMenu component usage with interactive comonent design
+ * @returns Example page for SelectMenu component usage with interactive component design
  */
 function App() {
   return (
     <div className="main-container">
-      <h1>Interactive example for select-menu React component usage</h1>
+      <h1>Interactive example for Select-Menu React component usage</h1>
+      <p>This page is an example page.</p>
       <p>
-        This page is an example page. To see full component&apos;s instructions,
-        please visit :
+        To see full component&apos;s usage instructions and documentation, or
+        install NPM package, visit:{' '}
+        <a
+          href="http://www.npmjs.com/package/@zafle/select_menu/v/1.0.8"
+          target="_blank"
+        >
+          @zafle/select_menu
+        </a>
       </p>
+
       <h2>Component description</h2>
       <p>The select-menu component displays a customisable select dropdown.</p>
       <h2>Component required props</h2>
@@ -30,6 +38,10 @@ function App() {
         <ConfigSelectForm />
         <GeneratedCode />
       </ConfigProvider>
+      <h2>Author</h2>
+      <p>Zafle</p>
+      <h2>License</h2>
+      <p>MIT</p>
     </div>
   )
 }
