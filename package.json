@@ -25,7 +25,7 @@
     "dev": "vite",
     "build:lib": "vite build --config vite.lib.config.js",
     "build:site": "vite build --config vite.site.config.js",
-    "deploy": "npm run build:site && gh-pages -d dist",
+    "deploy": "npm run build:site && gh-pages -d site-dist",
     "prepublishOnly": "npm run build:lib",
     "lint": "eslint .",
     "preview": "vite preview",
