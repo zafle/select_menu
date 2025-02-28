@@ -4,6 +4,10 @@
 
 A very easy to use and customisable React select dropdown
 
+## Live Select_menu example usage
+
+To try and design your own Select_Menu component, visit [Select_Menu page example](https://zafle.github.io/select_menu/)
+
 ## Features
 
 - [Different types of options data](#different-types-of-options-datas) :
