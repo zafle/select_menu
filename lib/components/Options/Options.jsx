@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types'
 import useConfig from '../../context/hook/useConfig'
 import Option from '../Option/Option'
+import useActiveOption from '../../context/hook/useActiveOption'
+import useSelect from '../../context/hook/useSelect'
+import { useEffect } from 'react'
 
 /**
  * Displays Options
@@ -12,6 +15,16 @@ import Option from '../Option/Option'
  */
 export default function Options({ options, startIndex }) {
   const { id } = useConfig()
+  const { activeOptionIndex, defineActiveOptionIndex } = useActiveOption()
+  const { isOpen, selectedIndex } = useSelect()
+
+  useEffect(() => {
+    if (!isOpen) {
+      if (selectedIndex === '' && activeOptionIndex !== 0) {
+        defineActiveOptionIndex(0)
+      }
+    }
+  }, [isOpen, activeOptionIndex, selectedIndex, defineActiveOptionIndex])
 
   return (
     <>

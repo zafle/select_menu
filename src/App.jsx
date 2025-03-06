@@ -31,7 +31,7 @@ function App() {
         The select-menu React component has only one required prop{' '}
         <code className="code-item">option</code>.
       </p>
-      <h2>Design your component</h2>
+      <h2>Set & Design your component</h2>
       <p>Set the component&apos;s options and use the generated code below.</p>
       <ConfigProvider>
         <CustomSelectMenu />

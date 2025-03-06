@@ -2,13 +2,27 @@
 
 # Select_Menu React component
 
-A very easy to use and customisable React select dropdown
+A very easy to use and customisable React select dropdown.
 
-## Live Select_menu example usage
+## Live Select_Menu example usage
 
-To try and design your own Select_Menu component, visit [Select_Menu page example](https://zafle.github.io/select_menu/)
+To try and design your own Select_Menu component and read more doc, visit [Select_Menu page example](https://zafle.github.io/select_menu/)
 
 ## Features
+
+### V2 new releases
+
+#### Unique ID for each Select_Menu component
+
+#### New `selectedOption` prop
+
+In V2, `selectedOption` allows to change your selectedOption value programmatically by changing its value to _null_ or _''_ to reset Select_Menu component by clearing selection.
+
+#### ClassNames for all essentials tags
+
+In V2, some classNames are added for a better CSS control.
+
+### All versions releases
 
 - [Different types of options data](#different-types-of-options-datas) :
 

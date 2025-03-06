@@ -13,19 +13,12 @@ export default function ConfigSelectForm() {
 
   const [optionsType, setOptionsType] = useState('options_without_values')
   const [formType, setFormType] = useState('')
+  const [isSelectedOptionChecked, setISelectedOptionChecked] = useState(false)
   const [isLinkLabelChecked, setIsLinkLabelChecked] = useState(false)
   const [isEnableAriaChecked, setIsEnableAriaChecked] = useState(false)
   const [defaultSelected, setdefaultSelected] = useState(undefined)
   const [hasBoxShadowOnOpen, setHasBoxShadowOnOpen] = useState(false)
   const [dropdownPosition, setDropdownPosition] = useState('')
-
-  // Function for onChangeValue dispatch
-  const onChangeValueFunction = (option) => {
-    dispatch({
-      type: 'set_selected_option',
-      selectedOption: option,
-    })
-  }
 
   function handleChangeOptionsType(e) {
     setOptionsType(e.target.value)
@@ -37,10 +30,46 @@ export default function ConfigSelectForm() {
 
   function handleChangeFormType(e) {
     setFormType(e.target.value)
+
     dispatch({
       type: e.target.value,
-      onChangeValue: onChangeValueFunction,
+      onChangeValue: () => {},
       name: 'optionName',
+    })
+    dispatch({
+      type: 'set_needConfigControlled',
+      needConfig: true,
+    })
+    if (e.target.value === 'uncontrolled') {
+      setISelectedOptionChecked(false)
+      dispatch({
+        type: 'set_selectedOption',
+        selectedOption: undefined,
+      })
+    }
+  }
+
+  function handleChangeSelectedOption() {
+    setISelectedOptionChecked((prev) => {
+      const newCheckedState = !prev
+      dispatch({
+        type: 'set_selectedOption',
+        selectedOption: newCheckedState ? 'selectedOption' : undefined,
+      })
+
+      setFormType(newCheckedState ? 'controlled' : 'uncontrolled')
+      dispatch({
+        type: newCheckedState ? 'controlled' : 'uncontrolled',
+        onChangeValue: () => {},
+        name: 'optionName',
+      })
+
+      dispatch({
+        type: 'set_needConfigControlled',
+        needConfig: true,
+      })
+
+      return newCheckedState
     })
   }
 
@@ -67,7 +96,6 @@ export default function ConfigSelectForm() {
   }
 
   function handleChangeDefaultSelected(e) {
-    console.log('rom handle defeult :', e.target.value)
     setdefaultSelected(e.target.value)
     dispatch({
       type: 'set_defaultSelectedOption',
@@ -197,6 +225,39 @@ export default function ConfigSelectForm() {
                 Uncontrolled
               </label>
             </div>
+          </div>
+        </li>
+
+        <li>
+          <div className="form-prop">
+            <code className="prop-code">selectedOption</code>
+          </div>
+          <div className="form-content">
+            <div className="form-text">
+              <label className="form-title" htmlFor="selectedOptionInput">
+                Enable reset selection progammatically
+              </label>
+              <div className="form-desc">
+                <p className="prop-new-feature">New feature in V2 !</p>
+                {isSelectedOptionChecked && (
+                  <p>
+                    The <code className="prop-code">selectedOption</code> prop
+                    must be used in association with{' '}
+                    <code className="prop-code">onChangeValue</code> prop. Pass
+                    here the selected option state associated with the{' '}
+                    <code className="prop-code">onChangeValue</code>&apos;s
+                    setter. Allows to reset selected option by setting this
+                    state&apos;s value to &apos;null&apos; or &apos;&apos;.
+                  </p>
+                )}
+              </div>
+            </div>
+            <input
+              type="checkbox"
+              id="selectedOptionInput"
+              checked={isSelectedOptionChecked}
+              onChange={handleChangeSelectedOption}
+            />
           </div>
         </li>
 

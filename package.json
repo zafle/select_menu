@@ -23,6 +23,7 @@
   ],
   "scripts": {
     "dev": "vite",
+    "dev:site": "vite --config vite.site.config.js",
     "build:lib": "vite build --config vite.lib.config.js",
     "build:site": "vite build --config vite.site.config.js",
     "deploy": "npm run build:site && gh-pages -d site-dist",

@@ -6,6 +6,7 @@ export const defaultConfigOptions = {
   labelId: '', // for SelectInput aria-labelledby
   name: '', // name for hidden input that will receive the selected option value
   onChangeValue: null, // Callback function triggered when an option is selected
+  selectedOption: undefined, // state controlled with OnChangeValue
   // OPTIONS DATA CONFIG
   options: COLORS, // Options'data array
   defaultSelectedOption: undefined, // 'first' for first || 'option_text' to define one || undefined for none

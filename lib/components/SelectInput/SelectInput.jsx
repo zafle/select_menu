@@ -3,6 +3,8 @@ import useSelect from '../../context/hook/useSelect'
 import arrow from '../../assets/caret-down-icon.png'
 import closeIcon from '../../assets/close-line-icon.png'
 import { triggerOnChangeSelectedValueInput } from '../../utils/utils'
+import { useEffect } from 'react'
+import PropTypes from 'prop-types'
 import styles from './SelectInput.module.css'
 
 /**
@@ -10,7 +12,7 @@ import styles from './SelectInput.module.css'
  *
  * @returns {React.ReactElement} SelectInput
  */
-export default function SelectInput() {
+export default function SelectInput({ selectedOption }) {
   //  get context
   const {
     selectedId,
@@ -26,6 +28,7 @@ export default function SelectInput() {
     labelId,
     name,
     onChangeValue,
+    values,
     colorOnFocus,
     classOnFocus,
     border,
@@ -49,12 +52,6 @@ export default function SelectInput() {
     }
   }
   const clearSelection = () => {
-    /**
-     *  Trigger on change event on option's value hidden input
-     *
-     * @param {string} param1 option's value (empty)
-     * @param {string} id  option's value hidden input ID
-     */
     triggerOnChangeSelectedValueInput('', id)
     clearSelected()
   }
@@ -87,6 +84,23 @@ export default function SelectInput() {
     }
   }
 
+  /**
+   * This function is added in V2
+   *
+   * Check equality with selectedOption state (new prop) and selectedText | selectedValue
+   * If different, means that user injected new value programmatically (null or '')
+   * This will reset selection
+   */
+  useEffect(() => {
+    if (selectedOption !== undefined) {
+      const selectedContent = values ? selectedValue : selectedText
+      if (selectedOption !== selectedContent) {
+        triggerOnChangeSelectedValueInput('', id)
+        clearSelected()
+      }
+    }
+  }, [selectedOption, selectedText, selectedValue, id, values, clearSelected])
+
   const selectInputStyle = {
     border: border,
     height: inputHeight,
@@ -103,7 +117,8 @@ export default function SelectInput() {
     <div
       className={
         `select-input ${styles.selectInput} ` +
-        (colorOnFocus !== 'default' ? `${styles[classOnFocus]} ` : '')
+        (colorOnFocus !== 'default' ? `${styles[classOnFocus]} ` : '') +
+        (selectedText !== '' ? `select-input--has-selection ` : '')
       }
       style={selectInputStyle}
       tabIndex="0"
@@ -124,7 +139,7 @@ export default function SelectInput() {
       {/* Hidden in css input */}
       <input
         id={id}
-        className={styles.selectedValue}
+        className={`select-input--value ${styles.selectedValue}`}
         type="text"
         onChange={(e) => {
           handleChange(e)
@@ -136,12 +151,15 @@ export default function SelectInput() {
         readOnly
         data-testid="selectedValue-input"
       />
-      <div className={styles.selectedText} data-testid="selectedText-input">
+      <div
+        className={`select-input--text ${styles.selectedText}`}
+        data-testid="selectedText-input"
+      >
         {selectedText}
       </div>
       <img
         className={
-          `${styles.clearSelect} ${styles.selectControl} ` +
+          `select-input--clear-icon ${styles.clearSelect} ${styles.selectControl} ` +
           (selectedText !== '' ? `${styles.hasSelection} ` : '') +
           (colorOnFocus !== 'default' ? `${styles[classOnFocus]} ` : '')
         }
@@ -161,7 +179,8 @@ export default function SelectInput() {
       />
       <img
         className={
-          `${styles.selectArrow} ${styles.selectControl} ` +
+          `select-input--arrow ${styles.selectArrow} ${styles.selectControl} ` +
+          (isOpen && `select-input--arrow-isopen `) +
           (isOpen && styles.open)
         }
         src={arrow}
@@ -169,4 +188,8 @@ export default function SelectInput() {
       />
     </div>
   )
+}
+
+SelectInput.propTypes = {
+  selectedOption: PropTypes.string,
 }

@@ -54,7 +54,7 @@ export default function Dropdown() {
       className={
         `select-dropdown ${styles.selectDropdown} ` +
         (colorOnFocus !== 'default' ? `${styles[classOnFocus]} ` : '') +
-        (isOpen ? '' : styles.close)
+        (isOpen ? `select-dropdown--isopen ` : styles.close)
       }
       style={dropdownStyle}
       role="listbox"

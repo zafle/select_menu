@@ -15,7 +15,8 @@ import useActiveOption from '../../context/hook/useActiveOption'
  * @returns {React.ReactElement} Option
  */
 export default function Option({ option, index }) {
-  const { isOpen, selectedId, defineSelected, toggleIsOpen } = useSelect()
+  const { isOpen, selectedId, selectedIndex, defineSelected, toggleIsOpen } =
+    useSelect()
 
   const {
     id,
@@ -59,11 +60,17 @@ export default function Option({ option, index }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  /**
+   * When dropdown opens, redefine active option === selected option
+   */
   useEffect(() => {
-    if (activeOptionIndex === index && isOpen) {
-      optionRef.current.focus()
+    if (selectedIndex === index && isOpen) {
+      defineActiveOptionIndex(index)
     }
-  }, [isOpen, activeOptionIndex, index])
+    // NOTE: Run effect only when isOpen state changes (dropdown opens),
+    // please recheck dependencies if effect is updated.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen])
 
   const handleClick = (e) => {
     /**
@@ -73,6 +80,7 @@ export default function Option({ option, index }) {
      * @param {string} id  option's value hidden input ID
      */
     triggerOnChangeSelectedValueInput(e.target.dataset.value, id)
+
     defineSelected(
       e.target.id,
       e.target.innerText,
@@ -130,6 +138,7 @@ export default function Option({ option, index }) {
       }
       ref={optionRef}
       data-value={values ? option[valueField] : option}
+      data-index={index}
       style={optionStyle}
       onClick={(e) => {
         handleClick(e)

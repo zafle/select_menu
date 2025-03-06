@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { configContext } from '../configContext'
 import defaultConfig from '../default/defaultConfig'
 import {
+  setId,
   setValues,
   setOptGroup,
   setDropdownBorderTop,
@@ -25,6 +26,10 @@ export default function ConfigContextProvider({ children }) {
         isSet: true,
         ...props,
       }
+
+      // set id
+      config.id = setId(config.id)
+
       // set boolean for `values` and `optGroup` if fields names are provided
       config.values = setValues(config.textField, config.valueField)
       config.optGroup = setOptGroup(

@@ -28,6 +28,7 @@ declare module '@zafle/select_menu' {
     labelId?: string
     name?: string
     onChangeValue?: (value: string) => void
+    selectedOption?: string | { option: string; value: string }
     defaultSelectedOption?: 'first' | string
     textField?: string
     valueField?: string

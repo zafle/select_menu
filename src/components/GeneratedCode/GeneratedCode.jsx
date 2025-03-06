@@ -7,7 +7,7 @@ import { useConfig } from '../../contexts/ConfigContext'
 import { defaultConfigOptions } from '../../contexts/defaultConfigOptions'
 
 export default function GeneratedCode() {
-  const { optionsArray, configProps } = useConfig()
+  const { optionsArray, hasReset, configProps } = useConfig()
 
   /**
    * Highlight code after each state update
@@ -57,7 +57,7 @@ export default function GeneratedCode() {
             valueToDisplay = `{handleChangeSelect}`
             break
           case 'name':
-            valueToDisplay = `"optionName"`
+            valueToDisplay = `"selectedOption"`
             break
           case 'labelId':
             valueToDisplay = `"selectMenuLabel"`
@@ -76,26 +76,49 @@ export default function GeneratedCode() {
   const controlledFormCode =
     configProps.onChangeValue !== null
       ? `
-        // Add this code for a controlled form
-        const [selectedOption, setSelectedOption] = useState('')
+    // Add this code for a controlled form
+    const [selectedOption, setSelectedOption] = useState('')
 
-        const handleChangeSelect = (option) => {
-          setSelectedOption(option)
-        }
+    const handleChangeSelect = (option) => {
+      setSelectedOption(option)
+    }
     `
       : ''
 
   const uncontrolledFormCode =
     configProps.name !== ''
       ? `
-      // Add this code for an uncontrolled form
-      const [formData, setFormData] = useState('')
+    // Add this code for an uncontrolled form
+    const [formData, setFormData] = useState('')
 
-      const handleSubmit = (e) => {
-        e.preventDefault()
-        setFormData(e.target.optionName.value)
-      }
+    const handleSubmit = (e) => {
+      e.preventDefault()
+      setFormData(e.target.selectedOption.value)
+    }
     `
+      : ''
+
+  const controllingYourSelection =
+    configProps.onChangeValue !== null || configProps.name !== ''
+      ? `<p>This option's value has been selected:</p>`
+      : ''
+
+  const controlledFormSelection =
+    configProps.onChangeValue !== null
+      ? `
+      <p>{selectedOption}</p>`
+      : ''
+
+  const uncontrolledFormSelection =
+    configProps.name !== ''
+      ? `
+      <p>{formData}</p>`
+      : ''
+
+  const uncontrolledValidateButton =
+    configProps.name !== ''
+      ? `<button type="submit">Validate</button>
+      `
       : ''
 
   const onSubmitFunction =
@@ -106,6 +129,26 @@ export default function GeneratedCode() {
   const labelIdAttribute =
     configProps.labelId !== '' ? ` id="selectMenuLabel"` : ''
 
+  const selectedOptionProp =
+    hasReset === true
+      ? `
+          selectedOption={selectedOption}`
+      : ''
+
+  const resetFunction =
+    hasReset === true
+      ? `
+    const handleClickReset = () => {
+      setSelectedOption('')
+    }
+      `
+      : ''
+  const resetButton =
+    hasReset === true
+      ? `
+      <button onClick={handleClickReset}>Reset</Button>`
+      : ''
+
   // Define bloc of code
   const highlightedJSCode = `// App.jsx
 
@@ -113,15 +156,17 @@ export default function GeneratedCode() {
   import { useState } from 'react'
 
   export default function App() {
-    ${controlledFormCode}${uncontrolledFormCode}
+    ${controlledFormCode}${uncontrolledFormCode}${resetFunction}
     ${optionsArray}
     return (
       <form${onSubmitFunction}>
         <label${htmlForAttribute}${labelIdAttribute}>Select an option:</label>
         <SelectMenu
-          options={OPTIONS}${generateEncodedProps()}
+          options={OPTIONS}${selectedOptionProp}${generateEncodedProps()}
         )
       </form>
+      ${uncontrolledValidateButton}${controllingYourSelection}${controlledFormSelection}${uncontrolledFormSelection}${resetButton}
+    )
   }
   `
 

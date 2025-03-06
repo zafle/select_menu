@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react'
+
 // components
 import Dropdown from '../Dropdown/Dropdown'
 import SelectInput from '../SelectInput/SelectInput'
@@ -37,6 +38,10 @@ import styles from './SelectComponent.module.css'
  * (parameter = option selected value)
  * - DEFAULT = null
  * @param {Function} props.props.onChangeValue
+ *
+ * New in V2
+ * selectedOption is the state given by user that is changed with onChangeValue
+ * @param {string} props.props.selectedOption
  *
  * Defines default selected option :
  * - POSSIBLE VALUES = 'text of the default selected option' | 'first'  | undefined
@@ -183,6 +188,7 @@ import styles from './SelectComponent.module.css'
 export default function SelectComponent({ props }) {
   // get select and config context
   const { isOpen, toggleIsOpen } = useSelect()
+
   const {
     isSet,
     id,
@@ -199,7 +205,7 @@ export default function SelectComponent({ props }) {
   // set custom config
   useEffect(() => {
     if (!isSet) {
-      defineConfig(props)
+      defineConfig({ ...props })
     }
   }, [props, isSet, defineConfig])
 
@@ -236,13 +242,17 @@ export default function SelectComponent({ props }) {
           handleKeyDown(e)
         }}
       >
-        <SelectInput />
+        <SelectInput selectedOption={props.selectedOption} />
         <Dropdown />
       </div>
     )
   }
 }
 SelectComponent.propTypes = {
+  // New in V2
+  // selectedOption is the state given by user that is changed with onChangeValue
+  selectedOption: PropTypes.string,
+  //
   props: PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
@@ -282,6 +292,9 @@ SelectComponent.propTypes = {
       ])
     ).isRequired,
     onChangeValue: PropTypes.func,
+    // New in V2
+    // selectedOption is the state given by user that is changed with onChangeValue
+    selectedOption: PropTypes.string,
     defaultSelectedOption: PropTypes.string,
     textField: PropTypes.string,
     valueField: PropTypes.string,
