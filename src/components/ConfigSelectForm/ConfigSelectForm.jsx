@@ -16,6 +16,7 @@ export default function ConfigSelectForm() {
   const [isSelectedOptionChecked, setISelectedOptionChecked] = useState(false)
   const [isLinkLabelChecked, setIsLinkLabelChecked] = useState(false)
   const [isEnableAriaChecked, setIsEnableAriaChecked] = useState(false)
+  const [isResetChecked, setIsResetChecked] = useState(false)
   const [defaultSelected, setdefaultSelected] = useState(undefined)
   const [hasBoxShadowOnOpen, setHasBoxShadowOnOpen] = useState(false)
   const [dropdownPosition, setDropdownPosition] = useState('')
@@ -57,6 +58,17 @@ export default function ConfigSelectForm() {
         type: newCheckedState ? 'controlled' : 'uncontrolled',
       })
 
+      return newCheckedState
+    })
+  }
+
+  function handleChangeReset() {
+    setIsResetChecked((prev) => {
+      const newCheckedState = !prev
+      dispatch({
+        type: 'set_ResetToDefault',
+        reset: newCheckedState,
+      })
       return newCheckedState
     })
   }
@@ -248,6 +260,31 @@ export default function ConfigSelectForm() {
             />
           </div>
         </li>
+
+        {isSelectedOptionChecked && (
+          <li className="blue-background">
+            <div className="form-prop">
+              <code className="prop-code">resetToDefault</code>
+            </div>
+            <div className="form-content">
+              <div className="form-text">
+                <label className="form-title" htmlFor="resetInput">
+                  Reset to default value ?
+                </label>
+                <div className="form-desc">
+                  The default selected value can be set with{' '}
+                  <code className="prop-code">defaultSelectedOption</code>
+                </div>
+              </div>
+              <input
+                type="checkbox"
+                id="resetInput"
+                checked={isResetChecked}
+                onChange={handleChangeReset}
+              />
+            </div>
+          </li>
+        )}
 
         <li>
           <div className="form-prop">

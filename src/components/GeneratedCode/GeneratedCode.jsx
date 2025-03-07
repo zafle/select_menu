@@ -59,11 +59,17 @@ export default function GeneratedCode() {
           case 'selectedOption':
             valueToDisplay = `{selectedOption}`
             break
+          case 'resetToDefault':
+            valueToDisplay = `{true}`
+            break
           case 'name':
             valueToDisplay = `"selectedOption"`
             break
           case 'labelId':
             valueToDisplay = `"selectMenuLabel"`
+            break
+          case 'boxShadowOnOpen':
+            valueToDisplay = `{true}`
             break
           default:
             valueToDisplay = 'default'

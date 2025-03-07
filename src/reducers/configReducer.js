@@ -125,6 +125,15 @@ export function configReducer(config, action) {
         },
       }
     }
+    case 'set_ResetToDefault': {
+      return {
+        ...config,
+        configProps: {
+          ...config.configProps,
+          resetToDefault: action.reset,
+        },
+      }
+    }
     case 'set_id': {
       if (action.id === '') {
         delete config.configProps.id

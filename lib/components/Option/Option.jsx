@@ -15,8 +15,14 @@ import useActiveOption from '../../context/hook/useActiveOption'
  * @returns {React.ReactElement} Option
  */
 export default function Option({ option, index }) {
-  const { isOpen, selectedId, selectedIndex, defineSelected, toggleIsOpen } =
-    useSelect()
+  const {
+    isOpen,
+    selectedId,
+    selectedIndex,
+    defineSelected,
+    toggleIsOpen,
+    defineDefaultSelected,
+  } = useSelect()
 
   const {
     id,
@@ -41,8 +47,8 @@ export default function Option({ option, index }) {
   const optionRef = useRef(null)
 
   /**
-   * If the option is the defualt selected option
-   * then define selected option in select context
+   * If the option is the default selected option
+   * then define selected option and default selected in select context
    * then define active option in select context
    * NOTE: this useEffect only runs once on component mount
    */
@@ -53,10 +59,16 @@ export default function Option({ option, index }) {
       defaultSelectedOption === optionText ||
       (defaultSelectedOption === 'first' && index === 0)
     ) {
-      if (onChangeValue !== null) {
-        onChangeValue(values ? optionValue : optionText)
-      }
       defineSelected(`option_${index}_${id}`, optionText, optionValue, index)
+      defineDefaultSelected(
+        `option_${index}_${id}`,
+        optionText,
+        optionValue,
+        index
+      )
+      if (onChangeValue !== null) {
+        onChangeValue(optionValue)
+      }
       defineActiveOptionIndex(index)
     }
     // NOTE: Run effect once on component mount, please

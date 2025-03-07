@@ -18,7 +18,11 @@ To try and design your own Select_Menu component and read more doc, visit [Selec
 
   - New `selectedOption` prop
 
-  - In V2, `selectedOption` allows to change your selectedOption value programmatically by changing its value to _null_ or _''_ to reset Select_Menu component by clearing selection.
+  - In V2, `selectedOption` allows to reset the Select*Menu component by clearing selection value programmatically by changing its value to \_null* | _''_.
+
+  - To reset on default value (which can be set with `defaultSelectedOption`), set `resetToDefault` prop to `true`.
+
+  NOTE : These functionnalities only work with controlled forms. Make sure to provide as welle `onChangeValue` prop.
 
 - ClassNames for all essentials tags
 
@@ -203,6 +207,10 @@ return (
 
 In V2 only, to enable reset programmatically, the form must be controlled and the `selectedOption` prop is required.
 
+- `selectedOption` allows to reset the Select*Menu component by clearing selection value programmatically by changing its value to \_null* | _''_.
+
+- To reset on default value (which can be set with `defaultSelectedOption`), set `resetToDefault` prop to `true`.
+
 ```jsx
 const [selectedValue, setSelectedValue] = useState('')
 
@@ -258,12 +266,14 @@ const options = ['Blue', 'Yellow', 'Green', 'Red', 'Purple']
 
 ```
 
-## Props component
+## Component props
 
 | Prop                                                                            | Description                                                                                                                                                                    | Value example(s)                                                            |
 | :------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------- |
 | **options**<br>_type: Array_<br>_default: none_                                 | **Required**<br>Array of options to display in the dropdown menu.                                                                                                              | [Different types of options data](#different-types-of-options-datas)        |
 | **onChangeValue**<br>_type: Function_<br>_default: null_                        | Callback function triggered when an option is selected. The returned value is the selected option's value.                                                                     | [Controlled Form](#controlled-form)                                         |
+| **selectedOption**<br>_type: string_<br>_default: undefined_                    | Selected option state controlled with `onChangeValue` prop.<br>**NOTE: for controlled forms only.**                                                                            | [Enable reset programmatically](#enable-reset-programmatically)             |
+| **resetToDefault**<br>_type: boolean_<br>_default: false_                       | Indicates if the selected option must reset on default value.<br>**NOTE: for controlled forms only.**                                                                          | [Enable reset programmatically](#enable-reset-programmatically)             |
 | **name**<br>_type: string_<br>_default: none_                                   | Gives a name attribute to the input that will stock the value of the selected option.                                                                                          | [Uncontrolled Form](#uncontrolled-form)                                     |
 | **textField**<br>_type: string_<br>_default: none_                              | The property name in the options array for the option's text to display. Use if the value option is different from the text option.<br>**NOTE: Must be used with valueField.** | [Options with values](#options-with-values)                                 |
 | **valueField**<br>_type: string_<br>_default: none_                             | The property name in the options array for the option's value. Use if the value option is different from the text option.<br>**NOTE: Must be used with textField.**            | [Options with values](#options-with-values)                                 |
@@ -271,8 +281,8 @@ const options = ['Blue', 'Yellow', 'Green', 'Red', 'Purple']
 | **optGroupOptionsField**<br>_type: string_<br>_default: none_                   | The property name in the options array for the optGroup options.<br>**NOTE: Must be used with optGroupLabelField.**                                                            | [Options with optGroups](#options-with-optGroups)                           |
 | **id**<br>_type: string_<br>_default: nanoid()_                                 | Gives a custom id attribute to the input that stocks the selected option value.                                                                                                | [Label and SelectMenu component link](#label-and-selectmenu-component-link) |
 | **labelId**<br>_type: string_<br>_default: none_                                | Enables the input's aria-labelledBy attribute that stocks the selected option value to be efficient.                                                                           | [Accessibility](#accessibility)                                             |
-| **defaultSelectedOption**<br>_type: string_<br>_default: undefined_             | Sets a default selected option.                                                                                                                                                | "option_text" or "first" for first option                                   |
-| **maxWidth**<br>_type: string_<br>_default: "250px"_                            | Gives the max-width CSS property for the whole component.                                                                                                                      | "200px", "50%"                                                              |
+| **defaultSelectedOption**<br>_type: string_<br>_default: undefined_             | Sets a default selected option.                                                                                                                                                | "option\*text" or "first" for first option                                  |
+| **maxWidth**<br>\_type: string\*<br>_default: "250px"_                          | Gives the max-width CSS property for the whole component.                                                                                                                      | "200px", "50%"                                                              |
 | **border**<br>_type: string_<br>_default: "1px solid #2b2b2b"_                  | Sets the border CSS property for the whole component.                                                                                                                          | "unset" for no border, "2px solid blue"                                     |
 | **borderRadius**<br>_type: string_<br>_default: "4px"_                          | Sets the border-radius for the component.                                                                                                                                      | "unset" for no border-radius, "10px" (single value required)                |
 | **containerMargin**<br>_type: string_<br>_default: "0"_                         | Defines the margin around the component.                                                                                                                                       | Any valid CSS margin value ("10px", "1em", "0 auto")                        |

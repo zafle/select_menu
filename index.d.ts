@@ -29,6 +29,7 @@ declare module '@zafle/select_menu' {
     name?: string
     onChangeValue?: (value: string) => void
     selectedOption?: string
+    resetToDefault?: boolean
     defaultSelectedOption?: 'first' | string
     textField?: string
     valueField?: string

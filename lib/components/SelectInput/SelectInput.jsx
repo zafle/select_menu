@@ -18,9 +18,11 @@ export default function SelectInput({ selectedOption }) {
     selectedId,
     selectedText,
     selectedValue,
+    defaultSelected,
     isOpen,
     toggleIsOpen,
     clearSelected,
+    defineSelected,
   } = useSelect()
 
   const {
@@ -28,6 +30,7 @@ export default function SelectInput({ selectedOption }) {
     labelId,
     name,
     onChangeValue,
+    resetToDefault,
     values,
     colorOnFocus,
     classOnFocus,
@@ -88,18 +91,32 @@ export default function SelectInput({ selectedOption }) {
    * This function is added in V2
    *
    * Check equality with selectedOption state (new prop) and selectedText | selectedValue
-   * If different, means that user injected new value programmatically (null or '')
-   * This will reset selection
+   * If different, means that user injected new value programmatically (null | '' | any)
+   * This will reset selection to '' | defaultSelected if resetToDefault is true
    */
   useEffect(() => {
     if (selectedOption !== undefined) {
       const selectedContent = values ? selectedValue : selectedText
+
       if (selectedOption !== selectedContent) {
-        triggerOnChangeSelectedValueInput('', id)
-        clearSelected()
+        if (!resetToDefault) {
+          triggerOnChangeSelectedValueInput('', id)
+          clearSelected()
+        } else if (resetToDefault) {
+          defineSelected(
+            defaultSelected.id,
+            defaultSelected.text,
+            defaultSelected.value,
+            defaultSelected.index
+          )
+          onChangeValue(defaultSelected.value)
+        }
       }
     }
-  }, [selectedOption, selectedText, selectedValue, id, values, clearSelected])
+    // NOTE: Run effect only when selectedOption changes,
+    // please recheck dependencies if effect is updated.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedOption])
 
   const selectInputStyle = {
     border: border,

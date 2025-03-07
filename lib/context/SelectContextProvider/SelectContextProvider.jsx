@@ -10,10 +10,19 @@ export default function SelectContextProvider({ children }) {
     index: '',
   }
   const [selected, setSelected] = useState(initialSelectedState)
+  const [defaultSelected, setDefaultSelected] = useState(initialSelectedState)
   const [isOpen, setIsOpen] = useState(false)
 
   const defineSelected = (id, text, value, index) => {
     setSelected({
+      id,
+      text,
+      value,
+      index,
+    })
+  }
+  const defineDefaultSelected = (id, text, value, index) => {
+    setDefaultSelected({
       id,
       text,
       value,
@@ -31,8 +40,10 @@ export default function SelectContextProvider({ children }) {
     <selectContext.Provider
       value={{
         selected,
+        defaultSelected,
         isOpen,
         defineSelected,
+        defineDefaultSelected,
         clearSelected,
         toggleIsOpen,
       }}
