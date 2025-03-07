@@ -93,19 +93,13 @@ export function configReducer(config, action) {
         selectedOption: action.selectedOption,
       }
     }
-    case 'set_reset': {
-      return {
-        ...config,
-        hasReset: action.reset,
-      }
-    }
     case 'controlled': {
       return {
         ...config,
         selectedOption: '',
         configProps: {
           ...config.configProps,
-          onChangeValue: action.onChangeValue,
+          onChangeValue: () => {},
           name: '',
         },
       }
@@ -117,7 +111,7 @@ export function configReducer(config, action) {
         configProps: {
           ...config.configProps,
           onChangeValue: null,
-          name: action.name,
+          name: 'optionName',
         },
       }
     }
@@ -125,17 +119,10 @@ export function configReducer(config, action) {
       return {
         ...config,
         selectedOption: '',
-        // hasReset: action.selectedOption === undefined ? false : true,
         configProps: {
           ...config.configProps,
           selectedOption: action.selectedOption,
         },
-      }
-    }
-    case 'set_needConfigControlled': {
-      return {
-        ...config,
-        needConfigControlled: action.needConfig,
       }
     }
     case 'set_id': {

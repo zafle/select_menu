@@ -33,13 +33,8 @@ export default function ConfigSelectForm() {
 
     dispatch({
       type: e.target.value,
-      onChangeValue: () => {},
-      name: 'optionName',
     })
-    dispatch({
-      type: 'set_needConfigControlled',
-      needConfig: true,
-    })
+
     if (e.target.value === 'uncontrolled') {
       setISelectedOptionChecked(false)
       dispatch({
@@ -54,19 +49,12 @@ export default function ConfigSelectForm() {
       const newCheckedState = !prev
       dispatch({
         type: 'set_selectedOption',
-        selectedOption: newCheckedState ? 'selectedOption' : undefined,
+        selectedOption: newCheckedState ? '{selectedOption}' : undefined,
       })
 
       setFormType(newCheckedState ? 'controlled' : 'uncontrolled')
       dispatch({
         type: newCheckedState ? 'controlled' : 'uncontrolled',
-        onChangeValue: () => {},
-        name: 'optionName',
-      })
-
-      dispatch({
-        type: 'set_needConfigControlled',
-        needConfig: true,
       })
 
       return newCheckedState
@@ -235,7 +223,7 @@ export default function ConfigSelectForm() {
           <div className="form-content">
             <div className="form-text">
               <label className="form-title" htmlFor="selectedOptionInput">
-                Enable reset selection progammatically
+                Enable reset selection programmatically
               </label>
               <div className="form-desc">
                 <p className="prop-new-feature">New feature in V2 !</p>

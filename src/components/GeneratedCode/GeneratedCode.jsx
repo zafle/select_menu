@@ -7,7 +7,7 @@ import { useConfig } from '../../contexts/ConfigContext'
 import { defaultConfigOptions } from '../../contexts/defaultConfigOptions'
 
 export default function GeneratedCode() {
-  const { optionsArray, hasReset, configProps } = useConfig()
+  const { optionsArray, configProps } = useConfig()
 
   /**
    * Highlight code after each state update
@@ -55,6 +55,9 @@ export default function GeneratedCode() {
         switch (key) {
           case 'onChangeValue':
             valueToDisplay = `{handleChangeSelect}`
+            break
+          case 'selectedOption':
+            valueToDisplay = `{selectedOption}`
             break
           case 'name':
             valueToDisplay = `"selectedOption"`
@@ -129,14 +132,8 @@ export default function GeneratedCode() {
   const labelIdAttribute =
     configProps.labelId !== '' ? ` id="selectMenuLabel"` : ''
 
-  const selectedOptionProp =
-    hasReset === true
-      ? `
-          selectedOption={selectedOption}`
-      : ''
-
   const resetFunction =
-    hasReset === true
+    configProps.selectedOption !== undefined
       ? `
     const handleClickReset = () => {
       setSelectedOption('')
@@ -144,7 +141,7 @@ export default function GeneratedCode() {
       `
       : ''
   const resetButton =
-    hasReset === true
+    configProps.selectedOption !== undefined
       ? `
       <button onClick={handleClickReset}>Reset</Button>`
       : ''
@@ -162,7 +159,7 @@ export default function GeneratedCode() {
       <form${onSubmitFunction}>
         <label${htmlForAttribute}${labelIdAttribute}>Select an option:</label>
         <SelectMenu
-          options={OPTIONS}${selectedOptionProp}${generateEncodedProps()}
+          options={OPTIONS}${generateEncodedProps()}
         )
       </form>
       ${uncontrolledValidateButton}${controllingYourSelection}${controlledFormSelection}${uncontrolledFormSelection}${resetButton}

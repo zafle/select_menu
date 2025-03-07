@@ -16,8 +16,6 @@ export default function ConfigProvider({ children }) {
     optionsType: 'options_without_values',
     optionsArray: optionsSnippet,
     selectedOption: '',
-    needConfigControlled: false,
-    hasReset: false,
     configProps: defaultConfigOptions,
   }
   const [config, dispatch] = useReducer(configReducer, initialConfig)

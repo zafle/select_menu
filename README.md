@@ -12,17 +12,19 @@ To try and design your own Select_Menu component and read more doc, visit [Selec
 
 ### V2 new releases
 
-#### Unique ID for each Select_Menu component
+- Unique ID for each Select_Menu component
 
-#### New `selectedOption` prop
+- [Enable reset programmatically](#enable-reset-programmatically)
 
-In V2, `selectedOption` allows to change your selectedOption value programmatically by changing its value to _null_ or _''_ to reset Select_Menu component by clearing selection.
+  - New `selectedOption` prop
 
-#### ClassNames for all essentials tags
+  - In V2, `selectedOption` allows to change your selectedOption value programmatically by changing its value to _null_ or _''_ to reset Select_Menu component by clearing selection.
 
-In V2, some classNames are added for a better CSS control.
+- ClassNames for all essentials tags
 
-### All versions releases
+  - In V2, some classNames are added for a better CSS control.
+
+### All versions features
 
 - [Different types of options data](#different-types-of-options-datas) :
 
@@ -193,6 +195,37 @@ return (
       <SelectMenu options={options} name="color" />
       <button type="submit">Validate</button>
     </form>
+  </>
+)
+```
+
+### Enable reset programmatically
+
+In V2 only, to enable reset programmatically, the form must be controlled and the `selectedOption` prop is required.
+
+```jsx
+const [selectedValue, setSelectedValue] = useState('')
+
+const options = ['Blue', 'Yellow', 'Green', 'Red', 'Purple']
+
+const handleChange = (option) => {
+  setSelectedValue(option)
+}
+
+const handleOnClickReset = () => {
+  setSelectedValue('')
+}
+
+return (
+  <>
+    <p>The selected option is {selectedValue} </p>
+    <SelectMenu
+      options={options}
+      onChangeValue={handleChange}
+      selectedOption={selectedValue}
+    />
+
+    <button onClick={handleClickReset}>Reset</button>
   </>
 )
 ```
