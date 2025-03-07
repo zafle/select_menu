@@ -21,6 +21,7 @@ export default function Option({ option, index }) {
   const {
     id,
     values,
+    onChangeValue,
     defaultSelectedOption,
     lastFocusableOptionIndex,
     textField,
@@ -52,6 +53,9 @@ export default function Option({ option, index }) {
       defaultSelectedOption === optionText ||
       (defaultSelectedOption === 'first' && index === 0)
     ) {
+      if (onChangeValue !== null) {
+        onChangeValue(values ? optionValue : optionText)
+      }
       defineSelected(`option_${index}_${id}`, optionText, optionValue, index)
       defineActiveOptionIndex(index)
     }
