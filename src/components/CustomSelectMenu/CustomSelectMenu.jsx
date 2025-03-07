@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { SelectMenu } from '../../../lib/SelectMenu'
-// import { SelectMenu } from '../../../'
+import { SelectMenu } from '../../../'
 import { useConfig, useConfigDispatch } from '../../contexts/ConfigContext'
 import './CustomSelectMenu.css'
 
