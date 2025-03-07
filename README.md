@@ -207,7 +207,7 @@ return (
 
 In V2 only, to enable reset programmatically, the form must be controlled and the `selectedOption` prop is required.
 
-- `selectedOption` allows to reset the Select*Menu component by clearing selection value programmatically by changing its value to \_null* | _''_.
+- `selectedOption` allows to reset the SelectMenu component by clearing selection value programmatically by changing its value to _null\* | _''\_.
 
 - To reset on default value (which can be set with `defaultSelectedOption`), set `resetToDefault` prop to `true`.
 
