@@ -18,7 +18,7 @@ To try and design your own Select_Menu component and read more doc, visit [Selec
 
   - New `selectedOption` prop
 
-  - In V2, `selectedOption` allows to reset the Select*Menu component by clearing selection value programmatically by changing its value to \_null* | _''_.
+  - In V2, `selectedOption` allows to reset the SelectMenu component by clearing selection value programmatically by changing its value to `null` | `''`.
 
   - To reset on default value (which can be set with `defaultSelectedOption`), set `resetToDefault` prop to `true`.
 
