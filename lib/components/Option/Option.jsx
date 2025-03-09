@@ -88,6 +88,13 @@ export default function Option({ option, index }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen])
 
+  // give focus to active option
+  useEffect(() => {
+    if (activeOptionIndex === index && isOpen) {
+      optionRef.current.focus()
+    }
+  }, [activeOptionIndex, index, isOpen])
+
   const handleClick = (e) => {
     /**
      *  Trigger on change event on option's value hidden input
