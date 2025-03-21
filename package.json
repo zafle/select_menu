@@ -30,8 +30,8 @@
     "prepublishOnly": "npm run build:lib",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "test": "vitest  --config vite.lib.config.js",
+    "coverage": "vitest run --coverage  --config vite.lib.config.js"
   },
   "peerDependencies": {
     "prop-types": "^15.8.1",
