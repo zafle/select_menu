@@ -17,7 +17,7 @@ function App() {
         To see full component&apos;s usage instructions and documentation, or
         install NPM package, visit:{' '}
         <a
-          href="http://www.npmjs.com/package/@zafle/select_menu/v/1.0.8"
+          href="http://www.npmjs.com/package/@zafle/select_menu"
           target="_blank"
         >
           @zafle/select_menu
