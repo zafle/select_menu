@@ -20,10 +20,9 @@
 .selectControl {
   width: 10px;
   height: 10px;
-  padding: 5px;
 }
 .selectArrow.open {
-  transform: rotate(-180deg);
+  transform: scaleY(-1);
 }
 .clearSelect {
   display: none;

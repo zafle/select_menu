@@ -124,10 +124,20 @@ export default function SelectInput({ selectedOption }) {
     background: inputBackground,
     color: inputTextColor,
     borderRadius: isOpen ? inputBorderRadiusOpened : borderRadius,
-    padding: `${inputVerticalPadding} ${inputHorizontalPadding}`,
     fontSize: inputFontSize,
     boxShadow: boxShadowOnOpen ? (isOpen ? boxShadow : 'unset') : boxShadow,
     zIndex: dropdownPosition === 'top' && isOpen ? '2' : 'auto',
+  }
+
+  const inputStyle = {
+    padding: `${inputVerticalPadding} 0 ${inputVerticalPadding} ${inputHorizontalPadding}  `,
+  }
+
+  const clearIconStyle = {
+    padding: `calc(4px + ${inputVerticalPadding}) 12px`,
+  }
+  const arrowStyle = {
+    padding: `calc(4px +  ${inputVerticalPadding}) ${inputHorizontalPadding} calc(4px +  ${inputVerticalPadding}) 12px`,
   }
 
   return (
@@ -170,6 +180,7 @@ export default function SelectInput({ selectedOption }) {
       />
       <div
         className={`select-input--text ${styles.selectedText}`}
+        style={inputStyle}
         data-testid="selectedText-input"
       >
         {selectedText}
@@ -180,6 +191,7 @@ export default function SelectInput({ selectedOption }) {
           (selectedText !== '' ? `${styles.hasSelection} ` : '') +
           (colorOnFocus !== 'default' ? `${styles[classOnFocus]} ` : '')
         }
+        style={clearIconStyle}
         src={closeIcon}
         alt="clear selection"
         data-name="clear"
@@ -200,6 +212,7 @@ export default function SelectInput({ selectedOption }) {
           (isOpen && `select-input--arrow-isopen `) +
           (isOpen && styles.open)
         }
+        style={arrowStyle}
         src={arrow}
         alt="select menu control"
       />
