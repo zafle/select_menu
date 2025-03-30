@@ -29,7 +29,7 @@
     "deploy": "npm run build:site && gh-pages -d site-dist",
     "prepublishOnly": "npm run build:lib",
     "lint": "eslint .",
-    "preview": "vite preview",
+    "preview:site": "vite preview --config vite.site.config.js",
     "test": "vitest  --config vite.lib.config.js",
     "coverage": "vitest run --coverage  --config vite.lib.config.js"
   },
@@ -66,5 +66,9 @@
   "sideEffects": [
     "**/*.css"
   ],
-  "types": "index.d.ts"
+  "types": "index.d.ts",
+  "engines": {
+    "node": ">=20.18.0",
+    "npm": ">=10.8.1"
+  }
 }

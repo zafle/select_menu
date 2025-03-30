@@ -34,7 +34,7 @@ export default function GeneratedCode() {
       valueToDisplay === 'default' ? `"${configProps[prop]}"` : valueToDisplay
     // if configProp value !== default prop value, display prop, else display empty string
     return configProps[prop] !== defaultPropValue
-      ? `\n          ${prop}=${propValue}`
+      ? `\n            ${prop}=${propValue}`
       : ''
   }
 
@@ -82,6 +82,12 @@ export default function GeneratedCode() {
   }
 
   // Define HTML code
+  const importUseStateCode =
+    configProps.onChangeValue !== null || configProps.name !== ''
+      ? `import { useState } from 'react'
+    `
+      : ''
+
   const controlledFormCode =
     configProps.onChangeValue !== null
       ? `
@@ -109,25 +115,26 @@ export default function GeneratedCode() {
 
   const controllingYourSelection =
     configProps.onChangeValue !== null || configProps.name !== ''
-      ? `<p>This option's value has been selected:</p>`
+      ? `
+        <p>This option's value has been selected:</p>`
       : ''
 
   const controlledFormSelection =
     configProps.onChangeValue !== null
       ? `
-      <p>{selectedOption}</p>`
+        <p>{selectedOption}</p>`
       : ''
 
   const uncontrolledFormSelection =
     configProps.name !== ''
       ? `
-      <p>{formData}</p>`
+        <p>{formData}</p>`
       : ''
 
   const uncontrolledValidateButton =
     configProps.name !== ''
-      ? `<button type="submit">Validate</button>
-      `
+      ? `
+          <button type="submit">Validate</button>`
       : ''
 
   const onSubmitFunction =
@@ -142,7 +149,7 @@ export default function GeneratedCode() {
     configProps.selectedOption !== undefined
       ? `
     const handleClickReset = () => {
-      setSelectedOption('')
+      setSelectedOption(null)
     }
       `
       : ''
@@ -156,19 +163,20 @@ export default function GeneratedCode() {
   const highlightedJSCode = `// App.jsx
 
   import { SelectMenu } from 'react-select-menu'
-  import { useState } from 'react'
-
+  ${importUseStateCode}
   export default function App() {
     ${controlledFormCode}${uncontrolledFormCode}${resetFunction}
     ${optionsArray}
     return (
-      <form${onSubmitFunction}>
-        <label${htmlForAttribute}${labelIdAttribute}>Select an option:</label>
-        <SelectMenu
-          options={OPTIONS}${generateEncodedProps()}
-        )
-      </form>
-      ${uncontrolledValidateButton}${controllingYourSelection}${controlledFormSelection}${uncontrolledFormSelection}${resetButton}
+      <div>
+        <form${onSubmitFunction}>
+          <label${htmlForAttribute}${labelIdAttribute}>Select an option:</label>
+          <SelectMenu
+            options={OPTIONS}${generateEncodedProps()}
+          )${uncontrolledValidateButton}
+        </form>
+        ${controllingYourSelection}${controlledFormSelection}${uncontrolledFormSelection}${resetButton}
+      </div>
     )
   }
   `

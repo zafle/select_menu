@@ -1,88 +1,82 @@
 [![Coverage Status](https://coveralls.io/repos/github/zafle/select_menu/badge.svg)](https://coveralls.io/github/zafle/select_menu)
 
-# Select_Menu React component
+# SelectMenu React component
 
 A very easy to use and customisable React select dropdown.
 
-## Live Select_Menu example usage
+## Interactive example page
 
-To try and design your own Select_Menu component and read more doc, visit [Select_Menu page example](https://zafle.github.io/select_menu/)
+Design your own SelectMenu component here : [Interactive SelectMenu example page](https://zafle.github.io/select_menu/)
 
 ## Features
 
-### V2 new releases
+### [Different types of options data](#different-types-of-options-datas) :
 
-- Unique ID for each Select_Menu component
+- array of options with or without values
+- array of optgroup with labels
 
-- [Enable reset programmatically](#enable-reset-programmatically)
+### [Controlled form and uncontrolled form](#controlled-and-uncontrolled-forms)
 
-  - New `selectedOption` prop
+- handles a custom onChange function to get the selected option's value
+- handles the select native HTML behaviour
 
-  - In V2, `selectedOption` allows to reset the SelectMenu component by clearing selection value programmatically by changing its value to `null` | `''`.
+### [Label and SelectMenu component link](#label-and-selectmenu-component-link)
 
-  - To reset on default value (which can be set with `defaultSelectedOption`), set `resetToDefault` prop to `true`.
+- link your select label with the SelectMenu component
 
-  NOTE : These functionnalities only work with controlled forms. Make sure to provide as welle `onChangeValue` prop.
+### [Enable reset programmatically](#enable-reset-programmatically) (only in V2)
 
-- ClassNames for all essentials tags
+### Reset to default
 
-  - In V2, some classNames are added for a better CSS control.
+### Default selected option
 
-### All versions features
+- a default selected option can be set
 
-- [Different types of options data](#different-types-of-options-datas) :
+### Clear selection
 
-  - array of options with or without values
-  - array of optgroup with labels
+- displays a button to clear the selected option
 
-- [Controlled form and uncontrolled form](#controlled-and-uncontrolled-forms)
+### Dropdown position
 
-  - handles a custom onChange function to get the selected option's value
-  - handles the select native HTML behaviour
+- dropdown can display eather on bottom or top of the select input
 
-- [Label and SelectMenu component link](#label-and-selectmenu-component-link)
+### Accessibility
 
-  - link your select label with the SelectMenu component
+- aria attributes
+- 100% control with keyboard
 
-- Accessibility
+### Unique ID for each SelectMenu component (only in V2)
 
-  - aria attributes
-  - 100% control with keyboard
+### ClassNames for all essentials tags
 
-- Default selected option
+- In V2, some classNames are added for a better CSS control.
 
-  - a default selected option can be set
+### Stylable component
 
-- Clear selection
-
-  - displays a button to clear the selected option
-
-- Dropdown position
-
-  - dropdown can display eather on bottom or top of the select input
-
-- Stylable component
-  - via props
-  - via external CSS
+- via props
+- via external CSS
 
 ## Installation
 
 > `npm i @zafle/select_menu`
 
+### Prerequisites
+
+- [NodeJS](https://nodejs.org/en/) >= 20.18.0
+- npm >= 10.8.1
+
 ## Basic usage
 
-### Import SelectMenu component
-
-`import { SelectMenu } from "@zafle/select_menu"`
-
-### Use
-
-The only required prop is **options** for a basic usage.
+The **only required prop** is `options` for a basic usage.
 
 ```jsx
-const options = ["Blue", "Yellow", "Green", "Red", "Purple"]
+import { SelectMenu } from '@zafle/select_menu'
 
-<SelectMenu options={options} />
+export default function App() {
+  const options = ['Blue', 'Yellow', 'Green', 'Red', 'Purple']
+
+  return <SelectMenu options={options} />
+}
 ```
 
 ## Advanced usage
@@ -94,9 +88,16 @@ const options = ["Blue", "Yellow", "Green", "Red", "Purple"]
 To use an array of options with values, use `textField` and `valueField` props.
 
 ```jsx
-const options = [{option: "Blue", code: 01}, {option: "Red", code: 02}]
+import { SelectMenu } from '@zafle/select_menu'
 
-<SelectMenu options={options} textField="option" valueField="code" />
+export default function App() {
+  const options = [
+    { option: 'Blue', code: 01 },
+    { option: 'Red', code: 02 },
+  ]
+
+  return <SelectMenu options={options} textField="option" valueField="code" />
+}
 ```
 
 - #### Options with optGroups
@@ -104,18 +105,28 @@ const options = [{option: "Blue", code: 01}, {option: "Red", code: 02}]
 To use an array of options with optGroups, use `optGroupLabelField` and `optGroupOptionsField` props.
 
 ```jsx
-const options = [
-{
-  label: "Fruits",
-  options: ["Apple","Banana","Orange"]
-},
-{
-  label: "Vegetables",
-  options: ["Bean","Pea","Leek"]
-}
-]
+import { SelectMenu } from '@zafle/select_menu'
 
-<SelectMenu options={options} optGroupLabelField="label" optGroupOptionsField="options" />
+export default function App() {
+  const options = [
+    {
+      label: 'Fruits',
+      options: ['Apple', 'Banana', 'Orange'],
+    },
+    {
+      label: 'Vegetables',
+      options: ['Bean', 'Pea', 'Leek'],
+    },
+  ]
+
+  return (
+    <SelectMenu
+      options={options}
+      optGroupLabelField="label"
+      optGroupOptionsField="options"
+    />
+  )
+}
 ```
 
 - #### Options with optGroups and values
@@ -123,32 +134,38 @@ const options = [
 To use an array of options with optGroups and values, use `optGroupLabelField`, `optGroupOptionsField`, `textField` and `valueField` props.
 
 ```jsx
-const options = [
-{
-  label: "Fruits",
-  options: [
-    {option: "Apple", id: "F1"},
-    {option: "Banana", id: "F2"},
-    {option: "Orange", id: "F3"},
-  ]
-},
-{
-  label: "Vegetables",
-  options: [
-    {option: "Bean", id: "V1"},
-    {option: "Pea", id: "V2"},
-    {option: "Leek", id: "V3"},
-  ]
-}
-]
+import { SelectMenu } from '@zafle/select_menu'
 
-<SelectMenu
-  options={options}
-  optGroupLabelField="label"
-  optGroupOptionsField="options"
-  textField="option"
-  valueField="id"
-/>
+export default function App() {
+  const options = [
+    {
+      label: 'Fruits',
+      options: [
+        { option: 'Apple', id: 'F1' },
+        { option: 'Banana', id: 'F2' },
+        { option: 'Orange', id: 'F3' },
+      ],
+    },
+    {
+      label: 'Vegetables',
+      options: [
+        { option: 'Bean', id: 'V1' },
+        { option: 'Pea', id: 'V2' },
+        { option: 'Leek', id: 'V3' },
+      ],
+    },
+  ]
+
+  return (
+    <SelectMenu
+      options={options}
+      optGroupLabelField="label"
+      optGroupOptionsField="options"
+      textField="option"
+      valueField="id"
+    />
+  )
+}
 ```
 
 ### Controlled and uncontrolled Forms
@@ -158,20 +175,24 @@ const options = [
 To use the SelectMenu component in a controlled form, use `onChangeValue` prop.
 
 ```jsx
-const [selectedValue, setSelectedValue] = useState('')
+import { SelectMenu } from '@zafle/select_menu'
 
-const options = ['Blue', 'Yellow', 'Green', 'Red', 'Purple']
+export default function App() {
+  const [selectedValue, setSelectedValue] = useState('')
 
-const handleChange = (option) => {
-  setSelectedValue(option)
+  const options = ['Blue', 'Yellow', 'Green', 'Red', 'Purple']
+
+  const handleChange = (option) => {
+    setSelectedValue(option)
+  }
+
+  return (
+    <>
+      <p>The selected option is {selectedValue} </p>
+      <SelectMenu options={options} onChangeValue={handleChange} />
+    </>
+  )
 }
-
-return (
-  <>
-    <p>The selected option is {selectedValue} </p>
-    <SelectMenu options={options} onChangeValue={handleChange} />
-  </>
-)
 ```
 
 - #### Uncontrolled Form
@@ -179,28 +200,32 @@ return (
 To use SelectMenu in an uncontrolled form, use `name` prop.
 
 ```jsx
-const [formData, setFormData] = useState('')
+import { SelectMenu } from '@zafle/select_menu'
 
-const options = ['Blue', 'Yellow', 'Green', 'Red', 'Purple']
+export default function App() {
+  const [formData, setFormData] = useState('')
 
-const getFormData = (e) => {
-  e.preventDefault()
-  setFormData(e.target.color.value)
+  const options = ['Blue', 'Yellow', 'Green', 'Red', 'Purple']
+
+  const getFormData = (e) => {
+    e.preventDefault()
+    setFormData(e.target.color.value)
+  }
+
+  return (
+    <>
+      <p>The selected option is {formData} </p>
+      <form
+        onSubmit={(e) => {
+          getFormData(e)
+        }}
+      >
+        <SelectMenu options={options} name="color" />
+        <button type="submit">Validate</button>
+      </form>
+    </>
+  )
 }
-
-return (
-  <>
-    <p>The selected option is {formData} </p>
-    <form
-      onSubmit={(e) => {
-        getFormData(e)
-      }}
-    >
-      <SelectMenu options={options} name="color" />
-      <button type="submit">Validate</button>
-    </form>
-  </>
-)
 ```
 
 ### Enable reset programmatically
@@ -209,33 +234,41 @@ In V2 only, to enable reset programmatically, the form must be controlled and th
 
 - `selectedOption` allows to reset the SelectMenu component by clearing selection value programmatically by changing its value to `null` | ''.
 
+  - `null`: giving a null value to `selectedOption` will reset the selection to the default value even when selected option === ''
+  - `''`: giving an empty string value will not reset the selected option to its default value when selected option === '' (it will reset on empty string)
+
 - To reset on default value (which can be set with `defaultSelectedOption`), set `resetToDefault` prop to `true`.
 
 ```jsx
-const [selectedValue, setSelectedValue] = useState('')
+import { SelectMenu } from '@zafle/select_menu'
 
-const options = ['Blue', 'Yellow', 'Green', 'Red', 'Purple']
+export default function App() {
+  const [selectedValue, setSelectedValue] = useState('')
 
-const handleChange = (option) => {
-  setSelectedValue(option)
+  const options = ['Blue', 'Yellow', 'Green', 'Red', 'Purple']
+
+  const handleChange = (option) => {
+    setSelectedValue(option)
+  }
+
+  const handleOnClickReset = () => {
+    setSelectedValue(null)
+  }
+
+  return (
+    <>
+      <p>The selected option is {selectedValue} </p>
+      <SelectMenu
+        options={options}
+        onChangeValue={handleChange}
+        selectedOption={selectedValue} // Allows to reset programmatically
+        defaultSelectedOption="Blue" // Optional - Set default selected option
+        resetToDefault={true} // Optional
+      />
+      <button onClick={handleClickReset}>Reset</button>
+    </>
+  )
 }
-
-const handleOnClickReset = () => {
-  setSelectedValue('')
-}
-
-return (
-  <>
-    <p>The selected option is {selectedValue} </p>
-    <SelectMenu
-      options={options}
-      onChangeValue={handleChange}
-      selectedOption={selectedValue}
-    />
-
-    <button onClick={handleClickReset}>Reset</button>
-  </>
-)
 ```
 
 ### Label and SelectMenu component link
@@ -244,11 +277,18 @@ To link your `<label>` tag to the SelectMenu component, use `id` prop, and set `
 This will allow a click event on the label to trigger the opening of the SelectMenu dropdown.
 
 ```jsx
-const options = ['Blue', 'Yellow', 'Green', 'Red', 'Purple']
+import { SelectMenu } from '@zafle/select_menu'
 
-<label htmlFor="color-select">Choose a color</label>
-<SelectMenu options={options} id="color-select" />
+export default function App() {
+  const options = ['Blue', 'Yellow', 'Green', 'Red', 'Purple']
 
+  return (
+    <>
+      <label htmlFor="color-select">Choose a color</label>
+      <SelectMenu options={options} id="color-select" />
+    </>
+  )
+}
 ```
 
 ### Accessibility
@@ -259,11 +299,18 @@ The whole component and its functionalities can be controlled with keyboard (tab
 **For a full accessible experience** set the `labelId` prop accordingly to the `id` attribute of the `<label>` tag to enable the aria-labelledBy attribute to be efficient.
 
 ```jsx
-const options = ['Blue', 'Yellow', 'Green', 'Red', 'Purple']
+import { SelectMenu } from '@zafle/select_menu'
 
-<label id="color-select-label">Choose a color</label>
-<SelectMenu options={options} labelId="color-select-label" />
+export default function App() {
+  const options = ['Blue', 'Yellow', 'Green', 'Red', 'Purple']
 
+  return (
+    <>
+      <label id="color-select-label">Choose a color</label>
+      <SelectMenu options={options} labelId="color-select-label" />
+    </>
+  )
+}
 ```
 
 ## Component props

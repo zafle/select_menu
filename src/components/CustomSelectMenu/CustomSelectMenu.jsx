@@ -14,8 +14,8 @@ export default function CustomSelectMenu() {
   const dispatch = useConfigDispatch()
 
   const [selectedOptionProp, setSelectedOptionProp] = useState('')
-  const selectedOptionTPropRef = useRef('')
-  selectedOptionTPropRef.current = selectedOptionProp
+  const selectedOptionPropRef = useRef('')
+  selectedOptionPropRef.current = selectedOptionProp
 
   const handleChangeValue = (option) => {
     setSelectedOptionProp(option)
@@ -38,7 +38,7 @@ export default function CustomSelectMenu() {
   }
 
   const handleClickReset = () => {
-    setSelectedOptionProp('')
+    setSelectedOptionProp(null)
   }
 
   return (
@@ -79,7 +79,7 @@ export default function CustomSelectMenu() {
             form to enable
           </span>
         )}
-        {configProps.onChangeValue !== null && selectedOptionTPropRef.current}
+        {configProps.onChangeValue !== null && selectedOptionPropRef.current}
         {configProps.name !== '' && selectedOption}
       </p>
       {configProps.selectedOption !== undefined && (
