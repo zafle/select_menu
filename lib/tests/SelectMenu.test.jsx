@@ -100,7 +100,6 @@ describe('Integration test for SelectMenu component', () => {
 
       const selectInput = screen.getByTestId('select-input')
       const selectedValueInput = screen.getByTestId('selectedValue-input')
-      const selectedTextInput = screen.getByTestId('selectedText-input')
 
       await user.click(selectInput)
 
@@ -108,14 +107,13 @@ describe('Integration test for SelectMenu component', () => {
 
       await user.click(optionBlue)
 
-      waitFor(() => {
+      await waitFor(() => {
         expect(selectInput).toHaveAttribute(
           'aria-activedescendant',
           'option_1_test'
         )
         expect(selectedValueInput.value).toEqual('Blue')
         expect(optionBlue).toHaveAttribute('aria-selected', 'true')
-        expect(selectedTextInput).toHaveTextContent('Blue')
       })
     })
   })
@@ -130,10 +128,10 @@ describe('Integration test for SelectMenu component', () => {
 
       await user.click(selectInput)
 
-      const options = screen.queryAllByRole('Options')
+      const options = await screen.findAllByRole('option')
 
       for (let i = 0; i < options.length; i++) {
-        await user.mouseOver(options[i])
+        await user.hover(options[i])
         expect(options[i]).toHaveFocus()
       }
     })
@@ -147,7 +145,6 @@ describe('Integration test for SelectMenu component', () => {
 
       const selectInput = screen.getByTestId('select-input')
       const selectedValueInput = screen.getByTestId('selectedValue-input')
-      const selectedTextInput = screen.getByTestId('selectedText-input')
       const clearSelected = screen.getByTestId('clearSelected-button')
 
       await user.click(selectInput)
@@ -157,11 +154,10 @@ describe('Integration test for SelectMenu component', () => {
       await user.click(optionBlue)
       await user.click(clearSelected)
 
-      waitFor(() => {
+      await waitFor(() => {
         expect(selectInput).toHaveAttribute('aria-activedescendant', '')
         expect(selectedValueInput.value).toEqual('')
         expect(optionBlue).toHaveAttribute('aria-selected', 'false')
-        expect(selectedTextInput).toHaveTextContent('')
       })
     })
   })

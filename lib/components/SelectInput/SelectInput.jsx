@@ -88,10 +88,11 @@ export default function SelectInput({ selectedOption }) {
   }
 
   /**
-   * This function is added in V2
+   * Reset function is added in V2
    *
    * Check equality with selectedOption state (new prop) and selectedText | selectedValue
    * If different, means that user injected new value programmatically (null | '' | any)
+   * -> only null value will reset to default when selected option is empty
    * This will reset selection to '' | defaultSelected if resetToDefault is true
    */
   useEffect(() => {
